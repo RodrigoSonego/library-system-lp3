@@ -1,13 +1,25 @@
 package br.com.acme.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Publication {
 
     private String title;
     private short year;
     private byte volume;
-    private ArrayList<Author> authors = new ArrayList<>();
+    private List<Author> authors;
+
+    public Publication() {
+        authors = new ArrayList<>();
+    }
+
+    public Publication(String title, short year, byte volume) {
+        this();
+        this.title = title;
+        this.volume = volume;
+        this.year = year;
+    }
 
     public String getTitle() {
         return title;
@@ -33,5 +45,19 @@ public abstract class Publication {
         this.volume = volume;
     }
     
+    public void addAuthor(Author author){
+        authors.add(author);
+    }
     
+    public void removeAuthor(String name){
+        for (Author aut : authors) {
+            if(aut.getName().equals(name))
+                authors.remove(aut);
+        }
+    }
+    
+    public List<Author> getAuthors(){
+        return authors;
+    }
+
 }

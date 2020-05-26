@@ -6,6 +6,18 @@ public class Book extends Publication {
     private long isbn;
     private short pages;
 
+    public Book(){
+        super();
+    }
+    
+    public Book(String title, short year, byte volume, String language, long isbn, short pages){
+        super(title,year,volume);
+        this.isbn = isbn;
+        this.pages = pages;
+        this.language = language;
+        //3 - não causa problema pois o construtor default não inicia nenhuma variável;
+    }
+    
     public String getLanguage() {
         return language;
     }

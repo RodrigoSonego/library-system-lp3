@@ -12,7 +12,20 @@ public class Article extends Publication {
     private Journal journal;
 
     public Article() {
+        super();
         keyWords = new ArrayList<>();
+    }
+    
+    public Article(String title, short year, byte volume, long issn,
+                    byte issue, short startPage, short endPage){
+        
+        super(title,year,volume);
+        this.issn = issn;
+        this.issue = issue;
+        this.startPage = startPage;
+        this.endPage = endPage;
+        keyWords = new ArrayList<>();
+        
     }
 
     public Journal getJournal() {
@@ -65,5 +78,9 @@ public class Article extends Publication {
 
     public void setEndPage(short endPage) {
         this.endPage = endPage;
+    }
+    
+    public void setKeyWords(ArrayList<String> keyWords){
+        this.keyWords = keyWords;
     }
 }
