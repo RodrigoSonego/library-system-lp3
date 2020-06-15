@@ -6,12 +6,15 @@
 package br.com.acme.model;
 
 import br.com.acme.gui.*;
+import java.awt.Component;
+import javax.swing.JTextField;
 
 public class TestaApp {
 
     public static void main(String[] args) {
         MainWindow mw = new MainWindow();
-        mw.setVisible(true);
+        mw.setVisible(true);     
+      
     }
     
 }

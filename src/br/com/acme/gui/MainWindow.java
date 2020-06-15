@@ -196,6 +196,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         jmiCreate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/acme/gui/icons/user_add.png"))); // NOI18N
         jmiCreate.setText("Create");
+        jmiCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiCreateActionPerformed(evt);
+            }
+        });
         jMenu3.add(jmiCreate);
 
         jmiLisAccounts.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/acme/gui/icons/list.png"))); // NOI18N
@@ -302,6 +307,15 @@ public class MainWindow extends javax.swing.JFrame {
     private void jmiExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiExitActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jmiExitActionPerformed
+
+    private void jmiCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCreateActionPerformed
+        
+        if(!(createAccount instanceof CreateAccountForm))
+            createAccount = new CreateAccountForm();
+        
+        createAccount.setVisible(true);
+        
+    }//GEN-LAST:event_jmiCreateActionPerformed
 
 
 

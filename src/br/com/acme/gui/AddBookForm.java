@@ -86,9 +86,9 @@ public class AddBookForm extends javax.swing.JDialog {
 
         jbClose.setText("Close");
         jbClose.setPreferredSize(new java.awt.Dimension(80, 32));
-        jbClose.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbCloseActionPerformed(evt);
+        jbClose.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbCloseMouseClicked(evt);
             }
         });
 
@@ -170,14 +170,6 @@ public class AddBookForm extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCloseActionPerformed
-        
-       this.setVisible(false);
-       clearFields();
-        dispose();
-        
-    }//GEN-LAST:event_jbCloseActionPerformed
-
     private void jbOKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbOKMouseClicked
         
         setVisible(false);
@@ -193,10 +185,19 @@ public class AddBookForm extends javax.swing.JDialog {
         
     }//GEN-LAST:event_jbAddAuthorMouseClicked
 
+    private void jbCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCloseMouseClicked
+        clearFields();
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_jbCloseMouseClicked
+
     private void clearFields(){
-        for(Component comp : this.getComponents()){
-            if(comp instanceof javax.swing.JTextField)
+        for(Component comp : getComponents()){
+            if(comp instanceof JTextField){
+                System.out.println("texto encontrado");
                 ((JTextField) comp).setText("");
+            }
+                
         }
     }
     

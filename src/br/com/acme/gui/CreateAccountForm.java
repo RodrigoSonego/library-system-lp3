@@ -5,17 +5,29 @@
  */
 package br.com.acme.gui;
 
+import br.com.acme.model.AcademicLibrary;
+import br.com.acme.model.User;
+import br.com.acme.model.logic.ALManager;
+import java.awt.Component;
+import java.awt.Container;
+import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRootPane;
+import javax.swing.JTextField;
+
+
 /**
  *
  * @author USER
  */
 public class CreateAccountForm extends javax.swing.JDialog {
 
-    /**
-     * Creates new form CreateAccountForm
-     */
-    public CreateAccountForm(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    private AcademicLibrary library;
+    
+    public CreateAccountForm() {
+        library = ALManager.getInstance();
         initComponents();
     }
 
@@ -64,9 +76,19 @@ public class CreateAccountForm extends javax.swing.JDialog {
         jLabel6.setText("Password:");
 
         jbCreate.setText("Create");
+        jbCreate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbCreateMouseClicked(evt);
+            }
+        });
 
         jbClose.setText("Close");
         jbClose.setPreferredSize(new java.awt.Dimension(69, 32));
+        jbClose.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbCloseMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -144,6 +166,51 @@ public class CreateAccountForm extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbCreateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCreateMouseClicked
+        
+        User tempUser = new User();
+        String pwdString = new String(jpfPassword.getPassword());
+        try {
+            int pwd = Integer.parseInt(pwdString);          
+            tempUser.setPassword(pwd);                          
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Password must be only numbers", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        try {
+          int phone = Integer.parseInt(jtfPhone.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Phone must be only numbers", "Error", JOptionPane.ERROR_MESSAGE);
+            return;         
+        }
+        
+        tempUser.setName(jtfName.getText());
+        tempUser.setLogin(jtfLogin.getText());
+        tempUser.setEmail(jtfEmail.getText());
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////// Incompleto, esperando gustavo acabar a parte dele////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////
+               
+        JOptionPane.showMessageDialog(this, "Your account was successfully created!", "Succes!", JOptionPane.INFORMATION_MESSAGE);
+        
+    }//GEN-LAST:event_jbCreateMouseClicked
+
+    private void jbCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCloseMouseClicked
+        
+        setVisible(false);
+        clearFields();
+        dispose();
+        
+    }//GEN-LAST:event_jbCloseMouseClicked
+
+     private void clearFields(){
+         for (Component c : getRootPane().getContentPane().getComponents()) {
+             if(c instanceof JTextField)
+                 ((JTextField) c).setText("");
+         }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
