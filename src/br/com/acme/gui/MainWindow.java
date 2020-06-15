@@ -5,15 +5,22 @@
  */
 package br.com.acme.gui;
 
+import br.com.acme.model.*;
+import java.io.File;
+import javax.swing.JFileChooser;
 /**
  *
  * @author USER
  */
 public class MainWindow extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MainWindow
-     */
+    AddBookForm addBook;
+    AddArticleForm addArticle;
+    CreateAccountForm createAccount;
+    ListAccountsForm listAccounts;
+    ListArticlesForm listArticles;
+    ListBooksForm listBooks;
+    
     public MainWindow() {
         initComponents();
     }
@@ -27,6 +34,7 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jfcFileChooser = new javax.swing.JFileChooser();
         jtbMenu = new javax.swing.JToolBar();
         jbmbNew = new javax.swing.JButton();
         jbmbOpen = new javax.swing.JButton();
@@ -96,22 +104,42 @@ public class MainWindow extends javax.swing.JFrame {
         jmiNew.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         jmiNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/acme/gui/icons/new.png"))); // NOI18N
         jmiNew.setText("New");
+        jmiNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiNewActionPerformed(evt);
+            }
+        });
         jMenu1.add(jmiNew);
 
         jmiOpen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         jmiOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/acme/gui/icons/open.png"))); // NOI18N
         jmiOpen.setText("Open");
+        jmiOpen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiOpenActionPerformed(evt);
+            }
+        });
         jMenu1.add(jmiOpen);
 
         jmiSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         jmiSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/acme/gui/icons/save.png"))); // NOI18N
         jmiSave.setText("Save");
+        jmiSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiSaveActionPerformed(evt);
+            }
+        });
         jMenu1.add(jmiSave);
         jMenu1.add(jSeparator1);
 
         jmiExit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
         jmiExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/acme/gui/icons/exit.png"))); // NOI18N
         jmiExit.setText("Exit");
+        jmiExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiExitActionPerformed(evt);
+            }
+        });
         jMenu1.add(jmiExit);
 
         jMenuBar1.add(jMenu1);
@@ -123,10 +151,20 @@ public class MainWindow extends javax.swing.JFrame {
 
         jmiAddBook.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
         jmiAddBook.setText("Book");
+        jmiAddBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiAddBookActionPerformed(evt);
+            }
+        });
         jmAdd.add(jmiAddBook);
 
         jmiAddArticle.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         jmiAddArticle.setText("Article");
+        jmiAddArticle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiAddArticleActionPerformed(evt);
+            }
+        });
         jmAdd.add(jmiAddArticle);
 
         jMenu2.add(jmAdd);
@@ -135,9 +173,19 @@ public class MainWindow extends javax.swing.JFrame {
         jmList.setText("List");
 
         jmiListBook.setText("Book");
+        jmiListBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiListBookActionPerformed(evt);
+            }
+        });
         jmList.add(jmiListBook);
 
         jmiListArticles.setText("Articles");
+        jmiListArticles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiListArticlesActionPerformed(evt);
+            }
+        });
         jmList.add(jmiListArticles);
 
         jMenu2.add(jmList);
@@ -186,7 +234,74 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jmiAddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAddBookActionPerformed
+        
+        if(!(addBook instanceof AddBookForm)){
+            addBook = new AddBookForm();
+        }       
+        
+        addBook.setVisible(true);
+        
+    }//GEN-LAST:event_jmiAddBookActionPerformed
+
+    private void jmiAddArticleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAddArticleActionPerformed
+        
+        if(!(addArticle instanceof AddArticleForm))
+            addArticle = new AddArticleForm();
+        
+        addArticle.setVisible(true);
+        
+    }//GEN-LAST:event_jmiAddArticleActionPerformed
+
+    private void jmiListBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListBookActionPerformed
+        
+        if(!(listBooks instanceof ListBooksForm))
+            listBooks = new ListBooksForm();
+        
+        listBooks.setVisible(true);
+    }//GEN-LAST:event_jmiListBookActionPerformed
+
+    private void jmiListArticlesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListArticlesActionPerformed
+        
+        if(!(listArticles instanceof ListArticlesForm))
+          listArticles = new ListArticlesForm();
+        
+        listArticles.setVisible(true);
+        
+    }//GEN-LAST:event_jmiListArticlesActionPerformed
+
+    private void jmiOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiOpenActionPerformed
+        
+        int result = jfcFileChooser.showOpenDialog(this);
+        if(result == JFileChooser.CANCEL_OPTION)
+            return;
+        
+        File file = jfcFileChooser.getSelectedFile();
+    }//GEN-LAST:event_jmiOpenActionPerformed
+
+    private void jmiNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNewActionPerformed
+        
+  
+        
+    }//GEN-LAST:event_jmiNewActionPerformed
+
+    private void jmiSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSaveActionPerformed
+        
+        
+        int result = jfcFileChooser.showSaveDialog(this);
+        
+        if(result == JFileChooser.APPROVE_OPTION){
+            
+        }
+            
+    }//GEN-LAST:event_jmiSaveActionPerformed
+
+    private void jmiExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiExitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jmiExitActionPerformed
 
 
 
@@ -202,6 +317,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton jbmbNew;
     private javax.swing.JButton jbmbOpen;
     private javax.swing.JCheckBoxMenuItem jcbmiUpdate;
+    private javax.swing.JFileChooser jfcFileChooser;
     private javax.swing.JMenu jmAdd;
     private javax.swing.JMenu jmList;
     private javax.swing.JMenuItem jmiAbout;

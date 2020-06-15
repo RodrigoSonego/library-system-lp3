@@ -5,17 +5,18 @@
  */
 package br.com.acme.gui;
 
+import java.awt.Component;
+import javax.swing.*;
+
 /**
  *
  * @author USER
  */
 public class AddBookForm extends javax.swing.JDialog {
 
-    /**
-     * Creates new form AddBookForm
-     */
-    public AddBookForm(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    private AuthorForm addAuthor;
+    
+    public AddBookForm() {
         initComponents();
     }
 
@@ -54,6 +55,11 @@ public class AddBookForm extends javax.swing.JDialog {
         jLabel2.setText("Title:");
 
         jbAddAuthor.setText("Add Author");
+        jbAddAuthor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbAddAuthorMouseClicked(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel3.setText("Year:");
@@ -72,9 +78,19 @@ public class AddBookForm extends javax.swing.JDialog {
 
         jbOK.setText("Ok");
         jbOK.setPreferredSize(new java.awt.Dimension(80, 32));
+        jbOK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbOKMouseClicked(evt);
+            }
+        });
 
         jbClose.setText("Close");
         jbClose.setPreferredSize(new java.awt.Dimension(80, 32));
+        jbClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCloseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,8 +167,39 @@ public class AddBookForm extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCloseActionPerformed
+        
+       this.setVisible(false);
+       clearFields();
+        dispose();
+        
+    }//GEN-LAST:event_jbCloseActionPerformed
+
+    private void jbOKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbOKMouseClicked
+        
+        setVisible(false);
+        
+    }//GEN-LAST:event_jbOKMouseClicked
+
+    private void jbAddAuthorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbAddAuthorMouseClicked
+        
+        if(!(addAuthor instanceof AuthorForm))
+            addAuthor = new AuthorForm();
+        
+        addAuthor.setVisible(true);
+        
+    }//GEN-LAST:event_jbAddAuthorMouseClicked
+
+    private void clearFields(){
+        for(Component comp : this.getComponents()){
+            if(comp instanceof javax.swing.JTextField)
+                ((JTextField) comp).setText("");
+        }
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

@@ -161,11 +161,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Add Author"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbAddAuthorMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbAddKeyword">
       <Properties>
         <Property name="text" type="java.lang.String" value="Add Keyword"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbAddKeywordMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -347,6 +353,9 @@
           <Dimension value="[100, 32]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbCloseMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

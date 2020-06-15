@@ -19,8 +19,7 @@ public class KeywordForm extends javax.swing.JDialog {
     /**
      * Creates new form KeywordForm
      */
-    public KeywordForm(java.awt.Frame parent, boolean modal, ArrayList<String> keyWords) {
-        super(parent, modal);
+    public KeywordForm(ArrayList<String> keyWords) {
         initComponents();
         
         list = new DefaultListModel();                       

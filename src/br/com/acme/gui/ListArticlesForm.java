@@ -13,8 +13,7 @@ public class ListArticlesForm extends javax.swing.JDialog {
 
     private AcademicLibrary library;
     
-    public ListArticlesForm(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public ListArticlesForm() {
         initComponents();
         
         library = ALManager.getInstance();

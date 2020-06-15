@@ -21,7 +21,7 @@ public class ListAccountsForm extends javax.swing.JDialog {
     private void populateTable() {
         TableModel model = jtAccounts.getModel();
         
-        Collection<User> users = library.getUsers().values();
+        Collection<User> users = library.getUsers();
         int line = 0;
         for (User u : users) {            
             model.setValueAt(u.getName(), line, 0);
