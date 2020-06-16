@@ -5,7 +5,9 @@
  */
 package br.com.acme.gui;
 
+import br.com.acme.model.Author;
 import java.awt.Component;
+import java.util.List;
 import javax.swing.JTextField;
 
 /**
@@ -14,11 +16,11 @@ import javax.swing.JTextField;
  */
 public class AuthorForm extends javax.swing.JDialog {
 
-    /**
-     * Creates new form AuthorForm
-     */
-    public AuthorForm() {
+    private List<Author> authors;
+    
+    public AuthorForm(List<Author> authors) {
         initComponents();
+        this.authors = authors;
     }
 
     /**

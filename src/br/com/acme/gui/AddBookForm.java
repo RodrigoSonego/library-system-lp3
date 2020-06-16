@@ -5,7 +5,14 @@
  */
 package br.com.acme.gui;
 
+import br.com.acme.model.AcademicLibrary;
+import br.com.acme.model.Author;
+import br.com.acme.model.Publication;
+import br.com.acme.model.logic.ALManager;
 import java.awt.Component;
+import br.com.acme.model.Book;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
 
 /**
@@ -15,9 +22,13 @@ import javax.swing.*;
 public class AddBookForm extends javax.swing.JDialog {
 
     private AuthorForm addAuthor;
+    private List<Author> authors;
+    private AcademicLibrary library;
     
     public AddBookForm() {
         initComponents();
+        library = ALManager.getInstance();
+        authors = new ArrayList<>();
     }
 
     /**
@@ -171,15 +182,23 @@ public class AddBookForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbOKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbOKMouseClicked
+              
+        Book tempBook = new Book(jtfTitle.getText(),Short.parseShort(jtfYear.getText()),
+                                   Byte.parseByte(jtfVolume.getText()), jtfLanguage.getText(), Long.parseLong(jtfIsbn.getText()),
+                                          Short.parseShort(jtfPages.getText()));
+        for(Author author : authors){
+            tempBook.addAuthor(author);
+        }
+        library.addPublication(tempBook);
         
-        setVisible(false);
-        
+        JOptionPane.showMessageDialog(this, "Your book was successfully added!", "Succes!", JOptionPane.INFORMATION_MESSAGE);
+        setVisible(false);                    
     }//GEN-LAST:event_jbOKMouseClicked
 
     private void jbAddAuthorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbAddAuthorMouseClicked
         
         if(!(addAuthor instanceof AuthorForm))
-            addAuthor = new AuthorForm();
+            addAuthor = new AuthorForm(authors);
         
         addAuthor.setVisible(true);
         
