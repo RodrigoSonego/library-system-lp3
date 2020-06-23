@@ -7,7 +7,9 @@ package br.com.acme.gui;
 
 import br.com.acme.model.Author;
 import java.awt.Component;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -17,10 +19,12 @@ import javax.swing.JTextField;
 public class AuthorForm extends javax.swing.JDialog {
 
     private List<Author> authors;
-    
-    public AuthorForm(List<Author> authors) {
+    private Author author;
+
+    public AuthorForm(List<Author> authors, Author tempAuthor) {
         initComponents();
         this.authors = authors;
+        author = tempAuthor;
     }
 
     /**
@@ -59,6 +63,11 @@ public class AuthorForm extends javax.swing.JDialog {
 
         jbOk.setText("OK");
         jbOk.setPreferredSize(new java.awt.Dimension(100, 32));
+        jbOk.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbOkMouseClicked(evt);
+            }
+        });
 
         jbClose.setText("Close");
         jbClose.setPreferredSize(new java.awt.Dimension(100, 32));
@@ -127,16 +136,34 @@ public class AuthorForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCloseMouseClicked
-       
         setVisible(false);
         clearFields();
-        
+
     }//GEN-LAST:event_jbCloseMouseClicked
 
-     private void clearFields(){
-        for(Component comp : this.getComponents()){
-            if(comp instanceof javax.swing.JTextField)
-                ((JTextField) comp).setText("");
+    private void jbOkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbOkMouseClicked
+        saveAuthor();
+    }//GEN-LAST:event_jbOkMouseClicked
+
+    private void saveAuthor() {
+        if (jtfAffiliation.getText().equals("") || jtfEmail.getText().equals("") || jtfEmail.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "One or more empty fields", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {            
+            author.setName(jtfName.getText());
+            author.setAfiliation(jtfAffiliation.getText());
+            author.setEmail(jtfEmail.getText());
+            ((ArrayList<Author>) authors).add(author);
+            JOptionPane.showMessageDialog(this, "Author added!", "Succes!", JOptionPane.INFORMATION_MESSAGE);
+            clearFields();
+        }
+
+    }
+
+    private void clearFields() {
+        for (Component c : getRootPane().getContentPane().getComponents()) {
+            if (c instanceof JTextField) {
+                ((JTextField) c).setText("");
+            }
         }
     }
 

@@ -188,13 +188,10 @@ public class CreateAccountForm extends javax.swing.JDialog {
         tempUser.setName(jtfName.getText());
         tempUser.setLogin(jtfLogin.getText());
         tempUser.setEmail(jtfEmail.getText());
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////// Incompleto, esperando gustavo acabar a parte dele////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////////////////////////
+        library.addUser(tempUser);
                
         JOptionPane.showMessageDialog(this, "Your account was successfully created!", "Succes!", JOptionPane.INFORMATION_MESSAGE);
-        
+        clearFields();
     }//GEN-LAST:event_jbCreateMouseClicked
 
     private void jbCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCloseMouseClicked

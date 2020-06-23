@@ -47,13 +47,13 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jtfStartPage1" min="-2" pref="37" max="-2" attributes="0"/>
+                                      <Component id="jtfStartPage" min="-2" pref="37" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jtfEndPage" min="-2" pref="37" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jtfYear1" alignment="0" min="-2" pref="47" max="-2" attributes="0"/>
+                                  <Component id="jtfVolume" alignment="0" min="-2" pref="47" max="-2" attributes="0"/>
                                   <Component id="jtfYear" alignment="0" min="-2" pref="62" max="-2" attributes="0"/>
                                   <Component id="jtfLanguage" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
                                   <Component id="jtfIssn" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
@@ -105,7 +105,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jtfYear1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jtfVolume" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -123,17 +123,17 @@
                           <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jtfEndPage" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jtfStartPage1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jtfStartPage" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="jpJournal" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jbOk" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbClose" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="32" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -191,7 +191,7 @@
         <Property name="text" type="java.lang.String" value="Volume:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jtfYear1">
+    <Component class="javax.swing.JTextField" name="jtfVolume">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
@@ -231,7 +231,7 @@
         <Property name="text" type="java.lang.String" value="End Page:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jtfStartPage1">
+    <Component class="javax.swing.JTextField" name="jtfStartPage">
     </Component>
     <Container class="javax.swing.JPanel" name="jpJournal">
       <Properties>
@@ -252,16 +252,18 @@
                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jtfName" max="32767" attributes="0"/>
                       <Component id="jtfPublisher" max="32767" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Component id="jtfImpact" min="-2" pref="66" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="97" max="32767" attributes="0"/>
-                      </Group>
                       <Component id="jtfCountry" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="jtfIssue" min="-2" pref="71" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="83" max="32767" attributes="0"/>
+                      </Group>
+                      <Component id="jtfImpact" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -290,7 +292,12 @@
                       <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jtfCountry" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="20" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtfIssue" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -336,6 +343,16 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jtfCountry">
         </Component>
+        <Component class="javax.swing.JLabel" name="jLabel13">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="12" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Issue:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jtfIssue">
+        </Component>
       </SubComponents>
     </Container>
     <Component class="javax.swing.JButton" name="jbOk">
@@ -345,6 +362,9 @@
           <Dimension value="[100, 32]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbOkActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbClose">
       <Properties>

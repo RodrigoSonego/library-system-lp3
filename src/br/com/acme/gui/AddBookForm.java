@@ -189,16 +189,17 @@ public class AddBookForm extends javax.swing.JDialog {
         for(Author author : authors){
             tempBook.addAuthor(author);
         }
-        library.addPublication(tempBook);
+        library.addBook(tempBook);
+        
         
         JOptionPane.showMessageDialog(this, "Your book was successfully added!", "Succes!", JOptionPane.INFORMATION_MESSAGE);
-        setVisible(false);                    
+        clearFields();
     }//GEN-LAST:event_jbOKMouseClicked
 
     private void jbAddAuthorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbAddAuthorMouseClicked
         
         if(!(addAuthor instanceof AuthorForm))
-            addAuthor = new AuthorForm(authors);
+            addAuthor = new AuthorForm(authors, new Author());
         
         addAuthor.setVisible(true);
         
@@ -211,13 +212,10 @@ public class AddBookForm extends javax.swing.JDialog {
     }//GEN-LAST:event_jbCloseMouseClicked
 
     private void clearFields(){
-        for(Component comp : getComponents()){
-            if(comp instanceof JTextField){
-                System.out.println("texto encontrado");
-                ((JTextField) comp).setText("");
-            }
-                
-        }
+         for (Component c : getRootPane().getContentPane().getComponents()) {
+             if(c instanceof JTextField)
+                 ((JTextField) c).setText("");
+         }
     }
     
 

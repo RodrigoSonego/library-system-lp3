@@ -38,7 +38,7 @@ public class MainWindow extends javax.swing.JFrame {
         jtbMenu = new javax.swing.JToolBar();
         jbmbNew = new javax.swing.JButton();
         jbmbOpen = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jbmbSave = new javax.swing.JButton();
         jbmbCreateAccount = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -56,7 +56,7 @@ public class MainWindow extends javax.swing.JFrame {
         jmiListArticles = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jmiCreate = new javax.swing.JMenuItem();
-        jmiLisAccounts = new javax.swing.JMenuItem();
+        jmiListAccounts = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jmiSupport = new javax.swing.JMenuItem();
         jcbmiUpdate = new javax.swing.JCheckBoxMenuItem();
@@ -76,6 +76,11 @@ public class MainWindow extends javax.swing.JFrame {
         jbmbNew.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbmbNew.setPreferredSize(new java.awt.Dimension(32, 16));
         jbmbNew.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jbmbNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbmbNewActionPerformed(evt);
+            }
+        });
         jtbMenu.add(jbmbNew);
 
         jbmbOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/acme/gui/icons/open.png"))); // NOI18N
@@ -83,20 +88,35 @@ public class MainWindow extends javax.swing.JFrame {
         jbmbOpen.setFocusable(false);
         jbmbOpen.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbmbOpen.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jbmbOpen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbmbOpenActionPerformed(evt);
+            }
+        });
         jtbMenu.add(jbmbOpen);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/acme/gui/icons/save.png"))); // NOI18N
-        jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jtbMenu.add(jButton1);
+        jbmbSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/acme/gui/icons/save.png"))); // NOI18N
+        jbmbSave.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jbmbSave.setFocusable(false);
+        jbmbSave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbmbSave.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jbmbSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbmbSaveActionPerformed(evt);
+            }
+        });
+        jtbMenu.add(jbmbSave);
 
         jbmbCreateAccount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/acme/gui/icons/user_add.png"))); // NOI18N
         jbmbCreateAccount.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jbmbCreateAccount.setFocusable(false);
         jbmbCreateAccount.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbmbCreateAccount.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jbmbCreateAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbmbCreateAccountActionPerformed(evt);
+            }
+        });
         jtbMenu.add(jbmbCreateAccount);
 
         jMenu1.setText("File");
@@ -203,9 +223,14 @@ public class MainWindow extends javax.swing.JFrame {
         });
         jMenu3.add(jmiCreate);
 
-        jmiLisAccounts.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/acme/gui/icons/list.png"))); // NOI18N
-        jmiLisAccounts.setText("List Accounts");
-        jMenu3.add(jmiLisAccounts);
+        jmiListAccounts.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/acme/gui/icons/list.png"))); // NOI18N
+        jmiListAccounts.setText("List Accounts");
+        jmiListAccounts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiListAccountsActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jmiListAccounts);
 
         jMenuBar1.add(jMenu3);
 
@@ -294,8 +319,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiNewActionPerformed
 
     private void jmiSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSaveActionPerformed
-        
-        
+               
         int result = jfcFileChooser.showSaveDialog(this);
         
         if(result == JFileChooser.APPROVE_OPTION){
@@ -317,10 +341,30 @@ public class MainWindow extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jmiCreateActionPerformed
 
+    private void jmiListAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListAccountsActionPerformed
+       listAccounts = new ListAccountsForm(this, true);
+       listAccounts.setVisible(true);
+    }//GEN-LAST:event_jmiListAccountsActionPerformed
+
+    private void jbmbCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbmbCreateAccountActionPerformed
+        jmiCreateActionPerformed(evt);
+    }//GEN-LAST:event_jbmbCreateAccountActionPerformed
+
+    private void jbmbSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbmbSaveActionPerformed
+        jmiSaveActionPerformed(evt);
+    }//GEN-LAST:event_jbmbSaveActionPerformed
+
+    private void jbmbOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbmbOpenActionPerformed
+        jmiOpenActionPerformed(evt);
+    }//GEN-LAST:event_jbmbOpenActionPerformed
+
+    private void jbmbNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbmbNewActionPerformed
+        jmiNewActionPerformed(evt);
+    }//GEN-LAST:event_jbmbNewActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -330,6 +374,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton jbmbCreateAccount;
     private javax.swing.JButton jbmbNew;
     private javax.swing.JButton jbmbOpen;
+    private javax.swing.JButton jbmbSave;
     private javax.swing.JCheckBoxMenuItem jcbmiUpdate;
     private javax.swing.JFileChooser jfcFileChooser;
     private javax.swing.JMenu jmAdd;
@@ -339,7 +384,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiAddBook;
     private javax.swing.JMenuItem jmiCreate;
     private javax.swing.JMenuItem jmiExit;
-    private javax.swing.JMenuItem jmiLisAccounts;
+    private javax.swing.JMenuItem jmiListAccounts;
     private javax.swing.JMenuItem jmiListArticles;
     private javax.swing.JMenuItem jmiListBook;
     private javax.swing.JMenuItem jmiNew;
