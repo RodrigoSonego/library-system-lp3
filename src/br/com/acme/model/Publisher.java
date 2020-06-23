@@ -13,5 +13,11 @@ public class Publisher {
     public String getCountry() {
         return country;
     }    
-    
+   
+    public Publisher(String name, String country){
+        this.name = name;
+        this.country = country;
+        
+    }
+            
 }

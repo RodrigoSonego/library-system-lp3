@@ -1,144 +1,133 @@
 package br.com.acme.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AcademicLibrary implements ILibrary {
 
     private String name;
     private String description;
     private String creationDate;
-    private ArrayList<Publication> publications;
-    private ArrayList<User> users;
+    private Map<Long, Article> articles; 
+    private Map<Long, Book> books; 
+     
+    private Map<String, User> users;
 
     public AcademicLibrary(String name, String description, String creationDate) {
         this.name = name;
         this.description = description;
         this.creationDate = creationDate;
-        this.publications = new ArrayList<>();
-        this.users = new ArrayList<>();
+        this.articles = new HashMap<>();
+        this.books = new HashMap<>();
+        this.users = new HashMap<>();
+    }
+    
+    @Override
+    public boolean hasPublication(String publication){
+        return false;
     }
 
 
-    public ArrayList<User> getUsers() {
+    public Map<String, User> getUsers() {
+        
         return users;
     }
-
-    @Override
-    public void addPublication(Publication p) {
-        publications.add(p);
+    public void setUsers(String login, User user){
+        this.users.put(login, user);
     }
-
-    @Override
-    public boolean removePublication(long id) {
-        for (Publication p : publications) {
-            if (p instanceof Article) {
-                Article a = (Article) p;
-                if (a.getIssn() == id) {
-                    return publications.remove(a);
-                }
-            } else if (p instanceof Book) {
-                Book b = (Book) p;
-                if (b.getIsbn() == id) {
-                    return publications.remove(b);
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public ArrayList<Publication> getAllPublications() {
-        return publications;
-    }
-
-    @Override
-    public short countPublications() {
-        return (short) publications.size();
-    }
-
-    @Override
-    public Publication findPublication(String title) {
-        for (Publication p : publications) {
-            if (p.getTitle().equalsIgnoreCase(title)) {
-                return p;
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public boolean hasPublication(String title) {
-        if (findPublication(title) != null) {
+    
+    public boolean findUser(String login){
+   
+        try{
+            users.get(login);
             return true;
-        }
-        return false;
+        }catch(Exception ex){
+            return false;
+    }
+    }
+    public void addUser(User user){
+        users.put(user.getLogin(), user);
+        
+    }
+    
+    public boolean removeUser(String login){
+       
+       try{
+            users.remove(login);
+            return true;
+        }catch(Exception ex){
+            return false;
+    }
+       
+       
+    }
+            
+    
+
+    public void addArticle(Article article){
+        articles.put(article.getIssn(), article);
+    }
+    
+    public boolean removeArticle(Article article){
+        
+        articles.remove(article.getIssn(), article);
+        try{
+            articles.remove(article.getIssn(), article);
+            return true;
+        }catch(Exception ex){
+            return false;
+    }
+    }
+    
+    public void addBooks(Book book){
+        books.put(book.getIsbn(), book);
+    }
+    
+    public boolean removeBook(Book book){
+        books.remove(book.getIsbn(), book);
+        try{
+            books.remove(book.getIsbn(), book);
+            return true;
+        }catch(Exception ex){
+            return false;
+    }
     }
 
-    public short countArticles() {
-        short count = 0;
-        for (Publication p : publications) {
-            if (p instanceof Article) {
-                count++;
-            }
-        }
-        return count;
+    public int countArticles() {
+        return articles.size(); 
     }
 
-    public short countBooks() {
-        short count = 0;
-        for (Publication p : publications) {
-            if (p instanceof Book) {
-                count++;
-            }
-        }
-        return count;
+    
+    public int countBooks() {
+        return books.size();
     }
 
     public Article findArticle(long issn) {
-        for (Publication p : publications) {
-            if (p instanceof Article) {
-                Article a = (Article) p;
-                if (a.getIssn() == issn) {
-                    return a;
-                }
-            }
-        }
-        return null;
+       return articles.get(issn);
     }
 
     public Article findArticle(String title) {
-        for (Publication p : publications) {
-            if (p instanceof Article) {
-                Article a = (Article) p;
-                if (a.getTitle().equalsIgnoreCase(title)) {
-                    return a;
-                }
-            }
-        }
-        return null;
+       for(Article a: getAllArticles()){
+           if(a.getTitle().equals(title)){
+               return a;
+           }
+           
+       }
+       return null;
     }
 
     public Book findBook(long isbn) {
-        for (Publication p : publications) {
-            if (p instanceof Book) {
-                Book b = (Book) p;
-                if (b.getIsbn() == isbn) {
-                    return b;
-                }
-            }
-        }
-        return null;
+        return books.get(isbn);
     }
 
     public Book findBook(String title) {
-        for (Publication p : publications) {
-            if (p instanceof Book) {
-                Book b = (Book) p;
-                if (b.getTitle().equalsIgnoreCase(title)) {
-                    return b;
-                }
-            }
-        }
+       for(Book b: getAllBooks()){
+           if(b.getTitle().equals(title)){
+               return b;
+           }
+           
+       }
         return null;
     }
 
@@ -165,4 +154,46 @@ public class AcademicLibrary implements ILibrary {
     public void setCreationDate(String creationDate) {
         this.creationDate = creationDate;
     }
+    
+    public ArrayList<Book> getAllBooks(){
+        ArrayList<Book> b = new ArrayList<>();
+        for(long key: books.keySet()) {
+            b.add(books.get(key));
+        }
+        return b;
+    }
+    public ArrayList<Article> getAllArticles(){
+        ArrayList<Article> a = new ArrayList<>();
+        for(long key: articles.keySet()) {
+            a.add(articles.get(key));
+        }
+        return a;
+    }
+
+    @Override
+    public void addPublication(Publication arg0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean removePublication(long arg0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Publication> getAllPublications() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public short countPublications() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Publication findPublication(String arg0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+            
 }

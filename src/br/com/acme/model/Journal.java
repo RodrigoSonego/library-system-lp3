@@ -26,7 +26,23 @@ public class Journal {
         return impactFactor;
     }
 
-    public void setImpactFactor(byte impactFactor) {
+    public void setImpactFactor(byte impactFactor) throws IllegalArgumentException{
         this.impactFactor = impactFactor;
+         if(impactFactor < 0){
+            throw new IllegalArgumentException();
+        }
     }
+    
+    public Journal(String name, byte impactFactor, Publisher publisher) throws IllegalArgumentException{
+        if(impactFactor < 0){
+            throw new IllegalArgumentException();
+        }
+            
+        
+        
+        
+    }
+    
+    
+    
 }
