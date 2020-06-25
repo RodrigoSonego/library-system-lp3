@@ -1,6 +1,8 @@
 package br.com.acme.model;
 
-public class Author extends Person {
+import java.io.Serializable;
+
+public class Author extends Person implements Serializable{
 
     private String afiliation;
     private boolean isCorrespondingAuthor;

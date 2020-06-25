@@ -1,6 +1,8 @@
 package br.com.acme.model;
 
-public class Publisher {
+import java.io.Serializable;
+
+public class Publisher implements Serializable{
 
     private String name;
     private String country;

@@ -32,7 +32,7 @@ public class ALManager implements Serializable{
      */
     public static void loadLibrary(File file) throws FileNotFoundException, IOException, ClassNotFoundException {
         try{
-        FileInputStream fin = new FileInputStream("c:\\library.exe");
+        FileInputStream fin = new FileInputStream(file);
         ObjectInputStream ois = new ObjectInputStream(fin);
         library = (AcademicLibrary)ois.readObject();
         ois.close();
@@ -50,7 +50,7 @@ public class ALManager implements Serializable{
      */
     public static void persistLibrary(File file) throws FileNotFoundException, IOException {
         try{
-        FileOutputStream fout = new FileOutputStream("c:\\library.exe");
+        FileOutputStream fout = new FileOutputStream(file);
         ObjectOutputStream oos = new ObjectOutputStream(fout);
         oos.writeObject(library);
         oos.close();

@@ -1,6 +1,8 @@
 package br.com.acme.model;
 
-public class Journal {
+import java.io.Serializable;
+
+public class Journal implements Serializable{
 
     private String name;
     private byte impactFactor;

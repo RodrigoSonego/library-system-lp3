@@ -191,15 +191,15 @@ public class AddBookForm extends javax.swing.JDialog {
         }
         library.addBook(tempBook);
         
-        
+        System.out.println(library.countBooks());
         JOptionPane.showMessageDialog(this, "Your book was successfully added!", "Succes!", JOptionPane.INFORMATION_MESSAGE);
+        authors.removeAll(authors);
         clearFields();
     }//GEN-LAST:event_jbOKMouseClicked
 
     private void jbAddAuthorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbAddAuthorMouseClicked
         
-        if(!(addAuthor instanceof AuthorForm))
-            addAuthor = new AuthorForm(authors, new Author());
+        addAuthor = new AuthorForm(authors, new Author());
         
         addAuthor.setVisible(true);
         

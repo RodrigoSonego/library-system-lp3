@@ -1,9 +1,10 @@
 package br.com.acme.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Publication {
+public abstract class Publication implements Serializable{
 
     private String title;
     private short year;

@@ -7,6 +7,7 @@ import br.com.acme.model.Publication;
 import br.com.acme.model.logic.ALManager;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 public class ListBooksForm extends javax.swing.JDialog {
@@ -50,7 +51,8 @@ public class ListBooksForm extends javax.swing.JDialog {
                 model.setValueAt(b.getPages(), line, 6);
                 line++;
             }
-        }   
+        }
+        ((DefaultTableModel)model).fireTableDataChanged();
         
     }
 

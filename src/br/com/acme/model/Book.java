@@ -1,6 +1,8 @@
 package br.com.acme.model;
 
-public class Book extends Publication {
+import java.io.Serializable;
+
+public class Book extends Publication implements Serializable{
 
     private String language;
     private long isbn;

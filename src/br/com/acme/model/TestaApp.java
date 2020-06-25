@@ -6,8 +6,6 @@
 package br.com.acme.model;
 
 import br.com.acme.gui.*;
-import java.awt.Component;
-import javax.swing.JTextField;
 
 public class TestaApp {
 

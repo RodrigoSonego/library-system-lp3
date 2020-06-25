@@ -5,10 +5,12 @@
  */
 package br.com.acme.gui;
 
+import br.com.acme.model.AcademicLibrary;
 import br.com.acme.model.Article;
 import br.com.acme.model.Author;
 import br.com.acme.model.Journal;
 import br.com.acme.model.Publisher;
+import br.com.acme.model.logic.ALManager;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +30,13 @@ public class AddArticleForm extends javax.swing.JDialog {
     private Publisher publisher;
     private Journal journal;
     private Article article;
+    private AcademicLibrary library;
             
     public AddArticleForm() {
         initComponents();
         authors = new ArrayList<>();
         keyWords = new ArrayList<>();
+        library = ALManager.getInstance();
     }
 
     /**
@@ -304,8 +308,7 @@ public class AddArticleForm extends javax.swing.JDialog {
 
     private void jbAddAuthorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbAddAuthorMouseClicked
         
-        if(!(authorForm instanceof AuthorForm))
-            authorForm = new AuthorForm(authors, new Author());
+        authorForm = new AuthorForm(authors, new Author());
         
         authorForm.setVisible(true);
         
@@ -320,7 +323,7 @@ public class AddArticleForm extends javax.swing.JDialog {
     private void jbOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbOkActionPerformed
         if (hasEmptyField()) {
             JOptionPane.showMessageDialog(this, "One or more empty fields", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
+        } else {            
             article = new Article(jtfTitle.getText(), Short.parseShort(jtfYear.getText()),
                     Byte.parseByte(jtfVolume.getText()), Long.parseLong(jtfIssn.getText()),
                     Byte.parseByte(jtfIssue.getText()), Short.parseShort(jtfStartPage.getText()),
@@ -337,7 +340,10 @@ public class AddArticleForm extends javax.swing.JDialog {
             }
             
            article.setJournal(journal);
+           
+           library.addArticle(article);
            JOptionPane.showMessageDialog(this, "Article added successfully!", "Success!", JOptionPane.INFORMATION_MESSAGE);
+           authors.removeAll(authors);
         }
     }//GEN-LAST:event_jbOkActionPerformed
 

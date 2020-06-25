@@ -6,8 +6,11 @@
 package br.com.acme.gui;
 
 import br.com.acme.model.*;
+import br.com.acme.model.logic.ALManager;
 import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  *
  * @author USER
@@ -23,6 +26,7 @@ public class MainWindow extends javax.swing.JFrame {
     
     public MainWindow() {
         initComponents();
+        restrictFileChooser();
     }
 
     /**
@@ -269,18 +273,16 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jmiAddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAddBookActionPerformed
         
-        if(!(addBook instanceof AddBookForm)){
-            addBook = new AddBookForm();
-        }       
+        addBook = new AddBookForm();
+              
         
         addBook.setVisible(true);
         
     }//GEN-LAST:event_jmiAddBookActionPerformed
 
     private void jmiAddArticleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAddArticleActionPerformed
-        
-        if(!(addArticle instanceof AddArticleForm))
-            addArticle = new AddArticleForm();
+               
+        addArticle = new AddArticleForm();
         
         addArticle.setVisible(true);
         
@@ -288,42 +290,60 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jmiListBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListBookActionPerformed
         
-        if(!(listBooks instanceof ListBooksForm))
-            listBooks = new ListBooksForm();
+        listBooks = new ListBooksForm();
         
         listBooks.setVisible(true);
     }//GEN-LAST:event_jmiListBookActionPerformed
 
     private void jmiListArticlesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListArticlesActionPerformed
-        
-        if(!(listArticles instanceof ListArticlesForm))
-          listArticles = new ListArticlesForm();
+                
+         listArticles = new ListArticlesForm();
         
         listArticles.setVisible(true);
         
     }//GEN-LAST:event_jmiListArticlesActionPerformed
 
     private void jmiOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiOpenActionPerformed
-        
+                
         int result = jfcFileChooser.showOpenDialog(this);
         if(result == JFileChooser.CANCEL_OPTION)
             return;
         
         File file = jfcFileChooser.getSelectedFile();
+        try {
+            ALManager.loadLibrary(file);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCause());
+        }
+        
     }//GEN-LAST:event_jmiOpenActionPerformed
 
     private void jmiNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNewActionPerformed
         
-  
+        
+        int result = JOptionPane.showConfirmDialog(this, "Are you sure? All unsaved changes will be lost", "Warning",
+                JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE);
+        if (result == JOptionPane.YES_OPTION) {
+            ALManager.newLibrary();
+        } else {
+            return;
+        }
         
     }//GEN-LAST:event_jmiNewActionPerformed
 
     private void jmiSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSaveActionPerformed
                
         int result = jfcFileChooser.showSaveDialog(this);
-        
         if(result == JFileChooser.APPROVE_OPTION){
-            
+            File file = jfcFileChooser.getSelectedFile();
+      
+            try {
+                 ALManager.persistLibrary(file);
+            } catch (Exception e) {
+                System.out.println("aaaaaaaaaaaaaaaaaaaai caraio");
+            }
+           
         }
             
     }//GEN-LAST:event_jmiSaveActionPerformed
@@ -334,8 +354,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jmiCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCreateActionPerformed
         
-        if(!(createAccount instanceof CreateAccountForm))
-            createAccount = new CreateAccountForm();
+        createAccount = new CreateAccountForm();
         
         createAccount.setVisible(true);
         
@@ -362,6 +381,11 @@ public class MainWindow extends javax.swing.JFrame {
         jmiNewActionPerformed(evt);
     }//GEN-LAST:event_jbmbNewActionPerformed
 
+    private void restrictFileChooser(){
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Academic Library files", "al");
+        jfcFileChooser.setFileFilter(filter);
+    }
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
