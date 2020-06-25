@@ -10,8 +10,8 @@ import br.com.acme.gui.*;
 public class TestaApp {
 
     public static void main(String[] args) {
-        MainWindow mw = new MainWindow();
-        mw.setVisible(true);     
+        LoginForm login = new LoginForm();
+        login.setVisible(true);     
       
     }
     

@@ -185,6 +185,8 @@ public class CreateAccountForm extends javax.swing.JDialog {
             return;         
         }
         
+        verifyFields();
+        
         tempUser.setName(jtfName.getText());
         tempUser.setLogin(jtfLogin.getText());
         tempUser.setEmail(jtfEmail.getText());
@@ -202,6 +204,14 @@ public class CreateAccountForm extends javax.swing.JDialog {
         
     }//GEN-LAST:event_jbCloseMouseClicked
 
+    private void verifyFields(){
+        for (Component c : getRootPane().getContentPane().getComponents()) {
+             if(c instanceof JTextField)
+                 if(((JTextField) c).getText().equals(""))
+                     JOptionPane.showMessageDialog(this, "One or more empty fields", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+    }
+    
      private void clearFields(){
          for (Component c : getRootPane().getContentPane().getComponents()) {
              if(c instanceof JTextField)

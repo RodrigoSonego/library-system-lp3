@@ -7,7 +7,9 @@ package br.com.acme.gui;
 
 import br.com.acme.model.*;
 import br.com.acme.model.logic.ALManager;
+import br.com.acme.model.logic.LogController;
 import java.io.File;
+import java.util.Date;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -17,16 +19,18 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class MainWindow extends javax.swing.JFrame {
 
-    AddBookForm addBook;
-    AddArticleForm addArticle;
-    CreateAccountForm createAccount;
-    ListAccountsForm listAccounts;
-    ListArticlesForm listArticles;
-    ListBooksForm listBooks;
+    private AddBookForm addBook;
+    private AddArticleForm addArticle;
+    private CreateAccountForm createAccount;
+    private ListAccountsForm listAccounts;
+    private ListArticlesForm listArticles;
+    private ListBooksForm listBooks;
+    private LogController logController;
+    private String currentUsername;           
     
-    public MainWindow() {
-        initComponents();
-        restrictFileChooser();
+    public MainWindow(String username) {
+        initComponents();       
+        currentUsername = username;
     }
 
     /**
@@ -65,6 +69,9 @@ public class MainWindow extends javax.swing.JFrame {
         jmiSupport = new javax.swing.JMenuItem();
         jcbmiUpdate = new javax.swing.JCheckBoxMenuItem();
         jmiAbout = new javax.swing.JMenuItem();
+        jmLog = new javax.swing.JMenu();
+        jmcbOn = new javax.swing.JCheckBoxMenuItem();
+        jmcbOff = new javax.swing.JCheckBoxMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Academic Library Control System");
@@ -250,6 +257,27 @@ public class MainWindow extends javax.swing.JFrame {
         jmiAbout.setText("About");
         jMenu4.add(jmiAbout);
 
+        jmLog.setText("Log");
+
+        jmcbOn.setSelected(true);
+        jmcbOn.setText("On");
+        jmcbOn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmcbOnActionPerformed(evt);
+            }
+        });
+        jmLog.add(jmcbOn);
+
+        jmcbOff.setText("Off");
+        jmcbOff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmcbOffActionPerformed(evt);
+            }
+        });
+        jmLog.add(jmcbOff);
+
+        jMenu4.add(jmLog);
+
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
@@ -273,8 +301,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jmiAddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAddBookActionPerformed
         
-        addBook = new AddBookForm();
-              
+        addBook = new AddBookForm();             
         
         addBook.setVisible(true);
         
@@ -293,6 +320,7 @@ public class MainWindow extends javax.swing.JFrame {
         listBooks = new ListBooksForm();
         
         listBooks.setVisible(true);
+        
     }//GEN-LAST:event_jmiListBookActionPerformed
 
     private void jmiListArticlesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListArticlesActionPerformed
@@ -340,8 +368,10 @@ public class MainWindow extends javax.swing.JFrame {
       
             try {
                  ALManager.persistLibrary(file);
+                 LogController.writeLog("Library saved with no errors.");
             } catch (Exception e) {
-                System.out.println("aaaaaaaaaaaaaaaaaaaai caraio");
+                JOptionPane.showMessageDialog(this, "Error on saving, try again", "Error", JOptionPane.ERROR_MESSAGE);
+                LogController.writeLog(e.toString() + "at MainWindow");
             }
            
         }
@@ -349,6 +379,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiSaveActionPerformed
 
     private void jmiExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiExitActionPerformed
+        LogController.writeLog("Exited the system : " + currentUsername);
         System.exit(0);
     }//GEN-LAST:event_jmiExitActionPerformed
 
@@ -381,11 +412,22 @@ public class MainWindow extends javax.swing.JFrame {
         jmiNewActionPerformed(evt);
     }//GEN-LAST:event_jbmbNewActionPerformed
 
+    private void jmcbOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmcbOnActionPerformed
+        jmcbOff.setSelected(false);
+        logController.setLogStatus(true);
+    }//GEN-LAST:event_jmcbOnActionPerformed
+
+    private void jmcbOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmcbOffActionPerformed
+        jmcbOn.setSelected(false);
+        logController.setLogStatus(false);
+    }//GEN-LAST:event_jmcbOffActionPerformed
+
+    /*
     private void restrictFileChooser(){
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Academic Library files", "al");
         jfcFileChooser.setFileFilter(filter);
     }
-    
+    */
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -403,6 +445,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JFileChooser jfcFileChooser;
     private javax.swing.JMenu jmAdd;
     private javax.swing.JMenu jmList;
+    private javax.swing.JMenu jmLog;
+    private javax.swing.JCheckBoxMenuItem jmcbOff;
+    private javax.swing.JCheckBoxMenuItem jmcbOn;
     private javax.swing.JMenuItem jmiAbout;
     private javax.swing.JMenuItem jmiAddArticle;
     private javax.swing.JMenuItem jmiAddBook;

@@ -11,8 +11,11 @@ import br.com.acme.model.Author;
 import br.com.acme.model.Journal;
 import br.com.acme.model.Publisher;
 import br.com.acme.model.logic.ALManager;
+import br.com.acme.model.logic.LogController;
 import java.awt.Component;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -31,7 +34,7 @@ public class AddArticleForm extends javax.swing.JDialog {
     private Journal journal;
     private Article article;
     private AcademicLibrary library;
-            
+
     public AddArticleForm() {
         initComponents();
         authors = new ArrayList<>();
@@ -300,69 +303,86 @@ public class AddArticleForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCloseMouseClicked
-        
+
         setVisible(false);
         clearFields();
         dispose();
     }//GEN-LAST:event_jbCloseMouseClicked
 
     private void jbAddAuthorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbAddAuthorMouseClicked
-        
+
         authorForm = new AuthorForm(authors, new Author());
-        
+
         authorForm.setVisible(true);
-        
+
     }//GEN-LAST:event_jbAddAuthorMouseClicked
 
     private void jbAddKeywordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbAddKeywordMouseClicked
         keywordForm = new KeywordForm(keyWords);
         keywordForm.setVisible(true);
-        
+
     }//GEN-LAST:event_jbAddKeywordMouseClicked
 
     private void jbOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbOkActionPerformed
         if (hasEmptyField()) {
             JOptionPane.showMessageDialog(this, "One or more empty fields", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {            
-            article = new Article(jtfTitle.getText(), Short.parseShort(jtfYear.getText()),
-                    Byte.parseByte(jtfVolume.getText()), Long.parseLong(jtfIssn.getText()),
-                    Byte.parseByte(jtfIssue.getText()), Short.parseShort(jtfStartPage.getText()),
-                    Byte.parseByte(jtfEndPage.getText()));
-            
-            publisher = new Publisher(jtfPublisher.getText(), jtfCountry.getText());
-            
-            try{
+        } else {
+            try {
+                article = new Article(jtfTitle.getText(), Short.parseShort(jtfYear.getText()),
+                        Byte.parseByte(jtfVolume.getText()), Long.parseLong(jtfIssn.getText()),
+                        Byte.parseByte(jtfIssue.getText()), Short.parseShort(jtfStartPage.getText()),
+                        Short.parseShort(jtfEndPage.getText()));
+
+                publisher = new Publisher(jtfPublisher.getText(), jtfCountry.getText());
+
                 journal = new Journal(jtfName.getText(), Byte.parseByte(jtfImpact.getText()),
-                    publisher);
-            } catch (br.com.acme.model.IllegalArgumentException ex){
+                        publisher);
+                
+            } catch (br.com.acme.model.IllegalArgumentException ex) {
                 JOptionPane.showMessageDialog(this, "Impact factor must be greater than zero", "Error", JOptionPane.ERROR_MESSAGE);
+                if (LogController.getLogStatus()) {
+                    LogController.writeLog(ex.toString());
+                }
+                return;
+                
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "The following fields must be NUMBERS between: \n"
+                        + "Year, Pages, Start/end page: 0 and " + Short.MAX_VALUE + "\n"
+                        + "Volume and Issue: 0 and " + Byte.MAX_VALUE, "Error", JOptionPane.INFORMATION_MESSAGE);
+                LogController.writeLog(ex.getMessage() + "at AddArticleForm");
                 return;
             }
-            
-           article.setJournal(journal);
-           
-           library.addArticle(article);
-           JOptionPane.showMessageDialog(this, "Article added successfully!", "Success!", JOptionPane.INFORMATION_MESSAGE);
-           authors.removeAll(authors);
+
+            article.setJournal(journal);
+
+            library.addArticle(article);
+            JOptionPane.showMessageDialog(this, "Article added successfully!", "Success!", JOptionPane.INFORMATION_MESSAGE);
+            if (LogController.getLogStatus()) {
+                LogController.writeLog("Article added: " + article.getTitle());
+            }
+            authors.removeAll(authors);
         }
     }//GEN-LAST:event_jbOkActionPerformed
 
-    private boolean hasEmptyField(){
+    private boolean hasEmptyField() {
         for (Component c : getRootPane().getContentPane().getComponents()) {
-             if(c instanceof JTextField)
-                 if(((JTextField) c).getText().equals(""))
-                     return true;
-         }
+            if (c instanceof JTextField) {
+                if (((JTextField) c).getText().equals("")) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
-    
-    private void clearFields(){
-         for (Component c : getRootPane().getContentPane().getComponents()) {
-             if(c instanceof JTextField)
-                 ((JTextField) c).setText("");
-         }
+
+    private void clearFields() {
+        for (Component c : getRootPane().getContentPane().getComponents()) {
+            if (c instanceof JTextField) {
+                ((JTextField) c).setText("");
+            }
+        }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

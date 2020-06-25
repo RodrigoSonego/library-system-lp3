@@ -11,7 +11,10 @@ import br.com.acme.model.Publication;
 import br.com.acme.model.logic.ALManager;
 import java.awt.Component;
 import br.com.acme.model.Book;
+import br.com.acme.model.logic.LogController;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.*;
 
@@ -24,7 +27,7 @@ public class AddBookForm extends javax.swing.JDialog {
     private AuthorForm addAuthor;
     private List<Author> authors;
     private AcademicLibrary library;
-    
+
     public AddBookForm() {
         initComponents();
         library = ALManager.getInstance();
@@ -182,27 +185,40 @@ public class AddBookForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbOKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbOKMouseClicked
-              
-        Book tempBook = new Book(jtfTitle.getText(),Short.parseShort(jtfYear.getText()),
-                                   Byte.parseByte(jtfVolume.getText()), jtfLanguage.getText(), Long.parseLong(jtfIsbn.getText()),
-                                          Short.parseShort(jtfPages.getText()));
-        for(Author author : authors){
-            tempBook.addAuthor(author);
+
+        try {            
+            Book tempBook = new Book(jtfTitle.getText(), Short.parseShort(jtfYear.getText()),
+                    Byte.parseByte(jtfVolume.getText()), jtfLanguage.getText(), Long.parseLong(jtfIsbn.getText()),
+                    Short.parseShort(jtfPages.getText()));
+            
+            for (Author author : authors) {
+                tempBook.addAuthor(author);
+            }
+            
+            library.addBook(tempBook);
+            JOptionPane.showMessageDialog(this, "Your book was successfully added!", "Succes!", JOptionPane.INFORMATION_MESSAGE);
+            if (LogController.getLogStatus()) {
+                LogController.writeLog("Book added: " + tempBook.getTitle());
+            }
+            authors.removeAll(authors);
+            clearFields();
+        } catch (NumberFormatException ex) {
+            showNumberErrorMessage();
+            if (LogController.getLogStatus()) {
+                LogController.writeLog(ex.toString() + " at AddBookForm");
+            }           
+            return;
         }
-        library.addBook(tempBook);
-        
-        System.out.println(library.countBooks());
-        JOptionPane.showMessageDialog(this, "Your book was successfully added!", "Succes!", JOptionPane.INFORMATION_MESSAGE);
-        authors.removeAll(authors);
-        clearFields();
+
+
     }//GEN-LAST:event_jbOKMouseClicked
 
     private void jbAddAuthorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbAddAuthorMouseClicked
-        
+
         addAuthor = new AuthorForm(authors, new Author());
-        
+
         addAuthor.setVisible(true);
-        
+
     }//GEN-LAST:event_jbAddAuthorMouseClicked
 
     private void jbCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCloseMouseClicked
@@ -211,13 +227,20 @@ public class AddBookForm extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_jbCloseMouseClicked
 
-    private void clearFields(){
-         for (Component c : getRootPane().getContentPane().getComponents()) {
-             if(c instanceof JTextField)
-                 ((JTextField) c).setText("");
-         }
+    private void showNumberErrorMessage(){
+        JOptionPane.showMessageDialog(this, "The following fields must be NUMBERS between: \n"
+                    + "Year and Pages: 0 and " + Short.MAX_VALUE + "\n"
+                            + "Volume: 0 and " + Byte.MAX_VALUE, "Error", JOptionPane.INFORMATION_MESSAGE);
     }
     
+    private void clearFields() {
+        for (Component c : getRootPane().getContentPane().getComponents()) {
+            if (c instanceof JTextField) {
+                ((JTextField) c).setText("");
+            }
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

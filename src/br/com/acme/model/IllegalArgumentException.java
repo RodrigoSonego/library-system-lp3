@@ -10,6 +10,12 @@ package br.com.acme.model;
  * @author Gustavo
  */
 public class IllegalArgumentException extends Exception{
+
+    @Override
+    public String getMessage() {
+        return "Impact factor must be greater than zero.";
+    }
+    
     
     
 }

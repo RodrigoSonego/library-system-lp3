@@ -5,18 +5,24 @@
  */
 package br.com.acme.gui;
 
+import br.com.acme.model.AcademicLibrary;
+import br.com.acme.model.User;
+import br.com.acme.model.logic.ALManager;
+import br.com.acme.model.logic.LogController;
+
 /**
  *
  * @author USER
  */
 public class LoginForm extends javax.swing.JDialog {
 
-    /**
-     * Creates new form LoginForm
-     */
-    public LoginForm(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    private AcademicLibrary library;
+    private CreateAccountForm createAccountForm;
+    private MainWindow mainWindow;
+
+    public LoginForm() {
         initComponents();
+        library = ALManager.getInstance();
     }
 
     /**
@@ -35,6 +41,7 @@ public class LoginForm extends javax.swing.JDialog {
         jpfPassword = new javax.swing.JPasswordField();
         jbValidate = new javax.swing.JButton();
         jbCancel = new javax.swing.JButton();
+        jbCreateAccount = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login");
@@ -52,33 +59,55 @@ public class LoginForm extends javax.swing.JDialog {
         jbValidate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/acme/gui/icons/accept.png"))); // NOI18N
         jbValidate.setText("Validate");
         jbValidate.setPreferredSize(new java.awt.Dimension(100, 32));
+        jbValidate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbValidateActionPerformed(evt);
+            }
+        });
 
         jbCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/acme/gui/icons/cross.png"))); // NOI18N
         jbCancel.setText("Cancel");
         jbCancel.setPreferredSize(new java.awt.Dimension(100, 32));
+        jbCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCancelActionPerformed(evt);
+            }
+        });
+
+        jbCreateAccount.setText("Create Account");
+        jbCreateAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCreateAccountActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jpfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(65, 65, 65)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jbValidate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(128, Short.MAX_VALUE))
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtfLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jpfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jbValidate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jbCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(214, 214, 214)
+                        .addComponent(jbCreateAccount)))
+                .addContainerGap(132, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,26 +122,67 @@ public class LoginForm extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jpfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbValidate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbCreateAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbValidateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbValidateActionPerformed
+        boolean isValidUser = false;
+        boolean isValidPassword = false;
+
+        try {
+            int insertedPwd = Integer.parseInt(new String(jpfPassword.getPassword()));
+            for (User user : library.getUsers()) {
+                if (user.getLogin().equals(jtfLogin.getText())) {
+                    isValidUser = true;
+                }
+                if (user.getPassword() == insertedPwd) {
+                    isValidPassword = true;
+                }
+            }
+
+            if ((isValidPassword && isValidUser) || (jtfLogin.getText().equals("admin") && insertedPwd == 1234)) {
+                mainWindow = new MainWindow(jtfLogin.getText());
+                mainWindow.setVisible(true);
+
+                LogController.writeLog("Logged into the system: " + jtfLogin.getText());
+                this.setVisible(false);
+                dispose();
+            }
+        } catch (NumberFormatException ex) {
+
+        }
+
     
+    }//GEN-LAST:event_jbValidateActionPerformed
+
+    private void jbCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCreateAccountActionPerformed
+        createAccountForm = new CreateAccountForm();
+        createAccountForm.setVisible(true);
+    }//GEN-LAST:event_jbCreateAccountActionPerformed
+
+    private void jbCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jbCancelActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JButton jbCancel;
+    private javax.swing.JButton jbCreateAccount;
     private javax.swing.JButton jbValidate;
     private javax.swing.JPasswordField jpfPassword;
     private javax.swing.JTextField jtfLogin;
     // End of variables declaration//GEN-END:variables
 }
+

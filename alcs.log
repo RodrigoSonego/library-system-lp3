@@ -1,0 +1,12 @@
+[Thu Jun 25 16:49:44 BRT 2020] For input string: "fsdasfd"
+[Thu Jun 25 16:49:49 BRT 2020] For input string: "fsdasfd"
+[Thu Jun 25 16:51:07 BRT 2020] For input string: "sdaf"
+[Thu Jun 25 16:52:40 BRT 2020] java.lang.NumberFormatException: For input string: "dsaf"
+[Thu Jun 25 17:21:09 BRT 2020] Logged into the system: admin
+[Thu Jun 25 17:21:55 BRT 2020] Book added: Pereira Ednaldo
+[Thu Jun 25 17:22:16 BRT 2020] Library saved with no errors.
+[Thu Jun 25 17:24:25 BRT 2020] Logged into the system: admin
+[Thu Jun 25 17:24:38 BRT 2020] Book added: fasdfasd
+[Thu Jun 25 17:24:51 BRT 2020] Library saved with no errors.
+[Thu Jun 25 17:26:55 BRT 2020] Logged into the system: admin
+[Thu Jun 25 17:27:28 BRT 2020] For input string: "sdafasd"at AddArticleForm
