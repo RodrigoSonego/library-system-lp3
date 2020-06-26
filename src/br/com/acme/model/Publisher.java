@@ -16,6 +16,10 @@ public class Publisher implements Serializable{
         return country;
     }    
    
+    public Publisher(){
+        
+    }
+    
     public Publisher(String name, String country){
         this.name = name;
         this.country = country;
