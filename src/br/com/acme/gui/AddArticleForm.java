@@ -349,7 +349,8 @@ public class AddArticleForm extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "The following fields must be NUMBERS between: \n"
                         + "Year, Pages, Start/end page: 0 and " + Short.MAX_VALUE + "\n"
                         + "Volume and Issue: 0 and " + Byte.MAX_VALUE, "Error", JOptionPane.INFORMATION_MESSAGE);
-                LogController.writeLog(ex.getMessage() + "at AddArticleForm");
+                if(LogController.getLogStatus())
+                    LogController.writeLog(ex.getMessage() + "at AddArticleForm");
                 return;
             }
 

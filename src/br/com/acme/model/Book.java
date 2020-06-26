@@ -16,8 +16,7 @@ public class Book extends Publication implements Serializable{
         super(title,year,volume);
         this.isbn = isbn;
         this.pages = pages;
-        this.language = language;
-        //3 - não causa problema pois o construtor default não inicia nenhuma variável;
+        this.language = language;       
     }
     
     public String getLanguage() {
