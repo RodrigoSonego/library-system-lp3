@@ -9,6 +9,7 @@ import br.com.acme.model.AcademicLibrary;
 import br.com.acme.model.User;
 import br.com.acme.model.logic.ALManager;
 import br.com.acme.model.logic.LogController;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -158,7 +159,8 @@ public class LoginForm extends javax.swing.JDialog {
                 dispose();
             }
         } catch (NumberFormatException ex) {
-
+            JOptionPane.showMessageDialog(this, "Password must be only numbers", "Error", JOptionPane.ERROR_MESSAGE);
+            LogController.writeLog(ex.toString() + " at LoginForm");
         }
 
     

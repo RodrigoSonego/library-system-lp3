@@ -38,11 +38,11 @@ public class Journal implements Serializable{
     public Journal(String name, byte impactFactor, Publisher publisher) throws IllegalArgumentException{
         if(impactFactor < 0){
             throw new IllegalArgumentException();
-        }
-            
-        
-        
-        
+        } else {
+            this.impactFactor = impactFactor;
+            this.name = name;
+            this.publisher = publisher;
+        }                                 
     }
     
     

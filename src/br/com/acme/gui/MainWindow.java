@@ -414,12 +414,12 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jmcbOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmcbOnActionPerformed
         jmcbOff.setSelected(false);
-        logController.setLogStatus(true);
+        LogController.setLogStatus(true);
     }//GEN-LAST:event_jmcbOnActionPerformed
 
     private void jmcbOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmcbOffActionPerformed
         jmcbOn.setSelected(false);
-        logController.setLogStatus(false);
+        LogController.setLogStatus(false);
     }//GEN-LAST:event_jmcbOffActionPerformed
 
     /*

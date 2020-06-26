@@ -16,7 +16,7 @@ public class LogController {
     
     private static boolean isLogOn = true;
     
-    public void setLogStatus(boolean status){
+    public static void setLogStatus(boolean status){
         isLogOn = status;
     }
     
