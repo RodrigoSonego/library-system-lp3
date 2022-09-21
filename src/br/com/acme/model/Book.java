@@ -7,13 +7,9 @@ public class Book extends Publication implements Serializable{
     private String language;
     private long isbn;
     private short pages;
-
-    public Book(){
-        super();
-    }
     
-    public Book(String title, short year, byte volume, String language, long isbn, short pages){
-        super(title,year,volume);
+    public Book(String title, short year, String language, long isbn, short pages){
+        super(title,year);
         this.isbn = isbn;
         this.pages = pages;
         this.language = language;       

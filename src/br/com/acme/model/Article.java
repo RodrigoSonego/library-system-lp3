@@ -4,83 +4,29 @@ import java.util.ArrayList;
 
 public class Article extends Publication {
 
-    private ArrayList<String> keyWords;
-    private long issn;
-    private byte issue;
-    private short startPage;
-    private short endPage;
-    private Journal journal;
-
-    public Article() {
-        super();
-        keyWords = new ArrayList<>();
-    }
+    private String doi;
+    private String journal;
     
-    public Article(String title, short year, byte volume, long issn,
-                    byte issue, short startPage, short endPage){
+    public Article(String title, short year, String doi){
         
-        super(title,year,volume);
-        this.issn = issn;
-        this.issue = issue;
-        this.startPage = startPage;
-        this.endPage = endPage;
-        keyWords = new ArrayList<>();
+        super(title,year);
+        this.doi = doi;
         
     }
 
-    public Journal getJournal() {
+    public String getJournal() {
         return journal;
     }
 
-    public void setJournal(Journal journal) {
+    public void setJournal(String journal) {
         this.journal = journal;
     }
 
-    public void addKeyWord(String key) {
-        keyWords.add(key);
+    public String getDoi() {
+        return doi;
     }
 
-    public ArrayList<String> getKeyWords() {
-        return keyWords;
-    }
-
-    public boolean removeKeyWord(String key) {
-        return keyWords.remove(key);
-    }
-
-    public long getIssn() {
-        return issn;
-    }
-
-    public void setIssn(long issn) {
-        this.issn = issn;
-    }
-
-    public byte getIssue() {
-        return issue;
-    }
-
-    public void setIssue(byte issue) {
-        this.issue = issue;
-    }
-
-    public short getStartPage() {
-        return startPage;
-    }
-
-    public void setStartPage(short startPage) {
-        this.startPage = startPage;
-    }
-
-    public short getEndPage() {
-        return endPage;
-    }
-
-    public void setEndPage(short endPage) {
-        this.endPage = endPage;
-    }
-    
-    public void setKeyWords(ArrayList<String> keyWords){
-        this.keyWords = keyWords;
+    public void setDoi(String doi) {
+        this.doi = doi;
     }
 }

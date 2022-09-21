@@ -8,17 +8,10 @@ public abstract class Publication implements Serializable{
 
     private String title;
     private short year;
-    private byte volume;
-    private List<Author> authors;
+    private String author;
 
-    public Publication() {
-        authors = new ArrayList<>();
-    }
-
-    public Publication(String title, short year, byte volume) {
-        this();
+    public Publication(String title, short year) {
         this.title = title;
-        this.volume = volume;
         this.year = year;
     }
 
@@ -37,28 +30,14 @@ public abstract class Publication implements Serializable{
     public void setYear(short year) {
         this.year = year;
     }
+    
+    public void addAuthor(String author){
+        this.author = author;
+    }
 
-    public byte getVolume() {
-        return volume;
-    }
-
-    public void setVolume(byte volume) {
-        this.volume = volume;
-    }
     
-    public void addAuthor(Author author){
-        authors.add(author);
-    }
-    
-    public void removeAuthor(String name){
-        for (Author aut : authors) {
-            if(aut.getName().equals(name))
-                authors.remove(aut);
-        }
-    }
-    
-    public List<Author> getAuthors(){
-        return authors;
+    public String getAuthor(){
+        return author;
     }
 
 }

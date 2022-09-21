@@ -24,14 +24,12 @@ import javax.swing.*;
  */
 public class AddBookForm extends javax.swing.JDialog {
 
-    private AuthorForm addAuthor;
-    private List<Author> authors;
+    private String author;
     private AcademicLibrary library;
 
     public AddBookForm() {
         initComponents();
         library = ALManager.getInstance();
-        authors = new ArrayList<>();
     }
 
     /**
@@ -187,19 +185,17 @@ public class AddBookForm extends javax.swing.JDialog {
 
         try {            
             Book tempBook = new Book(jtfTitle.getText(), Short.parseShort(jtfYear.getText()),
-                    Byte.parseByte(jtfVolume.getText()), jtfLanguage.getText(), Long.parseLong(jtfIsbn.getText()),
-                    Short.parseShort(jtfPages.getText()));
+                    jtfLanguage.getText(), Long.parseLong(jtfIsbn.getText()), Short.parseShort(jtfPages.getText()));
             
-            for (Author author : authors) {
-                tempBook.addAuthor(author);
-            }
+            author = jtfAuthor.getText();
             
             library.addBook(tempBook);
             JOptionPane.showMessageDialog(this, "Your book was successfully added!", "Succes!", JOptionPane.INFORMATION_MESSAGE);
             if (LogController.getLogStatus()) {
                 LogController.writeLog("Book added: " + tempBook.getTitle());
             }
-            authors.removeAll(authors);
+            author = "";
+            
             clearFields();
         } catch (NumberFormatException ex) {
             showNumberErrorMessage();

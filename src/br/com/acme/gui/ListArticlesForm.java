@@ -34,31 +34,12 @@ public class ListArticlesForm extends javax.swing.JDialog {
                 Article a = (Article)p;
                 model.setValueAt(a.getTitle(), line, 0);
                 
-                List<Author> authors = a.getAuthors();
-                String names = "";
-                for (Author x : authors) {
-                    names = names + x.getName() + ", ";
-                }
+                String author = a.getAuthor();
                 
-                model.setValueAt(names, line, 1);
-                
-                
+                model.setValueAt(author, line, 1);
                 model.setValueAt(a.getYear(), line, 2);
-                model.setValueAt(a.getVolume(), line, 3);
-                
-                ArrayList<String> keyWords = a.getKeyWords();
-                String s = "";
-                for (String k : keyWords) {
-                    s = s + k + ", ";
-                }
-                
-                model.setValueAt(s, line, 4);
-                model.setValueAt(a.getIssn(), line, 5);
-                model.setValueAt(a.getStartPage() +"-"+a.getEndPage(), line, 6);
-                model.setValueAt(a.getJournal().getName(), line, 7);
-                model.setValueAt(a.getJournal().getImpactFactor(), line, 8);
-                model.setValueAt(a.getJournal().getPublisher().getName(), line, 9);
-                model.setValueAt(a.getJournal().getPublisher().getCountry(), line, 10);
+                model.setValueAt(a.getDoi(), line, 3);
+                model.setValueAt(a.getJournal(), line, 4);
                 line++;
             }
         }   

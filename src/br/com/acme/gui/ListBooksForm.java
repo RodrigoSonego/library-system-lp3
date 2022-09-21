@@ -1,12 +1,10 @@
 package br.com.acme.gui;
 
 import br.com.acme.model.AcademicLibrary;
-import br.com.acme.model.Author;
 import br.com.acme.model.Book;
 import br.com.acme.model.Publication;
 import br.com.acme.model.logic.ALManager;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -35,17 +33,12 @@ public class ListBooksForm extends javax.swing.JDialog {
                 Book b = (Book)p;
                 model.setValueAt(b.getTitle(), line, 0);
                 
-                List<Author> authors = b.getAuthors();
-                String names = "";
-                for (Author a : authors) {
-                    names = names + a.getName() + ", ";
-                }
+                String author = b.getAuthor();
                 
-                model.setValueAt(names, line, 1);
                 
+                model.setValueAt(author, line, 1);
                 
                 model.setValueAt(b.getYear(), line, 2);
-                model.setValueAt(b.getVolume(), line, 3);
                 model.setValueAt(b.getLanguage(), line, 4);
                 model.setValueAt(b.getIsbn(), line, 5);
                 model.setValueAt(b.getPages(), line, 6);

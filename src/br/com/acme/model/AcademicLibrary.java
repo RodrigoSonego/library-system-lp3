@@ -10,7 +10,7 @@ public class AcademicLibrary implements ILibrary, Serializable {
     private String name;
     private String description;
     private String creationDate;
-    private Map<Long, Article> articles;
+    private Map<String, Article> articles;
     private Map<Long, Book> books;
 
     private Map<String, User> users;
@@ -68,14 +68,14 @@ public class AcademicLibrary implements ILibrary, Serializable {
     }
 
     public void addArticle(Article article) {
-        articles.put(article.getIssn(), article);
+        articles.put(article.getDoi(), article);
     }
 
     public boolean removeArticle(Article article) {
 
-        articles.remove(article.getIssn(), article);
+        articles.remove(article.getDoi(), article);
         try {
-            articles.remove(article.getIssn(), article);
+            articles.remove(article.getDoi(), article);
             return true;
         } catch (Exception ex) {
             return false;
@@ -189,7 +189,7 @@ public class AcademicLibrary implements ILibrary, Serializable {
 
     public ArrayList<Article> getAllArticles() {
         ArrayList<Article> a = new ArrayList<>();
-        for (long key : articles.keySet()) {
+        for (String key : articles.keySet()) {
             a.add(articles.get(key));
         }
         return a;
