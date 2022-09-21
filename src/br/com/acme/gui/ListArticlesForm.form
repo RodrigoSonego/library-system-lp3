@@ -95,18 +95,12 @@
         <Component class="javax.swing.JTable" name="jtArticleList">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="11" rowCount="10">
+              <Table columnCount="5" rowCount="10">
                 <Column editable="false" title="Title" type="java.lang.String"/>
-                <Column editable="false" title="Authors" type="java.lang.String"/>
+                <Column editable="false" title="Author" type="java.lang.String"/>
                 <Column editable="false" title="Year" type="java.lang.Short"/>
-                <Column editable="false" title="Volume" type="java.lang.Byte"/>
-                <Column editable="false" title="Keywords" type="java.lang.String"/>
-                <Column editable="false" title="ISSN" type="java.lang.Long"/>
-                <Column editable="false" title="Pages" type="java.lang.String"/>
+                <Column editable="false" title="DOI" type="java.lang.Long"/>
                 <Column editable="false" title="Journal" type="java.lang.String"/>
-                <Column editable="false" title="Impact Factor" type="java.lang.Byte"/>
-                <Column editable="false" title="Publisher" type="java.lang.String"/>
-                <Column editable="false" title="Country" type="java.lang.String"/>
               </Table>
             </Property>
           </Properties>

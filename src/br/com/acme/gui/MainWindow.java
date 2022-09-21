@@ -44,17 +44,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         jfcFileChooser = new javax.swing.JFileChooser();
         jtbMenu = new javax.swing.JToolBar();
-        jbmbNew = new javax.swing.JButton();
-        jbmbOpen = new javax.swing.JButton();
-        jbmbSave = new javax.swing.JButton();
         jbmbCreateAccount = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jmiNew = new javax.swing.JMenuItem();
-        jmiOpen = new javax.swing.JMenuItem();
-        jmiSave = new javax.swing.JMenuItem();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jmiExit = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jmAdd = new javax.swing.JMenu();
         jmiAddBook = new javax.swing.JMenuItem();
@@ -77,46 +68,7 @@ public class MainWindow extends javax.swing.JFrame {
         setTitle("Academic Library Control System");
         setResizable(false);
 
-        jtbMenu.setFloatable(false);
         jtbMenu.setRollover(true);
-
-        jbmbNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/acme/gui/icons/new.png"))); // NOI18N
-        jbmbNew.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        jbmbNew.setFocusCycleRoot(true);
-        jbmbNew.setFocusable(false);
-        jbmbNew.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jbmbNew.setPreferredSize(new java.awt.Dimension(32, 16));
-        jbmbNew.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jbmbNew.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbmbNewActionPerformed(evt);
-            }
-        });
-        jtbMenu.add(jbmbNew);
-
-        jbmbOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/acme/gui/icons/open.png"))); // NOI18N
-        jbmbOpen.setBorder(null);
-        jbmbOpen.setFocusable(false);
-        jbmbOpen.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jbmbOpen.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jbmbOpen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbmbOpenActionPerformed(evt);
-            }
-        });
-        jtbMenu.add(jbmbOpen);
-
-        jbmbSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/acme/gui/icons/save.png"))); // NOI18N
-        jbmbSave.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jbmbSave.setFocusable(false);
-        jbmbSave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jbmbSave.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jbmbSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbmbSaveActionPerformed(evt);
-            }
-        });
-        jtbMenu.add(jbmbSave);
 
         jbmbCreateAccount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/acme/gui/icons/user_add.png"))); // NOI18N
         jbmbCreateAccount.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -130,57 +82,12 @@ public class MainWindow extends javax.swing.JFrame {
         });
         jtbMenu.add(jbmbCreateAccount);
 
-        jMenu1.setText("File");
-
-        jmiNew.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
-        jmiNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/acme/gui/icons/new.png"))); // NOI18N
-        jmiNew.setText("New");
-        jmiNew.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiNewActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jmiNew);
-
-        jmiOpen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
-        jmiOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/acme/gui/icons/open.png"))); // NOI18N
-        jmiOpen.setText("Open");
-        jmiOpen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiOpenActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jmiOpen);
-
-        jmiSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
-        jmiSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/acme/gui/icons/save.png"))); // NOI18N
-        jmiSave.setText("Save");
-        jmiSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiSaveActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jmiSave);
-        jMenu1.add(jSeparator1);
-
-        jmiExit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
-        jmiExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/acme/gui/icons/exit.png"))); // NOI18N
-        jmiExit.setText("Exit");
-        jmiExit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiExitActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jmiExit);
-
-        jMenuBar1.add(jMenu1);
-
         jMenu2.setText("Publications");
 
         jmAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/acme/gui/icons/publication_add.png"))); // NOI18N
         jmAdd.setText("Add");
 
-        jmiAddBook.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
+        jmiAddBook.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jmiAddBook.setText("Book");
         jmiAddBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,7 +96,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         jmAdd.add(jmiAddBook);
 
-        jmiAddArticle.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        jmiAddArticle.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jmiAddArticle.setText("Article");
         jmiAddArticle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -331,58 +238,6 @@ public class MainWindow extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jmiListArticlesActionPerformed
 
-    private void jmiOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiOpenActionPerformed
-                
-        int result = jfcFileChooser.showOpenDialog(this);
-        if(result == JFileChooser.CANCEL_OPTION)
-            return;
-        
-        File file = jfcFileChooser.getSelectedFile();
-        try {
-            ALManager.loadLibrary(file);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println(e.getCause());
-        }
-        
-    }//GEN-LAST:event_jmiOpenActionPerformed
-
-    private void jmiNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNewActionPerformed
-        
-        
-        int result = JOptionPane.showConfirmDialog(this, "Are you sure? All unsaved changes will be lost", "Warning",
-                JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE);
-        if (result == JOptionPane.YES_OPTION) {
-            ALManager.newLibrary();
-        } else {
-            return;
-        }
-        
-    }//GEN-LAST:event_jmiNewActionPerformed
-
-    private void jmiSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSaveActionPerformed
-               
-        int result = jfcFileChooser.showSaveDialog(this);
-        if(result == JFileChooser.APPROVE_OPTION){
-            File file = jfcFileChooser.getSelectedFile();
-      
-            try {
-                 ALManager.persistLibrary(file);
-                 LogController.writeLog("Library saved with no errors.");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Error on saving, try again", "Error", JOptionPane.ERROR_MESSAGE);
-                LogController.writeLog(e.toString() + "at MainWindow");
-            }
-           
-        }
-            
-    }//GEN-LAST:event_jmiSaveActionPerformed
-
-    private void jmiExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiExitActionPerformed
-        LogController.writeLog("Exited the system : " + currentUsername);
-        System.exit(0);
-    }//GEN-LAST:event_jmiExitActionPerformed
-
     private void jmiCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCreateActionPerformed
         
         createAccount = new CreateAccountForm();
@@ -399,18 +254,6 @@ public class MainWindow extends javax.swing.JFrame {
     private void jbmbCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbmbCreateAccountActionPerformed
         jmiCreateActionPerformed(evt);
     }//GEN-LAST:event_jbmbCreateAccountActionPerformed
-
-    private void jbmbSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbmbSaveActionPerformed
-        jmiSaveActionPerformed(evt);
-    }//GEN-LAST:event_jbmbSaveActionPerformed
-
-    private void jbmbOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbmbOpenActionPerformed
-        jmiOpenActionPerformed(evt);
-    }//GEN-LAST:event_jbmbOpenActionPerformed
-
-    private void jbmbNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbmbNewActionPerformed
-        jmiNewActionPerformed(evt);
-    }//GEN-LAST:event_jbmbNewActionPerformed
 
     private void jmcbOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmcbOnActionPerformed
         jmcbOff.setSelected(false);
@@ -431,16 +274,11 @@ public class MainWindow extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JButton jbmbCreateAccount;
-    private javax.swing.JButton jbmbNew;
-    private javax.swing.JButton jbmbOpen;
-    private javax.swing.JButton jbmbSave;
     private javax.swing.JCheckBoxMenuItem jcbmiUpdate;
     private javax.swing.JFileChooser jfcFileChooser;
     private javax.swing.JMenu jmAdd;
@@ -452,13 +290,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiAddArticle;
     private javax.swing.JMenuItem jmiAddBook;
     private javax.swing.JMenuItem jmiCreate;
-    private javax.swing.JMenuItem jmiExit;
     private javax.swing.JMenuItem jmiListAccounts;
     private javax.swing.JMenuItem jmiListArticles;
     private javax.swing.JMenuItem jmiListBook;
-    private javax.swing.JMenuItem jmiNew;
-    private javax.swing.JMenuItem jmiOpen;
-    private javax.swing.JMenuItem jmiSave;
     private javax.swing.JMenuItem jmiSupport;
     private javax.swing.JToolBar jtbMenu;
     // End of variables declaration//GEN-END:variables
