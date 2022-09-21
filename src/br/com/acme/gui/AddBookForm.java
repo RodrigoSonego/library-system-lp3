@@ -188,6 +188,7 @@ public class AddBookForm extends javax.swing.JDialog {
                     jtfLanguage.getText(), Long.parseLong(jtfIsbn.getText()), Short.parseShort(jtfPages.getText()));
             
             author = jtfAuthor.getText();
+            tempBook.setAuthor(author);
             
             library.addBook(tempBook);
             JOptionPane.showMessageDialog(this, "Your book was successfully added!", "Succes!", JOptionPane.INFORMATION_MESSAGE);

@@ -31,7 +31,7 @@ public abstract class Publication implements Serializable{
         this.year = year;
     }
     
-    public void addAuthor(String author){
+    public void setAuthor(String author){
         this.author = author;
     }
 

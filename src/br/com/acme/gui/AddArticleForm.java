@@ -7,16 +7,9 @@ package br.com.acme.gui;
 
 import br.com.acme.model.AcademicLibrary;
 import br.com.acme.model.Article;
-import br.com.acme.model.Author;
-import br.com.acme.model.Journal;
-import br.com.acme.model.Publisher;
 import br.com.acme.model.logic.ALManager;
 import br.com.acme.model.logic.LogController;
 import java.awt.Component;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -211,7 +204,10 @@ public class AddArticleForm extends javax.swing.JDialog {
                 return;
             }
 
+            author = jtfAuthor.getText();
+            
             article.setJournal(journal);
+            article.setAuthor(author);
 
             library.addArticle(article);
             JOptionPane.showMessageDialog(this, "Article added successfully!", "Success!", JOptionPane.INFORMATION_MESSAGE);

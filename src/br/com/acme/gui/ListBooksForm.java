@@ -39,9 +39,9 @@ public class ListBooksForm extends javax.swing.JDialog {
                 model.setValueAt(author, line, 1);
                 
                 model.setValueAt(b.getYear(), line, 2);
-                model.setValueAt(b.getLanguage(), line, 4);
-                model.setValueAt(b.getIsbn(), line, 5);
-                model.setValueAt(b.getPages(), line, 6);
+                model.setValueAt(b.getLanguage(), line, 3);
+                model.setValueAt(b.getIsbn(), line, 4);
+                model.setValueAt(b.getPages(), line, 5);
                 line++;
             }
         }
