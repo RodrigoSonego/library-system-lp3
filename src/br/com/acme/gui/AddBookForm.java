@@ -6,16 +6,10 @@
 package br.com.acme.gui;
 
 import br.com.acme.model.AcademicLibrary;
-import br.com.acme.model.Author;
-import br.com.acme.model.Publication;
 import br.com.acme.model.logic.ALManager;
 import java.awt.Component;
 import br.com.acme.model.Book;
 import br.com.acme.model.logic.LogController;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import javax.swing.*;
 
 /**

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AcademicLibrary implements ILibrary, Serializable {
+public class AcademicLibrary implements Serializable {
 
     private String name;
     private String description;
@@ -24,7 +24,6 @@ public class AcademicLibrary implements ILibrary, Serializable {
         this.users = new HashMap<>();
     }
 
-    @Override
     public boolean hasPublication(String publication) {
         return false;
     }
@@ -195,7 +194,6 @@ public class AcademicLibrary implements ILibrary, Serializable {
         return a;
     }
 
-    @Override
     public void addPublication(Publication pub) {
         if(pub instanceof Book)
             addBook((Book)pub);        
@@ -203,12 +201,10 @@ public class AcademicLibrary implements ILibrary, Serializable {
             addArticle((Article)pub);
     }
 
-    @Override
     public boolean removePublication(long id) {
         return (removeArticle(id) || removeBook(id));
     }
 
-    @Override
     public ArrayList<Publication> getAllPublications() {
         ArrayList<Publication> temp = new ArrayList<>();
         temp.addAll(getAllBooks());
@@ -216,12 +212,10 @@ public class AcademicLibrary implements ILibrary, Serializable {
         return temp;
     }
 
-    @Override
     public short countPublications() {
         return (short)(books.size() + articles.size());
     }
 
-    @Override
     public Publication findPublication(String arg0) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
