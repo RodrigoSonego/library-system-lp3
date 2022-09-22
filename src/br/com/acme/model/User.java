@@ -1,10 +1,11 @@
 package br.com.acme.model;
 
-public class User extends Person {
+public class User {
 
     private String phone;
     private String login;
     private int password;
+     private String email;
 
     public String getPhone() {
         return phone;
@@ -29,4 +30,12 @@ public class User extends Person {
     public void setPassword(int password) {
         this.password = password;
     }
+    
+     public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }   
 }
