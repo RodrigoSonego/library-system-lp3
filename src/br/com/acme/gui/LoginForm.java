@@ -5,10 +5,7 @@
  */
 package br.com.acme.gui;
 
-import br.com.acme.model.AcademicLibrary;
 import br.com.acme.model.User;
-import br.com.acme.model.logic.ALManager;
-import br.com.acme.model.logic.LogController;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,13 +14,11 @@ import javax.swing.JOptionPane;
  */
 public class LoginForm extends javax.swing.JDialog {
 
-    private AcademicLibrary library;
     private CreateAccountForm createAccountForm;
     private MainWindow mainWindow;
 
     public LoginForm() {
         initComponents();
-        library = ALManager.getInstance();
     }
 
     /**
@@ -141,26 +136,18 @@ public class LoginForm extends javax.swing.JDialog {
 
         try {
             int insertedPwd = Integer.parseInt(new String(jpfPassword.getPassword()));
-            for (User user : library.getUsers()) {
-                if (user.getLogin().equals(jtfLogin.getText())) {
-                    isValidUser = true;
-                }
-                if (user.getPassword() == insertedPwd) {
-                    isValidPassword = true;
-                }
-            }
+            
+            //TODO call Login stuff here
 
             if ((isValidPassword && isValidUser) || (jtfLogin.getText().equals("admin") && insertedPwd == 1234)) {
                 mainWindow = new MainWindow(jtfLogin.getText());
                 mainWindow.setVisible(true);
 
-                LogController.writeLog("Logged into the system: " + jtfLogin.getText());
                 this.setVisible(false);
                 dispose();
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Password must be only numbers", "Error", JOptionPane.ERROR_MESSAGE);
-            LogController.writeLog(ex.toString() + " at LoginForm");
         }
 
     

@@ -5,16 +5,9 @@
  */
 package br.com.acme.gui;
 
-import br.com.acme.model.AcademicLibrary;
 import br.com.acme.model.User;
-import br.com.acme.model.logic.ALManager;
 import java.awt.Component;
-import java.awt.Container;
-import javax.swing.JFrame;
-import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JRootPane;
 import javax.swing.JTextField;
 
 
@@ -24,10 +17,8 @@ import javax.swing.JTextField;
  */
 public class CreateAccountForm extends javax.swing.JDialog {
 
-    private AcademicLibrary library;
     
     public CreateAccountForm() {
-        library = ALManager.getInstance();
         initComponents();
     }
 
@@ -156,8 +147,9 @@ public class CreateAccountForm extends javax.swing.JDialog {
         
         tempUser.setLogin(jtfLogin.getText());
         tempUser.setEmail(jtfEmail.getText());
-        library.addUser(tempUser);
-               
+        
+        //TODO: Add DB user creation stuff here
+        
         JOptionPane.showMessageDialog(this, "Your account was successfully created!", "Succes!", JOptionPane.INFORMATION_MESSAGE);
         clearFields();
     }//GEN-LAST:event_jbCreateMouseClicked

@@ -5,10 +5,7 @@
  */
 package br.com.acme.gui;
 
-import br.com.acme.model.AcademicLibrary;
 import br.com.acme.model.Article;
-import br.com.acme.model.logic.ALManager;
-import br.com.acme.model.logic.LogController;
 import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -22,11 +19,9 @@ public class AddArticleForm extends javax.swing.JDialog {
     private String author;
     private String journal;
     private Article article;
-    private AcademicLibrary library;
 
     public AddArticleForm() {
         initComponents();
-        library = ALManager.getInstance();
     }
 
     /**
@@ -199,8 +194,6 @@ public class AddArticleForm extends javax.swing.JDialog {
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(this, "Year must be between: \n"
                         + "0 and " + Short.MAX_VALUE + "\n");
-                if(LogController.getLogStatus())
-                    LogController.writeLog(ex.getMessage() + "at AddArticleForm");
                 return;
             }
 
@@ -209,11 +202,10 @@ public class AddArticleForm extends javax.swing.JDialog {
             article.setJournal(journal);
             article.setAuthor(author);
 
-            library.addArticle(article);
+            
+            // TODO: connection stuff here
+            
             JOptionPane.showMessageDialog(this, "Article added successfully!", "Success!", JOptionPane.INFORMATION_MESSAGE);
-            if (LogController.getLogStatus()) {
-                LogController.writeLog("Article added: " + article.getTitle());
-            }
             author = new String();
         }
     }//GEN-LAST:event_jbOkActionPerformed

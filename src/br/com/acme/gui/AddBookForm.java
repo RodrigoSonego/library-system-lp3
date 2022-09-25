@@ -5,11 +5,8 @@
  */
 package br.com.acme.gui;
 
-import br.com.acme.model.AcademicLibrary;
-import br.com.acme.model.logic.ALManager;
 import java.awt.Component;
 import br.com.acme.model.Book;
-import br.com.acme.model.logic.LogController;
 import javax.swing.*;
 
 /**
@@ -19,11 +16,9 @@ import javax.swing.*;
 public class AddBookForm extends javax.swing.JDialog {
 
     private String author;
-    private AcademicLibrary library;
 
     public AddBookForm() {
         initComponents();
-        library = ALManager.getInstance();
     }
 
     /**
@@ -184,19 +179,15 @@ public class AddBookForm extends javax.swing.JDialog {
             author = jtfAuthor.getText();
             tempBook.setAuthor(author);
             
-            library.addBook(tempBook);
+            //TODO: call DB connection here
+            
+            
             JOptionPane.showMessageDialog(this, "Your book was successfully added!", "Succes!", JOptionPane.INFORMATION_MESSAGE);
-            if (LogController.getLogStatus()) {
-                LogController.writeLog("Book added: " + tempBook.getTitle());
-            }
             author = "";
             
             clearFields();
         } catch (NumberFormatException ex) {
-            showNumberErrorMessage();
-            if (LogController.getLogStatus()) {
-                LogController.writeLog(ex.toString() + " at AddBookForm");
-            }           
+            showNumberErrorMessage();          
             return;
         }
 

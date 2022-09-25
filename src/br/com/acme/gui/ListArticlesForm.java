@@ -1,31 +1,28 @@
 package br.com.acme.gui;
 
-import br.com.acme.model.AcademicLibrary;
 import br.com.acme.model.Article;
 import br.com.acme.model.Publication;
-import br.com.acme.model.logic.ALManager;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.table.TableModel;
 
 public class ListArticlesForm extends javax.swing.JDialog {
-
-    private AcademicLibrary library;
     
     public ListArticlesForm() {
         initComponents();
-        
-        library = ALManager.getInstance();
         
         populateTable();
     }
 
     private void populateTable() {
-        jlTotal.setText( String.valueOf(library.countArticles()) );
+        ArrayList<Publication> publications = new ArrayList<Publication>();
+        
+        // TODO: Do connection stuff here
+        
+        jlTotal.setText( String.valueOf(publications.size()) );
         
         TableModel model = jtArticleList.getModel();
         
-        ArrayList<Publication> publications = library.getAllPublications();
+        
         
         int line = 0;
         for (Publication p : publications) {            

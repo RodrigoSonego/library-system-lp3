@@ -1,7 +1,5 @@
 package br.com.acme.model;
 
-import java.util.ArrayList;
-
 public class Article extends Publication {
 
     private String doi;

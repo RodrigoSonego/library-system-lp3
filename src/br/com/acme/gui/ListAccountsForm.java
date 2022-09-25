@@ -1,27 +1,27 @@
 package br.com.acme.gui;
 
-import br.com.acme.model.AcademicLibrary;
 import br.com.acme.model.User;
-import br.com.acme.model.logic.ALManager;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.swing.table.TableModel;
 
 public class ListAccountsForm extends javax.swing.JDialog {
 
-    private AcademicLibrary library;
-
     public ListAccountsForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        library = ALManager.getInstance();
-        
+
         populateTable();
     }
 
     private void populateTable() {
+        Collection<User> users = new ArrayList<User>();
+
+        // TODO: Do connection stuff
+        
         TableModel model = jtAccounts.getModel();
         
-        Collection<User> users = library.getUsers();
+        
         int line = 0;
         for (User u : users) {            
             model.setValueAt(u.getEmail(), line, 0);

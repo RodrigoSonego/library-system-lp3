@@ -4,15 +4,6 @@
  * and open the template in the editor.
  */
 package br.com.acme.gui;
-
-import br.com.acme.model.*;
-import br.com.acme.model.logic.ALManager;
-import br.com.acme.model.logic.LogController;
-import java.io.File;
-import java.util.Date;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  *
  * @author USER
@@ -24,13 +15,10 @@ public class MainWindow extends javax.swing.JFrame {
     private CreateAccountForm createAccount;
     private ListAccountsForm listAccounts;
     private ListArticlesForm listArticles;
-    private ListBooksForm listBooks;
-    private LogController logController;
-    private String currentUsername;           
+    private ListBooksForm listBooks;     
     
     public MainWindow(String username) {
         initComponents();       
-        currentUsername = username;
     }
 
     /**
@@ -257,12 +245,10 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jmcbOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmcbOnActionPerformed
         jmcbOff.setSelected(false);
-        LogController.setLogStatus(true);
     }//GEN-LAST:event_jmcbOnActionPerformed
 
     private void jmcbOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmcbOffActionPerformed
         jmcbOn.setSelected(false);
-        LogController.setLogStatus(false);
     }//GEN-LAST:event_jmcbOffActionPerformed
 
     /*
