@@ -1,9 +1,11 @@
-package br.com.acme.model;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package br.com.acme.connection;
 
-import java.io.Serializable;
 
-public class Book extends Publication implements Serializable{
-
+public class BookDatabaseConnector {
     private int idBook;
     private int FK_idUser;
     private String title;
@@ -12,30 +14,15 @@ public class Book extends Publication implements Serializable{
     private String language;
     private String isbn;
     private int pages;
-    
-    public Book(String title, short year, String language, String isbn, short pages){
-        super(title,year);
-        this.isbn = isbn;
-        this.pages = pages;
-        this.language = language;       
-    }
-    
-    public Book(int idBook, int FK_idUser, String title, int year, String author, String language, String isbn, int pages){
-        this.idBook = idBook;
-        this.FK_idUser = FK_idUser;
-        this.title = title;
-        this.year = year;
-        this.author = author;
-        this.language = language;
-        this.isbn = isbn;
-        this.pages = pages;
-    } 
+    private DataBaseConnection connection;
 
     public int getIdBook() {
         return idBook;
     }
 
-   
+    public void setIdBook(int idBook) {
+        this.idBook = idBook;
+    }
 
     public int getFK_idUser() {
         return FK_idUser;
@@ -51,6 +38,14 @@ public class Book extends Publication implements Serializable{
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 
     public String getAuthor() {
@@ -83,6 +78,14 @@ public class Book extends Publication implements Serializable{
 
     public void setPages(int pages) {
         this.pages = pages;
+    }
+
+    public DataBaseConnection getConnection() {
+        return connection;
+    }
+
+    public void setConnection(DataBaseConnection connection) {
+        this.connection = connection;
     }
     
     

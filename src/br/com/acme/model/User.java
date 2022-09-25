@@ -2,9 +2,10 @@ package br.com.acme.model;
 
 public class User {
 
+    private int idUser;
     private String login;
     private int password;
-     private String email;
+    private String email;
 
     public String getLogin() {
         return login;
@@ -29,4 +30,8 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }   
+    
+    public int getIdUser() {
+        return idUser;
+    }
 }

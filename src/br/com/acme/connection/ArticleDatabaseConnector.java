@@ -1,36 +1,29 @@
-package br.com.acme.model;
 
-public class Article extends Publication {
+package br.com.acme.connection;
 
+
+public class ArticleDatabaseConnector {
+    
     private int idArticle;
     private int FK_idUser;
     private String title;
     private int year;
-    private String author;
+    private String Author;
     private String doi;
     private String journal;
+    private DataBaseConnection connection;
 
-    public Article(String title, short year, String doi) {
-
-        super(title, year);
-        this.doi = doi;
-
-    }
-    
-    public Article(int idArticle, int FK_idUser, String title, int year, String author, String doi, String journal){
-        this.idArticle = idArticle;
-        this.FK_idUser = FK_idUser;
-        this.title = title;
-        this.year = year;
-        this.author = author;
-        this.doi = doi;
-        this.journal = journal;
+    public DataBaseConnection getConnection() {
+        return connection;
     }
 
     public int getIdArticle() {
         return idArticle;
     }
 
+    public void setIdArticle(int idArticle) {
+        this.idArticle = idArticle;
+    }
 
     public int getFK_idUser() {
         return FK_idUser;
@@ -48,12 +41,20 @@ public class Article extends Publication {
         this.title = title;
     }
 
-    public String getAuthor() {
-        return author;
+    public int getYear() {
+        return year;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public String getAuthor() {
+        return Author;
+    }
+
+    public void setAuthor(String Author) {
+        this.Author = Author;
     }
 
     public String getDoi() {
@@ -71,8 +72,6 @@ public class Article extends Publication {
     public void setJournal(String journal) {
         this.journal = journal;
     }
-
     
-   
     
 }
