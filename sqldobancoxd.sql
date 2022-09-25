@@ -37,7 +37,7 @@ constraint FK_Article_User foreign key (FK_idUser)
 references user(idUser) on update cascade on delete cascade
 );
 
-drop database library_system;
+
 
 insert into user(login, email, `password`) values ("uba123", "ainbb", "000");
 insert into book(FK_idUser, title, `year`, author, `language`, isbn, pages) values (1, "macumba", 8972, "olokomeu", "macaques", "007", 80);
@@ -47,6 +47,6 @@ select * from user;
 select * from book;
 select * from article;
 
-select 
+
 
 

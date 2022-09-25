@@ -11,7 +11,7 @@ public class UserDataBaseConnector {
         
         Connection con = DataBaseConnection.getConnection();
         PreparedStatement ptstm = null;
-        String SQL = "INSERT INTO USER(login, email, password) "
+        String SQL = "INSERT INTO user(login, email, password) "
                 + " VALUES(?, ?, ?)";
         
         try {
@@ -25,6 +25,7 @@ public class UserDataBaseConnector {
             
             
         } catch (SQLException e) {
+            
         }finally{
             DataBaseConnection.closeConnection(con, ptstm);
         }

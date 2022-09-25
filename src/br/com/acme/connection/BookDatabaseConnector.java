@@ -4,89 +4,36 @@
  */
 package br.com.acme.connection;
 
+import br.com.acme.model.Book;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class BookDatabaseConnector {
-    private int idBook;
-    private int FK_idUser;
-    private String title;
-    private int year;
-    private String author;
-    private String language;
-    private String isbn;
-    private int pages;
-    private DataBaseConnection connection;
-
-    public int getIdBook() {
-        return idBook;
-    }
-
-    public void setIdBook(int idBook) {
-        this.idBook = idBook;
-    }
-
-    public int getFK_idUser() {
-        return FK_idUser;
-    }
-
-    public void setFK_idUser(int FK_idUser) {
-        this.FK_idUser = FK_idUser;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
-    public int getPages() {
-        return pages;
-    }
-
-    public void setPages(int pages) {
-        this.pages = pages;
-    }
-
-    public DataBaseConnection getConnection() {
-        return connection;
-    }
-
-    public void setConnection(DataBaseConnection connection) {
-        this.connection = connection;
-    }
     
-    
+    public void InsertBook(Book book){
+        Connection con = DataBaseConnection.getConnection();
+        PreparedStatement ptstm = null;
+        String SQL = "INSERT INTO book(FK_idUser, title, year, author, language, isbn, pages) "
+                + " VALUES(?, ?, ?, ?, ?, ?, ?)";
+        
+        try {
+            ptstm = con.prepareStatement(SQL);
+            
+            ptstm.setInt(1, book.getFK_idUser());
+            ptstm.setString(2, book.getTitle());
+            ptstm.setInt(3, book.getYear());
+            ptstm.setString(4, book.getAuthor());
+            ptstm.setString(5, book.getLanguage());
+            ptstm.setString(6, book.getIsbn());
+            ptstm.setInt(7, book.getPages());
+            
+            ptstm.executeUpdate();
+            
+        } catch (SQLException e) {
+        }finally{
+            DataBaseConnection.closeConnection(con, ptstm);
+        }
+        
+    }
 }
