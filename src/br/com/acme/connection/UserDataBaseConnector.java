@@ -23,7 +23,7 @@ public class UserDataBaseConnector {
             ptstm = con.prepareStatement(SQL);
             ptstm.setString(1, user.getLogin());
             ptstm.setString(2, user.getEmail());
-            ptstm.setInt(3, user.getPassword());
+            ptstm.setString(3, user.getPassword());
             
             ptstm.executeUpdate();
             
@@ -49,7 +49,7 @@ public class UserDataBaseConnector {
                 int id = result.getInt(1);
                 String login = result.getString(2);
                 String email = result.getString(3);
-                int password = result.getInt(4);
+                String password = result.getString(4);
                 
                 User user = new User(login, password, email);
                 

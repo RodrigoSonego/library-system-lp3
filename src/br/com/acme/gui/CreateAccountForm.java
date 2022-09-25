@@ -136,7 +136,7 @@ public class CreateAccountForm extends javax.swing.JDialog {
         User tempUser = new User();
         String pwdString = new String(jpfPassword.getPassword());
         try {
-            int pwd = Integer.parseInt(pwdString);          
+            String pwd = pwdString;          
             tempUser.setPassword(pwd);                          
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Password must be only numbers", "Error", JOptionPane.ERROR_MESSAGE);
