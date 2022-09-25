@@ -7,6 +7,21 @@ public class User {
     private int password;
     private String email;
 
+    public User() {}
+    
+    public User(String login, int password, String email) {
+        this.login = login;
+        this.password = password;
+        this.email = email;
+    }
+    
+    public User(int id, String login, int password, String email) {
+        this.idUser = id;
+        this.login = login;
+        this.password = password;
+        this.email = email;
+    }
+    
     public String getLogin() {
         return login;
     }

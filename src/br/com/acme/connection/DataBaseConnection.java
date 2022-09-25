@@ -5,23 +5,27 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class DataBaseConnection {
-
+    
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/library_system";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "1234";
-    private static final String DRIVER = "com.mysql.jdbc.Driver";
+    private static final String PASSWORD = "";
 
     public static Connection getConnection(){
-
         try {
-            Class.forName(DRIVER);
-            return DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
-        } catch (ClassNotFoundException | SQLException e) {
-            throw new RuntimeException("Não deu", e);
+            //estabelece a conexão com o banco de dados
+            Connection connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
+            return connection;
+            
+        } catch (SQLException ex) {
+            System.out.println("Erro ao conectar o Banco de Dados. " + ex.getMessage());
         }
+        
+        return null;
     }
 
     public static void closeConnection(Connection conection) {
@@ -61,6 +65,7 @@ public class DataBaseConnection {
 
     }
     
+
     
 
 }
