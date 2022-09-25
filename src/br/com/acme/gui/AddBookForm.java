@@ -174,7 +174,7 @@ public class AddBookForm extends javax.swing.JDialog {
 
         try {            
             Book tempBook = new Book(jtfTitle.getText(), Short.parseShort(jtfYear.getText()),
-                    jtfLanguage.getText(), Long.parseLong(jtfIsbn.getText()), Short.parseShort(jtfPages.getText()));
+                    jtfLanguage.getText(), jtfIsbn.getText(), Short.parseShort(jtfPages.getText()));
             
             author = jtfAuthor.getText();
             tempBook.setAuthor(author);

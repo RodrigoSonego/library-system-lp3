@@ -4,8 +4,6 @@ public class Article extends Publication {
 
     private int idArticle;
     private int FK_idUser;
-    private String title;
-    private int year;
     private String author;
     private String doi;
     private String journal;
@@ -17,11 +15,11 @@ public class Article extends Publication {
 
     }
     
-    public Article(int idArticle, int FK_idUser, String title, int year, String author, String doi, String journal){
+    public Article(int idArticle, int FK_idUser, String title, short year, String author, String doi, String journal){
+        super(title, year);
+        
         this.idArticle = idArticle;
         this.FK_idUser = FK_idUser;
-        this.title = title;
-        this.year = year;
         this.author = author;
         this.doi = doi;
         this.journal = journal;
@@ -38,14 +36,6 @@ public class Article extends Publication {
 
     public void setFK_idUser(int FK_idUser) {
         this.FK_idUser = FK_idUser;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getAuthor() {

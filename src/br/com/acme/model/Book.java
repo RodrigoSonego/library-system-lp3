@@ -6,8 +6,6 @@ public class Book extends Publication implements Serializable{
 
     private int idBook;
     private int FK_idUser;
-    private String title;
-    private int year;
     private String author;
     private String language;
     private String isbn;
@@ -15,16 +13,17 @@ public class Book extends Publication implements Serializable{
     
     public Book(String title, short year, String language, String isbn, short pages){
         super(title,year);
+        
         this.isbn = isbn;
         this.pages = pages;
         this.language = language;       
     }
     
-    public Book(int idBook, int FK_idUser, String title, int year, String author, String language, String isbn, int pages){
+    public Book(int idBook, int FK_idUser, String title, short year, String author, String language, String isbn, int pages){
+       super(title, year);
+        
         this.idBook = idBook;
         this.FK_idUser = FK_idUser;
-        this.title = title;
-        this.year = year;
         this.author = author;
         this.language = language;
         this.isbn = isbn;
@@ -35,22 +34,12 @@ public class Book extends Publication implements Serializable{
         return idBook;
     }
 
-   
-
     public int getFK_idUser() {
         return FK_idUser;
     }
 
     public void setFK_idUser(int FK_idUser) {
         this.FK_idUser = FK_idUser;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getAuthor() {
