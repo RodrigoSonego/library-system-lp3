@@ -1,77 +1,33 @@
 
 package br.com.acme.connection;
 
+import br.com.acme.model.Article;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 
 public class ArticleDatabaseConnector {
     
-    private int idArticle;
-    private int FK_idUser;
-    private String title;
-    private int year;
-    private String Author;
-    private String doi;
-    private String journal;
-    private DataBaseConnection connection;
-
-    public DataBaseConnection getConnection() {
-        return connection;
+    public void InsertArticle(Article article){
+        Connection con = DataBaseConnection.getConnection();
+        PreparedStatement ptstm = null;
+        String SQL = "INSERT INTO article(FK_idUser, title, year, author, doi, journal) "
+                + " VALUES(?, ?, ?, ?, ?, ?)";
+        try {
+            ptstm = con.prepareStatement(SQL);
+            
+            ptstm.setInt(1, article.getFK_idUser());
+            ptstm.setString(2, article.getTitle());
+            ptstm.setInt(3, article.getYear());
+            ptstm.setString(4, article.getAuthor());
+            ptstm.setString(5, article.getDoi());
+            ptstm.setString(6, article.getJournal());
+            
+            ptstm.executeUpdate();
+        } catch (SQLException e) {
+        }finally{
+            DataBaseConnection.closeConnection(con, ptstm);
+        }
     }
-
-    public int getIdArticle() {
-        return idArticle;
-    }
-
-    public void setIdArticle(int idArticle) {
-        this.idArticle = idArticle;
-    }
-
-    public int getFK_idUser() {
-        return FK_idUser;
-    }
-
-    public void setFK_idUser(int FK_idUser) {
-        this.FK_idUser = FK_idUser;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public String getAuthor() {
-        return Author;
-    }
-
-    public void setAuthor(String Author) {
-        this.Author = Author;
-    }
-
-    public String getDoi() {
-        return doi;
-    }
-
-    public void setDoi(String doi) {
-        this.doi = doi;
-    }
-
-    public String getJournal() {
-        return journal;
-    }
-
-    public void setJournal(String journal) {
-        this.journal = journal;
-    }
-    
-    
 }
