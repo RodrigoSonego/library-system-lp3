@@ -24,11 +24,9 @@ public class ListAccountsForm extends javax.swing.JDialog {
         Collection<User> users = library.getUsers();
         int line = 0;
         for (User u : users) {            
-            model.setValueAt(u.getName(), line, 0);
-            model.setValueAt(u.getEmail(), line, 1);
-            model.setValueAt(u.getPhone(), line, 2);
-            model.setValueAt(u.getLogin(), line, 3);
-            model.setValueAt(u.getPassword(), line, 4);
+            model.setValueAt(u.getEmail(), line, 0);
+            model.setValueAt(u.getLogin(), line, 1);
+            model.setValueAt(u.getPassword(), line, 2);
             line++;
         }   
         

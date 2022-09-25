@@ -2,18 +2,9 @@ package br.com.acme.model;
 
 public class User {
 
-    private String phone;
     private String login;
     private int password;
      private String email;
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 
     public String getLogin() {
         return login;
