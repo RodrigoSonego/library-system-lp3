@@ -12,15 +12,16 @@ import java.util.logging.Logger;
 
 public class UserDataBaseConnector {
 
-    public void InsertUser(User user) {
+    public boolean InsertUser(User user) throws SQLException {
 
         Connection con = DataBaseConnection.getConnection();
         PreparedStatement ptstm = null;
         String SQL = "INSERT INTO user(login, email, password) "
                 + " VALUES(?, ?, ?)";
-
+        
         try {
-
+            con.setAutoCommit(false);
+            
             ptstm = con.prepareStatement(SQL);
             ptstm.setString(1, user.getLogin());
             ptstm.setString(2, user.getEmail());
@@ -28,11 +29,19 @@ public class UserDataBaseConnector {
 
             ptstm.executeUpdate();
 
+            con.commit();
+            return true;
+            
         } catch (SQLException e) {
-
+            System.out.println("ih rapaiz deu ruim");
+            
+            con.rollback();
+            
         } finally {
-            // DataBaseConnection.closeConnection(con, ptstm);
+            DataBaseConnection.closeConnection(con, ptstm);    
         }
+        
+        return false;
     }
 
     public ArrayList<User> getAllUsers() {
