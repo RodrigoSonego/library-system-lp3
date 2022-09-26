@@ -17,8 +17,6 @@ import javax.swing.*;
  */
 public class AddBookForm extends javax.swing.JDialog {
     
-    private String author;
-    
     public AddBookForm() {
         initComponents();
     }
@@ -176,10 +174,7 @@ public class AddBookForm extends javax.swing.JDialog {
         
         try {
             Book tempBook = new Book(jtfTitle.getText(), Short.parseShort(jtfYear.getText()),
-                    jtfLanguage.getText(), jtfIsbn.getText(), Short.parseShort(jtfPages.getText()));
-            
-            author = jtfAuthor.getText();
-            tempBook.setAuthor(author);
+                    jtfLanguage.getText(), jtfIsbn.getText(), Short.parseShort(jtfPages.getText()), jtfAuthor.getText());
 
             int userId = Session.getInstance().getLoggedUser().getIdUser();
             tempBook.setFK_idUser(userId);
@@ -187,7 +182,6 @@ public class AddBookForm extends javax.swing.JDialog {
             BookDatabaseConnector.InsertBook(tempBook);
             
             JOptionPane.showMessageDialog(this, "Your book was successfully added!", "Succes!", JOptionPane.INFORMATION_MESSAGE);
-            author = "";
             
             clearFields();
         } catch (NumberFormatException ex) {

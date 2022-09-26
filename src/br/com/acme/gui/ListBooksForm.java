@@ -1,51 +1,51 @@
 package br.com.acme.gui;
 
+import br.com.acme.connection.BookDatabaseConnector;
 import br.com.acme.model.Book;
 import br.com.acme.model.Publication;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 public class ListBooksForm extends javax.swing.JDialog {
-    
+
     public ListBooksForm() {
         initComponents();
-        
+
         populateTable();
     }
-    
+
     private void populateTable() {
-        ArrayList<Publication> publications = new ArrayList<Publication>();
+        ArrayList<Book> books = BookDatabaseConnector.getAllBooksFromUser();
         
-        // TODO: do connection stuff here
-        
-        
-        jlTotal.setText( Integer.toString(publications.size()) );
-        
-        TableModel model = jtBookList.getModel();
-        
-        
-        
-        int line = 0;
-        for (Publication p : publications) {            
-            if (p instanceof Book) {
-                Book b = (Book)p;
-                model.setValueAt(b.getTitle(), line, 0);
-                
-                String author = b.getAuthor();
-                
-                
-                model.setValueAt(author, line, 1);
-                
-                model.setValueAt(b.getYear(), line, 2);
-                model.setValueAt(b.getLanguage(), line, 3);
-                model.setValueAt(b.getIsbn(), line, 4);
-                model.setValueAt(b.getPages(), line, 5);
-                line++;
-            }
+        if(books == null) {
+            JOptionPane.showMessageDialog(this, "Você não possui livros registrados", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+            return;
         }
-        ((DefaultTableModel)model).fireTableDataChanged();
         
+        jlTotal.setText(Integer.toString(books.size()));
+
+        TableModel model = jtBookList.getModel();
+
+        int line = 0;
+        for (Book b : books) {
+            model.setValueAt(b.getTitle(), line, 0);
+
+            String author = b.getAuthor();
+
+            model.setValueAt(author, line, 1);
+
+            model.setValueAt(b.getYear(), line, 2);
+            model.setValueAt(b.getLanguage(), line, 3);
+            model.setValueAt(b.getIsbn(), line, 4);
+            model.setValueAt(b.getPages(), line, 5);
+            line++;
+
+        }
+        ((DefaultTableModel) model).fireTableDataChanged();
+
     }
 
     /**

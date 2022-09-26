@@ -11,12 +11,14 @@ public class Book extends Publication implements Serializable{
     private String isbn;
     private int pages;
     
-    public Book(String title, short year, String language, String isbn, short pages){
+    public Book(String title, short year, String language, String isbn, int pages, String author){
         super(title,year);
         
         this.isbn = isbn;
         this.pages = pages;
-        this.language = language;       
+        this.language = language;
+        
+        setAuthor(author);
     }
     
     public Book(int idBook, int FK_idUser, String title, short year, String author, String language, String isbn, int pages){

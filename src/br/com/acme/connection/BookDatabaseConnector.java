@@ -5,6 +5,7 @@
 package br.com.acme.connection;
 
 import br.com.acme.model.Book;
+import br.com.acme.model.Session;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -50,32 +51,39 @@ public class BookDatabaseConnector {
         }
     }
 
-    public ArrayList<Book> getAllBooks() throws SQLException {
+    public static ArrayList<Book> getAllBooksFromUser() {
         ArrayList<Book> books = new ArrayList<>();
         Connection con = DataBaseConnection.getConnection();
-        Statement stm = null;
+        PreparedStatement stm = null;
         ResultSet rst = null;
-        String SQL = "SELECT * FROM book";
+        String SQL = "SELECT * FROM book WHERE FK_idUser = ?";
 
+        int userId = Session.getInstance().getLoggedUser().getIdUser();
+        
         try {
-            stm = con.createStatement();
-            rst = stm.executeQuery(SQL);
+            stm = con.prepareStatement(SQL);
+            stm.setInt(1, userId);
+            
+            rst = stm.executeQuery();
 
             while (rst.next()) {
-                String title = rst.getString(1);
-                short year = rst.getShort(2);
-                String author = rst.getString(3);
-                String language = rst.getString(4);
-                String isbn = rst.getString(5);
-                int pages = rst.getInt(6);
+                String title = rst.getString(3);
+                short year = rst.getShort(4);
+                String author = rst.getString(5);
+                String language = rst.getString(6);
+                String isbn = rst.getString(7);
+                int pages = rst.getInt(8);
 
-                Book book = new Book(title, year, language, isbn, year);
+                Book book = new Book(title, year, language, isbn, pages, author);
+                System.out.println(book.getAuthor());
                 books.add(book);
             }
 
+            return books;
         } catch (SQLException e) {
             System.out.println(e);
         }
-        return books;
+        
+        return null;
     }
 }
