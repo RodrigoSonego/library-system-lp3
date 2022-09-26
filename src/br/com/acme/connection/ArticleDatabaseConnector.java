@@ -7,15 +7,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ArticleDatabaseConnector {
 
-    public void InsertArticle(Article article) {
+    public static void InsertArticle(Article article) {
         Connection con = DataBaseConnection.getConnection();
         PreparedStatement ptstm = null;
         String SQL = "INSERT INTO article(FK_idUser, title, year, author, doi, journal) "
                 + " VALUES(?, ?, ?, ?, ?, ?)";
         try {
+            con.setAutoCommit(false);
+            
             ptstm = con.prepareStatement(SQL);
 
             ptstm.setInt(1, article.getFK_idUser());
@@ -26,7 +30,18 @@ public class ArticleDatabaseConnector {
             ptstm.setString(6, article.getJournal());
 
             ptstm.executeUpdate();
+            
+            con.commit();
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            
+            //gore abaixo
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(ArticleDatabaseConnector.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         } finally {
             DataBaseConnection.closeConnection(con, ptstm);
         }

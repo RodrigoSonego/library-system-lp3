@@ -7,6 +7,7 @@ package br.com.acme.gui;
 
 import br.com.acme.connection.ArticleDatabaseConnector;
 import br.com.acme.model.Article;
+import br.com.acme.model.Session;
 import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -16,10 +17,6 @@ import javax.swing.JTextField;
  * @author USER
  */
 public class AddArticleForm extends javax.swing.JDialog {
-
-    private String author;
-    private String journal;
-    private Article article;
 
     public AddArticleForm() {
         initComponents();
@@ -181,37 +178,31 @@ public class AddArticleForm extends javax.swing.JDialog {
         if (hasEmptyField()) {
             JOptionPane.showMessageDialog(this, "One or more empty fields", "Error", JOptionPane.ERROR_MESSAGE);
             return;
-        } 
-            try {
-                article = new Article(jtfTitle.getText(), Short.parseShort(jtfYear.getText()), (jtfDoi.getText()));
+        }
+        
+        Article article;
+        
+        try {
+            article = new Article(jtfTitle.getText(), Short.parseShort(jtfYear.getText()), (jtfDoi.getText()));
 
-                journal = jtfJournal.getText();
-                
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Year must be between: \n"
-                        + "0 and " + Short.MAX_VALUE + "\n");
-                return;
-            }
-
-            
+            String journal = jtfJournal.getText();
+            String author = jtfAuthor.getText();
             
             article.setJournal(journal);
             article.setAuthor(author);
+            
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Year must be between: \n"
+                    + "0 and " + Short.MAX_VALUE + "\n");
+            return;
+        }
 
-            ArticleDatabaseConnector articleConnector = new ArticleDatabaseConnector();
-            
-            String title = jtfTitle.getText();
-            short year = Short.valueOf(jtfYear.getText());
-            author = jtfAuthor.getText();
-            String doi = jtfDoi.getText();
-            journal = jtfJournal.getText();
-            
-            Article article = new Article(title, year, author, doi, journal);
-            articleConnector.InsertArticle(article);
-            
-            JOptionPane.showMessageDialog(this, "Article added successfully!", "Success!", JOptionPane.INFORMATION_MESSAGE);
-            author = new String();
-        
+        int userId = Session.getInstance().getLoggedUser().getIdUser();
+        article.setFK_idUser(userId);
+
+        ArticleDatabaseConnector.InsertArticle(article);
+
+        JOptionPane.showMessageDialog(this, "Article added successfully!", "Success!", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jbOkActionPerformed
 
     private void jtfYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfYearActionPerformed
