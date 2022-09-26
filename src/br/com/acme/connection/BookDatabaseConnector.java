@@ -11,16 +11,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BookDatabaseConnector {
 
-    public void InsertBook(Book book) {
+    public static void InsertBook(Book book) {
         Connection con = DataBaseConnection.getConnection();
         PreparedStatement ptstm = null;
         String SQL = "INSERT INTO book(FK_idUser, title, year, author, language, isbn, pages) "
                 + " VALUES(?, ?, ?, ?, ?, ?, ?)";
 
         try {
+            con.setAutoCommit(false);
+            
             ptstm = con.prepareStatement(SQL);
 
             ptstm.setInt(1, book.getFK_idUser());
@@ -32,8 +36,15 @@ public class BookDatabaseConnector {
             ptstm.setInt(7, book.getPages());
 
             ptstm.executeUpdate();
-
-        } catch (SQLException e) {
+            
+            con.commit();
+        } catch (SQLException e) {           
+            //muito feio meu deus
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(BookDatabaseConnector.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } finally {
             DataBaseConnection.closeConnection(con, ptstm);
         }

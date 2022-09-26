@@ -8,6 +8,7 @@ package br.com.acme.gui;
 import br.com.acme.connection.BookDatabaseConnector;
 import java.awt.Component;
 import br.com.acme.model.Book;
+import br.com.acme.model.Session;
 import javax.swing.*;
 
 /**
@@ -180,7 +181,11 @@ public class AddBookForm extends javax.swing.JDialog {
             author = jtfAuthor.getText();
             tempBook.setAuthor(author);
 
-            //TODO: call DB connection here
+            int userId = Session.getInstance().getLoggedUser().getIdUser();
+            tempBook.setFK_idUser(userId);
+            
+            BookDatabaseConnector.InsertBook(tempBook);
+            
             JOptionPane.showMessageDialog(this, "Your book was successfully added!", "Succes!", JOptionPane.INFORMATION_MESSAGE);
             author = "";
             
@@ -200,17 +205,7 @@ public class AddBookForm extends javax.swing.JDialog {
     }//GEN-LAST:event_jbCloseMouseClicked
 
     private void jbOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbOKActionPerformed
-        
-        BookDatabaseConnector bookConnector = new BookDatabaseConnector();
-        String title = jtfTitle.getText();
-        String author = jtfAuthor.getText();
-        short year = (Short.valueOf(jtfYear.getText()));
-        String language = jtfLanguage.getText();
-        String isbn = jtfIsbn.getText();
-        int pages = (Integer.valueOf(jtfPages.getText()));
-        Book book = new Book(title, year, language, isbn, year);
-        
-        bookConnector.InsertBook(book);
+     
     }//GEN-LAST:event_jbOKActionPerformed
 
     private void jtfLanguageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfLanguageActionPerformed
