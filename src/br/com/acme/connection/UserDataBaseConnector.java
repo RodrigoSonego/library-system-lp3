@@ -48,7 +48,7 @@ public class UserDataBaseConnector {
         return false;
     }
 
-    public ArrayList<User> getAllUsers() {
+    public static ArrayList<User> getAllUsers() {
         ArrayList<User> users = new ArrayList<>();
 
         Connection con = DataBaseConnection.getConnection();
@@ -59,7 +59,6 @@ public class UserDataBaseConnector {
             ResultSet result = stmt.executeQuery("select * from `user`");
 
             while (result.next()) {
-                int id = result.getInt(1);
                 String login = result.getString(2);
                 String email = result.getString(3);
                 String password = result.getString(4);

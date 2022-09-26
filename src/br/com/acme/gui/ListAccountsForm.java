@@ -1,8 +1,10 @@
 package br.com.acme.gui;
 
+import br.com.acme.connection.UserDataBaseConnector;
 import br.com.acme.model.User;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 
 public class ListAccountsForm extends javax.swing.JDialog {
@@ -15,9 +17,13 @@ public class ListAccountsForm extends javax.swing.JDialog {
     }
 
     private void populateTable() {
-        Collection<User> users = new ArrayList<User>();
+        Collection<User> users = UserDataBaseConnector.getAllUsers();
 
-        // TODO: Do connection stuff
+        if(users == null || users.size() == 0) {
+            JOptionPane.showMessageDialog(this, "Erro ao comunicar com o banco de dados", "Erro", JOptionPane.ERROR_MESSAGE);
+            dispose();
+            return;
+        }
         
         TableModel model = jtAccounts.getModel();
         
