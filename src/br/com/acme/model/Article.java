@@ -24,6 +24,16 @@ public class Article extends Publication {
         this.doi = doi;
         this.journal = journal;
     }
+    
+    public Article(String title, short year, String author, String doi, String journal){
+        super(title, year);
+        this.author = author;
+        this.doi = doi;
+        this.journal = journal;
+        
+    }
+
+  
 
     public int getIdArticle() {
         return idArticle;
@@ -38,13 +48,7 @@ public class Article extends Publication {
         this.FK_idUser = FK_idUser;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
+    
 
     public String getDoi() {
         return doi;

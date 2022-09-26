@@ -37,7 +37,6 @@ public class BookDatabaseConnector {
         } finally {
             DataBaseConnection.closeConnection(con, ptstm);
         }
-
     }
 
     public ArrayList<Book> getAllBooks() throws SQLException {
@@ -46,25 +45,23 @@ public class BookDatabaseConnector {
         Statement stm = null;
         ResultSet rst = null;
         String SQL = "SELECT * FROM book";
-        
+
         try {
             stm = con.createStatement();
             rst = stm.executeQuery(SQL);
-            
-            while(rst.next()){
-                int idBook = rst.getInt(1);
-                int FK_idUser = rst.getInt(2);
-                String title = rst.getString(3);
-                int year = rst.getInt(4);
-                String author = rst.getString(5);
-                String language = rst.getString(6);
-                String isbn = rst.getString(7);
-                int pages = rst.getInt(8);
-                
-                Book book = new Book(idBook, FK_idUser, title, (short)year, author, language, isbn, pages);
+
+            while (rst.next()) {
+                String title = rst.getString(1);
+                short year = rst.getShort(2);
+                String author = rst.getString(3);
+                String language = rst.getString(4);
+                String isbn = rst.getString(5);
+                int pages = rst.getInt(6);
+
+                Book book = new Book(title, year, language, isbn, year);
                 books.add(book);
             }
-            
+
         } catch (SQLException e) {
             System.out.println(e);
         }
