@@ -20,9 +20,10 @@ public class Article extends Publication {
         
         this.idArticle = idArticle;
         this.FK_idUser = FK_idUser;
-        this.author = author;
         this.doi = doi;
         this.journal = journal;
+        
+        setAuthor(author);
     }
     
     public Article(String title, short year, String author, String doi, String journal){
@@ -31,6 +32,7 @@ public class Article extends Publication {
         this.doi = doi;
         this.journal = journal;
         
+        setAuthor(author);
     }
 
   

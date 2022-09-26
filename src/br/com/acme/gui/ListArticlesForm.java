@@ -1,48 +1,49 @@
 package br.com.acme.gui;
 
+import br.com.acme.connection.ArticleDatabaseConnector;
 import br.com.acme.model.Article;
 import br.com.acme.model.Publication;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 
 public class ListArticlesForm extends javax.swing.JDialog {
-    
+
     public ListArticlesForm() {
         initComponents();
-        
+
         populateTable();
     }
 
     private void populateTable() {
-        ArrayList<Publication> publications = new ArrayList<Publication>();
+        ArrayList<Article> articles = ArticleDatabaseConnector.getAllArticlesFromUser();
+
+        if(articles == null) {
+            JOptionPane.showMessageDialog(this, "Você não possui livros registrados", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+            return;
+        }
         
-        // TODO: Do connection stuff here
-        
-        jlTotal.setText( String.valueOf(publications.size()) );
-        
+        jlTotal.setText(String.valueOf(articles.size()));
+
         TableModel model = jtArticleList.getModel();
-        
-        
-        
+
         int line = 0;
-        for (Publication p : publications) {            
-            if (p instanceof Article) {
-                Article a = (Article)p;
-                model.setValueAt(a.getTitle(), line, 0);
-                
-                String author = a.getAuthor();
-                
-                model.setValueAt(author, line, 1);
-                model.setValueAt(a.getYear(), line, 2);
-                model.setValueAt(a.getDoi(), line, 3);
-                model.setValueAt(a.getJournal(), line, 4);
-                line++;
-            }
-        }   
-        
+        for (Article a : articles) {
+            model.setValueAt(a.getTitle(), line, 0);
+
+            String author = a.getAuthor();
+
+            model.setValueAt(author, line, 1);
+            model.setValueAt(a.getYear(), line, 2);
+            model.setValueAt(a.getDoi(), line, 3);
+            model.setValueAt(a.getJournal(), line, 4);
+            line++;
+
+        }
+
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

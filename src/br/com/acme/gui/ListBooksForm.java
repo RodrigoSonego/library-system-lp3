@@ -2,7 +2,6 @@ package br.com.acme.gui;
 
 import br.com.acme.connection.BookDatabaseConnector;
 import br.com.acme.model.Book;
-import br.com.acme.model.Publication;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;

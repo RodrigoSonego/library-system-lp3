@@ -1,6 +1,7 @@
 package br.com.acme.connection;
 
 import br.com.acme.model.Article;
+import br.com.acme.model.Session;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -47,33 +48,38 @@ public class ArticleDatabaseConnector {
         }
     }
 
-    public ArrayList<Article> getAllArticles() throws SQLException {
+    public static ArrayList<Article> getAllArticlesFromUser(){
         ArrayList<Article> articles = new ArrayList<>();
         Connection con = DataBaseConnection.getConnection();
-        Statement stm = null;
+        PreparedStatement stm = null;
         ResultSet rst = null;
-        String SQL = "SELECT * FROM article";
+        String SQL = "SELECT * FROM article WHERE FK_idUser = ?";
+        
+        int userId = Session.getInstance().getLoggedUser().getIdUser();
         
         try {
-            stm = con.createStatement();
-            rst = stm.executeQuery(SQL);
+            stm = con.prepareStatement(SQL);
+            stm.setInt(1, userId);
+            
+            rst = stm.executeQuery();
             
             while(rst.next()){
-                int idArticle = rst.getInt(1);
-                int FK_idUser = rst.getInt(2);
                 String title = rst.getString(3);
-                int year = rst.getInt(4);
+                short year = rst.getShort(4);
                 String author = rst.getString(5);
                 String doi = rst.getString(6);
                 String journal = rst.getString(7);
                 
-                Article article = new Article(idArticle, FK_idUser, title, (short) year, author, doi, journal);
+                Article article = new Article(title, year, author, doi, journal);
                 articles.add(article);
             }
+            
+            return articles;
         } catch (SQLException e) {
             System.out.println(e);
         }
-        return articles;
+        
+       return null;
     }
     
 }
