@@ -19,7 +19,12 @@ public class ListArticlesForm extends javax.swing.JDialog {
         ArrayList<Article> articles = ArticleDatabaseConnector.getAllArticlesFromUser();
 
         if(articles == null) {
-            JOptionPane.showMessageDialog(this, "Você não possui livros registrados", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Erro ao conectar ao banco de dados", "Erro", JOptionPane.ERROR_MESSAGE);
+            dispose();
+            return;
+        }
+        if(articles.size() == 0) {
+            JOptionPane.showMessageDialog(this, "Você não possui artigos registrados", "Erro", JOptionPane.INFORMATION_MESSAGE);
             dispose();
             return;
         }

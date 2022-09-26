@@ -19,6 +19,11 @@ public class ListBooksForm extends javax.swing.JDialog {
         ArrayList<Book> books = BookDatabaseConnector.getAllBooksFromUser();
         
         if(books == null) {
+            JOptionPane.showMessageDialog(this, "Erro ao conectar ao banco de dados", "Erro", JOptionPane.ERROR_MESSAGE);
+            dispose();
+            return;
+        }
+        if(books.size() == 0) {
             JOptionPane.showMessageDialog(this, "Você não possui livros registrados", "Erro", JOptionPane.INFORMATION_MESSAGE);
             dispose();
             return;
