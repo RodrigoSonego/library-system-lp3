@@ -75,13 +75,13 @@ public class UserDataBaseConnector {
         return users;
     }
 
-    public static boolean login(String login, String password) {
+    public static User login(String login, String password) {
 
         Connection con = DataBaseConnection.getConnection();
 
         PreparedStatement pstmt = null;
 
-        String query = "SELECT idUser from `user` WHERE login = ? AND password = ?";
+        String query = "SELECT idUser, email from `user` WHERE login = ? AND password = ?";
         try {
             pstmt = con.prepareStatement(query);
 
@@ -92,13 +92,19 @@ public class UserDataBaseConnector {
             
             boolean isValid = result.next();
             
-            return isValid;
+            if(isValid == false) { return null; }
+            
+            int id = result.getInt(1);
+            String email = result.getString(2);
+
+            User user = new User(id, login, password, email);
+            return user;
             
         } catch (SQLException ex) {
             Logger.getLogger(UserDataBaseConnector.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("deu ruim no login");
         }
         
-        return false;
+        return null;
     }
 }

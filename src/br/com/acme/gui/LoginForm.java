@@ -6,6 +6,7 @@
 package br.com.acme.gui;
 
 import br.com.acme.connection.UserDataBaseConnector;
+import br.com.acme.model.Session;
 import br.com.acme.model.User;
 import javax.swing.JOptionPane;
 
@@ -136,16 +137,18 @@ public class LoginForm extends javax.swing.JDialog {
         String insertedPwd = new String(jpfPassword.getPassword());
         String login = jtfLogin.getText();
 
-        boolean isLoginValid = UserDataBaseConnector.login(login, insertedPwd);
+        User loggedUser = UserDataBaseConnector.login(login, insertedPwd);
 
-        if (isLoginValid == false) {
+        if (loggedUser == null) {
             JOptionPane.showMessageDialog(this, "Login ou senha inválidos", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
+        Session.startSession(loggedUser);
+        
         mainWindow = new MainWindow(jtfLogin.getText());
         mainWindow.setVisible(true);
-
+        
         this.setVisible(false);
         dispose();
     }//GEN-LAST:event_jbValidateActionPerformed
