@@ -5,6 +5,7 @@
  */
 package br.com.acme.gui;
 
+import br.com.acme.connection.BookDatabaseConnector;
 import java.awt.Component;
 import br.com.acme.model.Book;
 import javax.swing.*;
@@ -14,9 +15,9 @@ import javax.swing.*;
  * @author USER
  */
 public class AddBookForm extends javax.swing.JDialog {
-
+    
     private String author;
-
+    
     public AddBookForm() {
         initComponents();
     }
@@ -35,8 +36,6 @@ public class AddBookForm extends javax.swing.JDialog {
         jtfTitle = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jtfYear = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jtfVolume = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jtfLanguage = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -59,11 +58,14 @@ public class AddBookForm extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel3.setText("Year:");
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel4.setText("Volume:");
-
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel5.setText("Language:");
+
+        jtfLanguage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfLanguageActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel6.setText("ISBN:");
@@ -76,6 +78,11 @@ public class AddBookForm extends javax.swing.JDialog {
         jbOK.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jbOKMouseClicked(evt);
+            }
+        });
+        jbOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbOKActionPerformed(evt);
             }
         });
 
@@ -105,7 +112,6 @@ public class AddBookForm extends javax.swing.JDialog {
                             .addComponent(jLabel8)
                             .addComponent(jLabel3)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel4)
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7))
@@ -113,7 +119,6 @@ public class AddBookForm extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtfTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtfYear, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfVolume, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtfLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtfPages, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtfIsbn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -143,25 +148,21 @@ public class AddBookForm extends javax.swing.JDialog {
                     .addComponent(jtfYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfVolume, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jtfLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jtfLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfIsbn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jtfIsbn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jtfPages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbOK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbClose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         jLabel8.getAccessibleContext().setAccessibleName("Author");
@@ -171,26 +172,24 @@ public class AddBookForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbOKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbOKMouseClicked
-
-        try {            
+        
+        try {
             Book tempBook = new Book(jtfTitle.getText(), Short.parseShort(jtfYear.getText()),
                     jtfLanguage.getText(), jtfIsbn.getText(), Short.parseShort(jtfPages.getText()));
             
             author = jtfAuthor.getText();
             tempBook.setAuthor(author);
-            
+
             //TODO: call DB connection here
-            
-            
             JOptionPane.showMessageDialog(this, "Your book was successfully added!", "Succes!", JOptionPane.INFORMATION_MESSAGE);
             author = "";
             
             clearFields();
         } catch (NumberFormatException ex) {
-            showNumberErrorMessage();          
+            showNumberErrorMessage();
             return;
         }
-
+        
 
     }//GEN-LAST:event_jbOKMouseClicked
 
@@ -200,10 +199,28 @@ public class AddBookForm extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_jbCloseMouseClicked
 
-    private void showNumberErrorMessage(){
+    private void jbOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbOKActionPerformed
+        
+        BookDatabaseConnector bookConnector = new BookDatabaseConnector();
+        String title = jtfTitle.getText();
+        String author = jtfAuthor.getText();
+        short year = (Short.valueOf(jtfYear.getText()));
+        String language = jtfLanguage.getText();
+        String isbn = jtfIsbn.getText();
+        int pages = (Integer.valueOf(jtfPages.getText()));
+        Book book = new Book(title, year, language, isbn, year);
+        
+        bookConnector.InsertBook(book);
+    }//GEN-LAST:event_jbOKActionPerformed
+
+    private void jtfLanguageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfLanguageActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfLanguageActionPerformed
+    
+    private void showNumberErrorMessage() {
         JOptionPane.showMessageDialog(this, "The following fields must be NUMBERS between: \n"
-                    + "Year and Pages: 0 and " + Short.MAX_VALUE + "\n"
-                            + "Volume: 0 and " + Byte.MAX_VALUE, "Error", JOptionPane.INFORMATION_MESSAGE);
+                + "Year and Pages: 0 and " + Short.MAX_VALUE + "\n"
+                + "Volume: 0 and " + Byte.MAX_VALUE, "Error", JOptionPane.INFORMATION_MESSAGE);
     }
     
     private void clearFields() {
@@ -219,7 +236,6 @@ public class AddBookForm extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -231,7 +247,6 @@ public class AddBookForm extends javax.swing.JDialog {
     private javax.swing.JTextField jtfLanguage;
     private javax.swing.JTextField jtfPages;
     private javax.swing.JTextField jtfTitle;
-    private javax.swing.JTextField jtfVolume;
     private javax.swing.JTextField jtfYear;
     // End of variables declaration//GEN-END:variables
 }
