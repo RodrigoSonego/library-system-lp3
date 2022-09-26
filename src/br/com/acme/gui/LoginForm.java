@@ -5,6 +5,7 @@
  */
 package br.com.acme.gui;
 
+import br.com.acme.connection.UserDataBaseConnector;
 import br.com.acme.model.User;
 import javax.swing.JOptionPane;
 
@@ -131,26 +132,22 @@ public class LoginForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbValidateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbValidateActionPerformed
-        boolean isValidUser = false;
-        boolean isValidPassword = false;
 
-        try {
-            int insertedPwd = Integer.parseInt(new String(jpfPassword.getPassword()));
-            
-            //TODO call Login stuff here
+        String insertedPwd = new String(jpfPassword.getPassword());
+        String login = jtfLogin.getText();
 
-            if ((isValidPassword && isValidUser) || (jtfLogin.getText().equals("admin") && insertedPwd == 1234)) {
-                mainWindow = new MainWindow(jtfLogin.getText());
-                mainWindow.setVisible(true);
+        boolean isLoginValid = UserDataBaseConnector.login(login, insertedPwd);
 
-                this.setVisible(false);
-                dispose();
-            }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Password must be only numbers", "Error", JOptionPane.ERROR_MESSAGE);
+        if (isLoginValid == false) {
+            JOptionPane.showMessageDialog(this, "Login ou senha inválidos", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
-    
+        mainWindow = new MainWindow(jtfLogin.getText());
+        mainWindow.setVisible(true);
+
+        this.setVisible(false);
+        dispose();
     }//GEN-LAST:event_jbValidateActionPerformed
 
     private void jbCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCreateAccountActionPerformed
@@ -174,4 +171,3 @@ public class LoginForm extends javax.swing.JDialog {
     private javax.swing.JTextField jtfLogin;
     // End of variables declaration//GEN-END:variables
 }
-

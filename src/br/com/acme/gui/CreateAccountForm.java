@@ -5,8 +5,12 @@
  */
 package br.com.acme.gui;
 
+import br.com.acme.connection.UserDataBaseConnector;
 import br.com.acme.model.User;
 import java.awt.Component;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -148,7 +152,13 @@ public class CreateAccountForm extends javax.swing.JDialog {
         tempUser.setLogin(jtfLogin.getText());
         tempUser.setEmail(jtfEmail.getText());
         
-        //TODO: Add DB user creation stuff here
+        boolean successful = UserDataBaseConnector.insertUser(tempUser);
+        
+        if(successful == false) {
+            JOptionPane.showMessageDialog(this, "Login já utilizado", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         
         JOptionPane.showMessageDialog(this, "Your account was successfully created!", "Succes!", JOptionPane.INFORMATION_MESSAGE);
         clearFields();

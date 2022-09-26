@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 public class UserDataBaseConnector {
 
-    public boolean InsertUser(User user) throws SQLException {
+    public static boolean insertUser(User user) {
 
         Connection con = DataBaseConnection.getConnection();
         PreparedStatement ptstm = null;
@@ -33,9 +33,13 @@ public class UserDataBaseConnector {
             return true;
             
         } catch (SQLException e) {
-            System.out.println("ih rapaiz deu ruim");
+            System.out.println(e.getErrorCode());
             
-            con.rollback();
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                System.out.println("deu ruim no rollback");
+            }
             
         } finally {
             DataBaseConnection.closeConnection(con, ptstm);    
@@ -71,7 +75,7 @@ public class UserDataBaseConnector {
         return users;
     }
 
-    public boolean login(String login, String password) {
+    public static boolean login(String login, String password) {
 
         Connection con = DataBaseConnection.getConnection();
 
