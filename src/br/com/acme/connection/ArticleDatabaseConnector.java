@@ -6,14 +6,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ArticleDatabaseConnector {
 
-    public static void InsertArticle(Article article) {
+    public static boolean InsertArticle(Article article) {
         Connection con = DataBaseConnection.getConnection();
         PreparedStatement ptstm = null;
         String SQL = "INSERT INTO article(FK_idUser, title, year, author, doi, journal) "
@@ -33,6 +32,8 @@ public class ArticleDatabaseConnector {
             ptstm.executeUpdate();
             
             con.commit();
+            
+            return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             
@@ -46,6 +47,8 @@ public class ArticleDatabaseConnector {
         } finally {
             DataBaseConnection.closeConnection(con, ptstm);
         }
+        
+        return false;
     }
 
     public static ArrayList<Article> getAllArticlesFromUser(){

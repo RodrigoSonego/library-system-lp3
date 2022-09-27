@@ -200,7 +200,12 @@ public class AddArticleForm extends javax.swing.JDialog {
         int userId = Session.getInstance().getLoggedUser().getIdUser();
         article.setFK_idUser(userId);
 
-        ArticleDatabaseConnector.InsertArticle(article);
+        boolean successful = ArticleDatabaseConnector.InsertArticle(article);
+        
+        if(successful == false) {
+            JOptionPane.showMessageDialog(this, "Error on article insertion", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         JOptionPane.showMessageDialog(this, "Article added successfully!", "Success!", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jbOkActionPerformed

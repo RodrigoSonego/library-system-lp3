@@ -179,10 +179,14 @@ public class AddBookForm extends javax.swing.JDialog {
             int userId = Session.getInstance().getLoggedUser().getIdUser();
             tempBook.setFK_idUser(userId);
             
-            BookDatabaseConnector.InsertBook(tempBook);
+            boolean successful = BookDatabaseConnector.InsertBook(tempBook);
             
-            JOptionPane.showMessageDialog(this, "Your book was successfully added!", "Succes!", JOptionPane.INFORMATION_MESSAGE);
+            if(successful == false ) {
+                JOptionPane.showMessageDialog(this, "Error on book insertion", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             
+            JOptionPane.showMessageDialog(this, "Your book was successfully added!", "Succes!", JOptionPane.INFORMATION_MESSAGE);           
             clearFields();
         } catch (NumberFormatException ex) {
             showNumberErrorMessage();

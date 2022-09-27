@@ -10,14 +10,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class BookDatabaseConnector {
 
-    public static void InsertBook(Book book) {
+    public static boolean InsertBook(Book book) {
         Connection con = DataBaseConnection.getConnection();
         PreparedStatement ptstm = null;
         String SQL = "INSERT INTO book(FK_idUser, title, year, author, language, isbn, pages) "
@@ -39,6 +38,8 @@ public class BookDatabaseConnector {
             ptstm.executeUpdate();
             
             con.commit();
+            
+            return true;
         } catch (SQLException e) {           
             //muito feio meu deus
             try {
@@ -49,6 +50,8 @@ public class BookDatabaseConnector {
         } finally {
             DataBaseConnection.closeConnection(con, ptstm);
         }
+        
+        return false;
     }
 
     public static ArrayList<Book> getAllBooksFromUser() {
