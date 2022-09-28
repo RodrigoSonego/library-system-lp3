@@ -19,13 +19,17 @@ public class BookDatabaseConnector {
     public static boolean InsertBook(Book book) {
         Connection con = DataBaseConnection.getConnection();
         PreparedStatement ptstm = null;
-        String SQL = "INSERT INTO book(FK_idUser, title, year, author, language, isbn, pages) "
+        String insertBookSql = "INSERT INTO book(FK_idUser, title, year, author, language, isbn, pages) "
                 + " VALUES(?, ?, ?, ?, ?, ?, ?)";
+        
+        int userId = Session.getInstance().getLoggedUser().getIdUser();
+        
+        String updateCountSql = "UPDATE user SET publication_limit = publication_limit - 1 WHERE idUser =  ?";
 
         try {
             con.setAutoCommit(false);
             
-            ptstm = con.prepareStatement(SQL);
+            ptstm = con.prepareStatement(insertBookSql);
 
             ptstm.setInt(1, book.getFK_idUser());
             ptstm.setString(2, book.getTitle());
@@ -35,6 +39,11 @@ public class BookDatabaseConnector {
             ptstm.setString(6, book.getIsbn());
             ptstm.setInt(7, book.getPages());
 
+            ptstm.executeUpdate();         
+            
+            ptstm = con.prepareStatement(updateCountSql);
+            ptstm.setInt(1, userId);
+            
             ptstm.executeUpdate();
             
             con.commit();

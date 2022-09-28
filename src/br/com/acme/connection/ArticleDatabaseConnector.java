@@ -15,12 +15,17 @@ public class ArticleDatabaseConnector {
     public static boolean InsertArticle(Article article) {
         Connection con = DataBaseConnection.getConnection();
         PreparedStatement ptstm = null;
-        String SQL = "INSERT INTO article(FK_idUser, title, year, author, doi, journal) "
+        String insertArticleSql = "INSERT INTO article(FK_idUser, title, year, author, doi, journal) "
                 + " VALUES(?, ?, ?, ?, ?, ?)";
+        
+        int userId = Session.getInstance().getLoggedUser().getIdUser();
+        
+        String updateCountSql = "UPDATE user SET publication_limit = publication_limit - 1 WHERE idUser =  ?";
+        
         try {
             con.setAutoCommit(false);
             
-            ptstm = con.prepareStatement(SQL);
+            ptstm = con.prepareStatement(insertArticleSql);
 
             ptstm.setInt(1, article.getFK_idUser());
             ptstm.setString(2, article.getTitle());
@@ -30,6 +35,11 @@ public class ArticleDatabaseConnector {
             ptstm.setString(6, article.getJournal());
 
             ptstm.executeUpdate();
+            
+            ptstm = con.prepareStatement(updateCountSql);
+            ptstm.setInt(1, userId);
+            
+            ptstm.executeUpdate();      
             
             con.commit();
             
