@@ -84,7 +84,7 @@
               <Table columnCount="3" rowCount="10">
                 <Column editable="false" title="Email" type="java.lang.String"/>
                 <Column editable="false" title="Login" type="java.lang.String"/>
-                <Column editable="false" title="Password" type="java.lang.Integer"/>
+                <Column editable="false" title="Remaining Registers" type="java.lang.Integer"/>
               </Table>
             </Property>
           </Properties>

@@ -62,8 +62,9 @@ public class UserDataBaseConnector {
                 String login = result.getString(2);
                 String email = result.getString(3);
                 String password = result.getString(4);
-
-                User user = new User(login, password, email);
+                int publicationLimit = result.getInt(5);
+                
+                User user = new User(login, password, email, publicationLimit);
 
                 users.add(user);
             }

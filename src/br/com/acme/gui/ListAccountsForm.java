@@ -2,7 +2,6 @@ package br.com.acme.gui;
 
 import br.com.acme.connection.UserDataBaseConnector;
 import br.com.acme.model.User;
-import java.util.ArrayList;
 import java.util.Collection;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
@@ -32,7 +31,7 @@ public class ListAccountsForm extends javax.swing.JDialog {
         for (User u : users) {            
             model.setValueAt(u.getEmail(), line, 0);
             model.setValueAt(u.getLogin(), line, 1);
-            model.setValueAt(u.getPassword(), line, 2);
+            model.setValueAt(u.getPublications_limit(), line, 2);
             line++;
         }   
         
@@ -72,7 +71,7 @@ public class ListAccountsForm extends javax.swing.JDialog {
                 {null, null, null}
             },
             new String [] {
-                "Email", "Login", "Password"
+                "Email", "Login", "Remaining Registers"
             }
         ) {
             Class[] types = new Class [] {

@@ -6,6 +6,7 @@ public class User {
     private String login;
     private String password;
     private String email;
+    private int publications_limit;
 
     public User() {}
     
@@ -20,6 +21,11 @@ public class User {
         this.login = login;
         this.password = password;
         this.email = email;
+    }
+    
+    public User(String login, String password, String email, int publications_limit) {
+        this(login, password, email);
+        this.publications_limit = publications_limit;
     }
     
     public String getLogin() {
@@ -48,5 +54,13 @@ public class User {
     
     public int getIdUser() {
         return idUser;
+    }
+    
+    public int getPublications_limit() {
+        return publications_limit;
+    }
+
+    public void setPublications_limit(int publications_limit) {
+        this.publications_limit = publications_limit;
     }
 }
