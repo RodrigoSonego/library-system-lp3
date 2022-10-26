@@ -2,32 +2,36 @@ package br.com.acme.gui;
 
 import br.com.acme.connection.ArticleDatabaseConnector;
 import br.com.acme.model.Article;
-import br.com.acme.model.Publication;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 
 public class ListArticlesForm extends javax.swing.JDialog {
 
+    public boolean hasError = false;
+    
     public ListArticlesForm() {
-        initComponents();
-
-        populateTable();
-    }
-
-    private void populateTable() {
+        
         ArrayList<Article> articles = ArticleDatabaseConnector.getAllArticlesFromUser();
 
         if(articles == null) {
             JOptionPane.showMessageDialog(this, "Erro ao conectar ao banco de dados", "Erro", JOptionPane.ERROR_MESSAGE);
-            dispose();
+            hasError = true;
             return;
         }
         if(articles.size() == 0) {
             JOptionPane.showMessageDialog(this, "Você não possui artigos registrados", "Erro", JOptionPane.INFORMATION_MESSAGE);
-            dispose();
+            hasError = true;
             return;
         }
+        
+        initComponents();
+
+        populateTable(articles);
+    }
+
+    private void populateTable(List<Article> articles) {
         
         jlTotal.setText(String.valueOf(articles.size()));
 

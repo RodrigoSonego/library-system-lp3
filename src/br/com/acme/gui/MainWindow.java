@@ -211,18 +211,18 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiAddArticleActionPerformed
 
     private void jmiListBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListBookActionPerformed
-        
+
         listBooks = new ListBooksForm();
-        
-        listBooks.setVisible(true);
+        if (listBooks.hasError) listBooks.dispose();
+        else listBooks.setVisible(true);
         
     }//GEN-LAST:event_jmiListBookActionPerformed
 
     private void jmiListArticlesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListArticlesActionPerformed
-                
-         listArticles = new ListArticlesForm();
-        
-        listArticles.setVisible(true);
+
+        listArticles = new ListArticlesForm();
+        if (listArticles.hasError) listArticles.dispose();
+        else listArticles.setVisible(true);
         
     }//GEN-LAST:event_jmiListArticlesActionPerformed
 
