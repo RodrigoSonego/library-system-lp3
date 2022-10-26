@@ -44,10 +44,6 @@ public class MainWindow extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jmiCreate = new javax.swing.JMenuItem();
         jmiListAccounts = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jmiSupport = new javax.swing.JMenuItem();
-        jcbmiUpdate = new javax.swing.JCheckBoxMenuItem();
-        jmiAbout = new javax.swing.JMenuItem();
         jmLog = new javax.swing.JMenu();
         jmcbOn = new javax.swing.JCheckBoxMenuItem();
         jmcbOff = new javax.swing.JCheckBoxMenuItem();
@@ -140,18 +136,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu4.setText("Help");
-
-        jmiSupport.setText("Support");
-        jMenu4.add(jmiSupport);
-
-        jcbmiUpdate.setSelected(true);
-        jcbmiUpdate.setText("Check for updates");
-        jMenu4.add(jcbmiUpdate);
-
-        jmiAbout.setText("About");
-        jMenu4.add(jmiAbout);
-
         jmLog.setText("Log");
 
         jmcbOn.setSelected(true);
@@ -171,9 +155,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         jmLog.add(jmcbOff);
 
-        jMenu4.add(jmLog);
-
-        jMenuBar1.add(jMenu4);
+        jMenuBar1.add(jmLog);
 
         setJMenuBar(jMenuBar1);
 
@@ -262,24 +244,20 @@ public class MainWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JButton jbmbCreateAccount;
-    private javax.swing.JCheckBoxMenuItem jcbmiUpdate;
     private javax.swing.JFileChooser jfcFileChooser;
     private javax.swing.JMenu jmAdd;
     private javax.swing.JMenu jmList;
     private javax.swing.JMenu jmLog;
     private javax.swing.JCheckBoxMenuItem jmcbOff;
     private javax.swing.JCheckBoxMenuItem jmcbOn;
-    private javax.swing.JMenuItem jmiAbout;
     private javax.swing.JMenuItem jmiAddArticle;
     private javax.swing.JMenuItem jmiAddBook;
     private javax.swing.JMenuItem jmiCreate;
     private javax.swing.JMenuItem jmiListAccounts;
     private javax.swing.JMenuItem jmiListArticles;
     private javax.swing.JMenuItem jmiListBook;
-    private javax.swing.JMenuItem jmiSupport;
     private javax.swing.JToolBar jtbMenu;
     // End of variables declaration//GEN-END:variables
 }
