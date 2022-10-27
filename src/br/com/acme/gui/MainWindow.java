@@ -5,6 +5,8 @@
  */
 package br.com.acme.gui;
 
+import javax.swing.JOptionPane;
+
 import br.com.acme.model.logic.LogController;
 
 /**
@@ -13,6 +15,8 @@ import br.com.acme.model.logic.LogController;
  */
 public class MainWindow extends javax.swing.JFrame {
 
+    public boolean isOfflineMode = false;
+    
     private AddBookForm addBook;
     private AddArticleForm addArticle;
     private CreateAccountForm createAccount;
@@ -27,6 +31,7 @@ public class MainWindow extends javax.swing.JFrame {
         initComponents();
         
         jlUsername.setText(username);
+        isOfflineMode = jmcbOfflineOn.isSelected();
     }
 
     /**
@@ -220,6 +225,13 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jmiAddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAddBookActionPerformed
         
+        System.out.println("tamo no modo ofF?" + isOfflineMode);
+        
+        if (isOfflineMode) {
+            JOptionPane.showMessageDialog(this, "Erro, não se pode adicionar livro no modo offline!", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         addBook = new AddBookForm();             
         
         addBook.setVisible(true);
@@ -227,7 +239,13 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiAddBookActionPerformed
 
     private void jmiAddArticleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAddArticleActionPerformed
-               
+        
+        System.out.println("tamo no modo ofF?" + isOfflineMode);
+        if (isOfflineMode) {
+            JOptionPane.showMessageDialog(this, "Erro, não se pode adicionar publicação no modo offline!", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         addArticle = new AddArticleForm();
         
         addArticle.setVisible(true);
@@ -286,10 +304,12 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jmcbOfflineOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmcbOfflineOnActionPerformed
         jmcbOfflineOff.setSelected(false);
+        isOfflineMode = true;
     }//GEN-LAST:event_jmcbOfflineOnActionPerformed
 
     private void jmcbOfflineOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmcbOfflineOffActionPerformed
         jmcbOfflineOn.setSelected(false);
+        isOfflineMode = false;
     }//GEN-LAST:event_jmcbOfflineOffActionPerformed
 
     /*
