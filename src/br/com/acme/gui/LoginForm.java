@@ -22,6 +22,12 @@ public class LoginForm extends javax.swing.JDialog {
     public LoginForm() {
         initComponents();
     }
+    
+    
+    public void restart() {
+        mainWindow.dispose();
+        this.setVisible(true);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -146,7 +152,7 @@ public class LoginForm extends javax.swing.JDialog {
 
         Session.startSession(loggedUser);
         
-        mainWindow = new MainWindow(jtfLogin.getText());
+        mainWindow = new MainWindow(jtfLogin.getText(), this);
         mainWindow.setVisible(true);
         
         this.setVisible(false);
