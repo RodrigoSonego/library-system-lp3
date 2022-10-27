@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package br.com.acme.gui;
+
+import br.com.acme.model.logic.LogController;
+
 /**
  *
  * @author USER
@@ -22,6 +25,8 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow(String username, LoginForm previousWindow) {
         this.previousWindow = previousWindow;
         initComponents();
+        
+        jlUsername.setText(username);
     }
 
     /**
@@ -35,6 +40,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         jfcFileChooser = new javax.swing.JFileChooser();
         jButtonLogout = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jlUsername = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jmAdd = new javax.swing.JMenu();
@@ -62,6 +69,10 @@ public class MainWindow extends javax.swing.JFrame {
                 jButtonLogoutActionPerformed(evt);
             }
         });
+
+        jLabel1.setText("Logado como:");
+
+        jlUsername.setText("userzao");
 
         jMenu2.setText("Publications");
 
@@ -161,13 +172,21 @@ public class MainWindow extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(563, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlUsername)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 434, Short.MAX_VALUE)
                 .addComponent(jButtonLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jButtonLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(jlUsername)))
                 .addGap(0, 315, Short.MAX_VALUE))
         );
 
@@ -222,10 +241,16 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jmcbOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmcbOnActionPerformed
         jmcbOff.setSelected(false);
+        jmcbOn.setSelected(true);
+        
+        LogController.setLogStatus(true);
     }//GEN-LAST:event_jmcbOnActionPerformed
 
     private void jmcbOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmcbOffActionPerformed
         jmcbOn.setSelected(false);
+        jmcbOff.setSelected(true);
+        
+        LogController.setLogStatus(false);
     }//GEN-LAST:event_jmcbOffActionPerformed
 
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
@@ -245,10 +270,12 @@ public class MainWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLogout;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JFileChooser jfcFileChooser;
+    private javax.swing.JLabel jlUsername;
     private javax.swing.JMenu jmAdd;
     private javax.swing.JMenu jmList;
     private javax.swing.JMenu jmLog;
