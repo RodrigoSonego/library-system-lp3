@@ -17,8 +17,11 @@ public class MainWindow extends javax.swing.JFrame {
     private ListArticlesForm listArticles;
     private ListBooksForm listBooks;     
     
-    public MainWindow(String username) {
-        initComponents();       
+    private LoginForm previousWindow;
+    
+    public MainWindow(String username, LoginForm previousWindow) {
+        this.previousWindow = previousWindow;
+        initComponents();
     }
 
     /**
@@ -31,8 +34,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         jfcFileChooser = new javax.swing.JFileChooser();
-        jtbMenu = new javax.swing.JToolBar();
-        jbmbCreateAccount = new javax.swing.JButton();
+        jButtonLogout = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jmAdd = new javax.swing.JMenu();
@@ -52,19 +54,14 @@ public class MainWindow extends javax.swing.JFrame {
         setTitle("Academic Library Control System");
         setResizable(false);
 
-        jtbMenu.setRollover(true);
-
-        jbmbCreateAccount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/acme/gui/icons/user_add.png"))); // NOI18N
-        jbmbCreateAccount.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jbmbCreateAccount.setFocusable(false);
-        jbmbCreateAccount.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jbmbCreateAccount.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jbmbCreateAccount.addActionListener(new java.awt.event.ActionListener() {
+        jButtonLogout.setText("Logout");
+        jButtonLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonLogout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbmbCreateAccountActionPerformed(evt);
+                jButtonLogoutActionPerformed(evt);
             }
         });
-        jtbMenu.add(jbmbCreateAccount);
 
         jMenu2.setText("Publications");
 
@@ -163,13 +160,15 @@ public class MainWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jtbMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(563, Short.MAX_VALUE)
+                .addComponent(jButtonLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jtbMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 311, Short.MAX_VALUE))
+                .addComponent(jButtonLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 315, Short.MAX_VALUE))
         );
 
         pack();
@@ -221,10 +220,6 @@ public class MainWindow extends javax.swing.JFrame {
        listAccounts.setVisible(true);
     }//GEN-LAST:event_jmiListAccountsActionPerformed
 
-    private void jbmbCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbmbCreateAccountActionPerformed
-        jmiCreateActionPerformed(evt);
-    }//GEN-LAST:event_jbmbCreateAccountActionPerformed
-
     private void jmcbOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmcbOnActionPerformed
         jmcbOff.setSelected(false);
     }//GEN-LAST:event_jmcbOnActionPerformed
@@ -232,6 +227,13 @@ public class MainWindow extends javax.swing.JFrame {
     private void jmcbOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmcbOffActionPerformed
         jmcbOn.setSelected(false);
     }//GEN-LAST:event_jmcbOffActionPerformed
+
+    private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
+        
+        previousWindow.restart();
+        
+        
+    }//GEN-LAST:event_jButtonLogoutActionPerformed
 
     /*
     private void restrictFileChooser(){
@@ -242,10 +244,10 @@ public class MainWindow extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonLogout;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JButton jbmbCreateAccount;
     private javax.swing.JFileChooser jfcFileChooser;
     private javax.swing.JMenu jmAdd;
     private javax.swing.JMenu jmList;
@@ -258,6 +260,5 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiListAccounts;
     private javax.swing.JMenuItem jmiListArticles;
     private javax.swing.JMenuItem jmiListBook;
-    private javax.swing.JToolBar jtbMenu;
     // End of variables declaration//GEN-END:variables
 }
