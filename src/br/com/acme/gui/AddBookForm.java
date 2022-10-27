@@ -9,6 +9,8 @@ import br.com.acme.connection.BookDatabaseConnector;
 import java.awt.Component;
 import br.com.acme.model.Book;
 import br.com.acme.model.Session;
+import br.com.acme.model.logic.LogController;
+
 import javax.swing.*;
 
 /**
@@ -186,6 +188,10 @@ public class AddBookForm extends javax.swing.JDialog {
                 return;
             }
             
+            if (LogController.getLogStatus()) {
+                LogController.writeLog("Book added: " + tempBook.getTitle());
+            }
+
             JOptionPane.showMessageDialog(this, "Your book was successfully added!", "Succes!", JOptionPane.INFORMATION_MESSAGE);           
             clearFields();
         } catch (NumberFormatException ex) {

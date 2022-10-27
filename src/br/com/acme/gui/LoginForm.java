@@ -8,6 +8,8 @@ package br.com.acme.gui;
 import br.com.acme.connection.UserDataBaseConnector;
 import br.com.acme.model.Session;
 import br.com.acme.model.User;
+import br.com.acme.model.logic.LogController;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -145,6 +147,8 @@ public class LoginForm extends javax.swing.JDialog {
         }
 
         Session.startSession(loggedUser);
+        
+        LogController.writeLog("Logged into the system: " + jtfLogin.getText());
         
         mainWindow = new MainWindow(jtfLogin.getText());
         mainWindow.setVisible(true);

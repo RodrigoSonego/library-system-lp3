@@ -11,7 +11,7 @@ public class DataBaseConnection {
     
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/library_system";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "root";
+    private static final String PASSWORD = "";
 
     public static Connection getConnection(){
         try {

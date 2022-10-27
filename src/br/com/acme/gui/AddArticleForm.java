@@ -8,6 +8,8 @@ package br.com.acme.gui;
 import br.com.acme.connection.ArticleDatabaseConnector;
 import br.com.acme.model.Article;
 import br.com.acme.model.Session;
+import br.com.acme.model.logic.LogController;
+
 import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -205,6 +207,10 @@ public class AddArticleForm extends javax.swing.JDialog {
         if(successful == false) {
             JOptionPane.showMessageDialog(this, "Error on article insertion", "Error", JOptionPane.ERROR_MESSAGE);
             return;
+        }
+
+        if (LogController.getLogStatus()) {
+            LogController.writeLog("Article added: " + article.getTitle());
         }
 
         JOptionPane.showMessageDialog(this, "Article added successfully!", "Success!", JOptionPane.INFORMATION_MESSAGE);
