@@ -1,11 +1,11 @@
 X - opcao de sair
-	- serializa xml do cache do login
 X - list books / articles mostra vazio
-- tirar os lixo la de cima, menos o log ( deixa log on default )
-	- trocar o nome de help p algo
+X - tirar os lixo la de cima, menos o log ( deixa log on default )
 	- modo offline
-		- abre no modo offline
-- log com o rodrigo
-- cache das pesquisas utilizado no modo offline
-
+	X - toggle
+		- salva as conta, log on off e as publication/book
+	- se tentar adicionar uma pub / book no modo off, nao deixa
+X - log com o rodrigo
+	- falta desativar o log quando marca off log
+	- loga a desativação do log
 

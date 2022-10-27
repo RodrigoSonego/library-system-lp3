@@ -56,6 +56,9 @@ public class MainWindow extends javax.swing.JFrame {
         jmLog = new javax.swing.JMenu();
         jmcbOn = new javax.swing.JCheckBoxMenuItem();
         jmcbOff = new javax.swing.JCheckBoxMenuItem();
+        jmOffline = new javax.swing.JMenu();
+        jmcbOfflineOn = new javax.swing.JCheckBoxMenuItem();
+        jmcbOfflineOff = new javax.swing.JCheckBoxMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Academic Library Control System");
@@ -165,6 +168,27 @@ public class MainWindow extends javax.swing.JFrame {
 
         jMenuBar1.add(jmLog);
 
+        jmOffline.setText("Offline Mode");
+
+        jmcbOfflineOn.setText("On");
+        jmcbOfflineOn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmcbOfflineOnActionPerformed(evt);
+            }
+        });
+        jmOffline.add(jmcbOfflineOn);
+
+        jmcbOfflineOff.setSelected(true);
+        jmcbOfflineOff.setText("Off");
+        jmcbOfflineOff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmcbOfflineOffActionPerformed(evt);
+            }
+        });
+        jmOffline.add(jmcbOfflineOff);
+
+        jMenuBar1.add(jmOffline);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -260,6 +284,14 @@ public class MainWindow extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
+    private void jmcbOfflineOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmcbOfflineOnActionPerformed
+        jmcbOfflineOff.setSelected(false);
+    }//GEN-LAST:event_jmcbOfflineOnActionPerformed
+
+    private void jmcbOfflineOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmcbOfflineOffActionPerformed
+        jmcbOfflineOn.setSelected(false);
+    }//GEN-LAST:event_jmcbOfflineOffActionPerformed
+
     /*
     private void restrictFileChooser(){
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Academic Library files", "al");
@@ -279,7 +311,10 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu jmAdd;
     private javax.swing.JMenu jmList;
     private javax.swing.JMenu jmLog;
+    private javax.swing.JMenu jmOffline;
     private javax.swing.JCheckBoxMenuItem jmcbOff;
+    private javax.swing.JCheckBoxMenuItem jmcbOfflineOff;
+    private javax.swing.JCheckBoxMenuItem jmcbOfflineOn;
     private javax.swing.JCheckBoxMenuItem jmcbOn;
     private javax.swing.JMenuItem jmiAddArticle;
     private javax.swing.JMenuItem jmiAddBook;
