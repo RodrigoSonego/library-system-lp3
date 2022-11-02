@@ -23,7 +23,7 @@ public class LogController {
     }
     
     public static void writeLog(String message){
-        File log = new File("alcs.log");
+        File log = new File("library.log");
         StringBuilder finalMessage = new StringBuilder();
         finalMessage.append("[").append(new Date().toString()).append("] ").append(message).append("\n");
         try{
