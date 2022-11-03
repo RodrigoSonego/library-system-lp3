@@ -63,7 +63,6 @@ public class MainWindow extends javax.swing.JFrame {
         jmcbOff = new javax.swing.JCheckBoxMenuItem();
         jmOffline = new javax.swing.JMenu();
         jmcbOfflineOn = new javax.swing.JCheckBoxMenuItem();
-        jmcbOfflineOff = new javax.swing.JCheckBoxMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Academic Library Control System");
@@ -173,24 +172,15 @@ public class MainWindow extends javax.swing.JFrame {
 
         jMenuBar1.add(jmLog);
 
-        jmOffline.setText("Offline Mode");
+        jmOffline.setText("Online Mode");
 
-        jmcbOfflineOn.setText("On");
+        jmcbOfflineOn.setText("Offline Mode");
         jmcbOfflineOn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmcbOfflineOnActionPerformed(evt);
             }
         });
         jmOffline.add(jmcbOfflineOn);
-
-        jmcbOfflineOff.setSelected(true);
-        jmcbOfflineOff.setText("Off");
-        jmcbOfflineOff.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmcbOfflineOffActionPerformed(evt);
-            }
-        });
-        jmOffline.add(jmcbOfflineOff);
 
         jMenuBar1.add(jmOffline);
 
@@ -270,6 +260,11 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jmiCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCreateActionPerformed
         
+        if (isOfflineMode) {
+            JOptionPane.showMessageDialog(this, "Erro, não se pode criar conta no modo offline!", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         createAccount = new CreateAccountForm();
         
         createAccount.setVisible(true);
@@ -304,14 +299,15 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
     private void jmcbOfflineOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmcbOfflineOnActionPerformed
-        jmcbOfflineOff.setSelected(false);
-        isOfflineMode = true;
-    }//GEN-LAST:event_jmcbOfflineOnActionPerformed
 
-    private void jmcbOfflineOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmcbOfflineOffActionPerformed
-        jmcbOfflineOn.setSelected(false);
-        isOfflineMode = false;
-    }//GEN-LAST:event_jmcbOfflineOffActionPerformed
+        isOfflineMode = !isOfflineMode;
+        if (isOfflineMode) {
+            jmOffline.setText("Offline Mode");
+        } else {
+            jmOffline.setText("Online Mode");
+        }
+        
+    }//GEN-LAST:event_jmcbOfflineOnActionPerformed
 
     /*
     private void restrictFileChooser(){
@@ -334,7 +330,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu jmLog;
     private javax.swing.JMenu jmOffline;
     private javax.swing.JCheckBoxMenuItem jmcbOff;
-    private javax.swing.JCheckBoxMenuItem jmcbOfflineOff;
     private javax.swing.JCheckBoxMenuItem jmcbOfflineOn;
     private javax.swing.JCheckBoxMenuItem jmcbOn;
     private javax.swing.JMenuItem jmiAddArticle;

@@ -126,24 +126,15 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jmOffline">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Offline Mode"/>
+            <Property name="text" type="java.lang.String" value="Online Mode"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jmcbOfflineOn">
               <Properties>
-                <Property name="text" type="java.lang.String" value="On"/>
+                <Property name="text" type="java.lang.String" value="Offline Mode"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmcbOfflineOnActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jmcbOfflineOff">
-              <Properties>
-                <Property name="selected" type="boolean" value="true"/>
-                <Property name="text" type="java.lang.String" value="Off"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmcbOfflineOffActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
