@@ -2,6 +2,7 @@ package br.com.acme.gui;
 
 import br.com.acme.connection.ArticleDatabaseConnector;
 import br.com.acme.model.Article;
+import br.edu.unijui.xml.XMLCache;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -29,6 +30,9 @@ public class ListArticlesForm extends javax.swing.JDialog {
         initComponents();
 
         populateTable(articles);
+        
+        XMLCache.instance.setArticles(articles);
+        XMLCache.instance.serialize();
     }
 
     private void populateTable(List<Article> articles) {

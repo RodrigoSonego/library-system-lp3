@@ -111,8 +111,6 @@ public class ManipuladorXML {
             File file = new File(filename);
             Result result = new StreamResult(file);
 
-            System.out.println(result.toString());
-
             Transformer xformer = TransformerFactory.newInstance().newTransformer();
             xformer.setOutputProperty(OutputKeys.INDENT, "yes");
             xformer.transform(source, result);
