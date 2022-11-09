@@ -3,15 +3,16 @@ package br.edu.unijui.xml;
 import br.com.acme.model.Article;
 import br.com.acme.model.Book;
 import br.com.acme.model.User;
+import br.com.acme.model.logic.LogController;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import org.graalvm.compiler.core.common.Fields;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
 
 public class XMLCache {
     
@@ -23,6 +24,7 @@ public class XMLCache {
     private XMLCache() {
         data = new AcademicLibraryData();
     }
+
     
     public void serialize() {
         try {
@@ -30,15 +32,14 @@ public class XMLCache {
             Element root = doc.createElement("AcademicLibrary");
             doc.appendChild(root);
             
-            appendOfflineMode(root).appendArticles(root);
-                                    
-            ManipuladorXML.writeXmlFile(doc, "./cache.xml");
-            
+            appendOfflineMode(root);
+            appendArticles(root);
+            appendBooks(root);
+
+            ManipuladorXML.writeXmlFile(doc, "./cache.xml");            
         } catch (Exception ex) {
             Logger.getLogger(XMLCache.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
     }
     
     public AcademicLibraryData deserialize() {
@@ -62,6 +63,7 @@ public class XMLCache {
     public void setUsers(ArrayList<User> users) {
         data.users = users;
     }
+
     
     private XMLCache appendOfflineMode(Element root) {
         Element offlineModeElement = doc.createElement("OfflineMode");
@@ -71,33 +73,48 @@ public class XMLCache {
         return instance;
     }
     
-    private XMLCache appendArticles(Element root) throws IllegalArgumentException, IllegalAccessException {
-        Element articlesElement = doc.createElement("Articles");
-        Field[] fields = Article.class.getDeclaredFields();
-        Field[] baseFields = Article.class.getSuperclass().getDeclaredFields();
+    private void appendAny(Element root, List toAppend, Class classOfObjectToAppend) {
+        if (toAppend == null) return;
+        
+        Field[] fields = classOfObjectToAppend.getDeclaredFields();
+        Field[] baseFields = classOfObjectToAppend.getSuperclass().getDeclaredFields();
         
         Field[] allFields = new Field[fields.length + baseFields.length];
         System.arraycopy(fields, 0, allFields, 0, fields.length);
         System.arraycopy(baseFields, 0, allFields, fields.length, baseFields.length);
         
-        for (Article article : data.articles) {
-            Element articleElement = doc.createElement("Article");
+        String className = classOfObjectToAppend.getSimpleName();
+        Element articlesElement = doc.createElement("List");
+        articlesElement.setAttribute("type", className);
+        
+        for (Object objToAppend : toAppend) {
+            Element articleElement = doc.createElement(className);
             
             for (Field field : allFields) {
-                field.setAccessible(true); // lmao
-                Object obj = field.get(article);
-                articleElement.setAttribute(field.getName(), String.valueOf(obj));
+                field.setAccessible(true);
+                try {
+                    Object obj = field.get(objToAppend);
+                    articleElement.setAttribute(field.getName(), String.valueOf(obj));
+                } catch (Exception any) {
+                    LogController.writeLog(String.format("Exception in {0}", (Object)any.getStackTrace()));
+                }
             }
-            
-            
             
             articlesElement.appendChild(articleElement);
         }
  
         root.appendChild(articlesElement);
-        
-        return instance;
     }
+    
+    private void appendArticles(Element root) {
+        appendAny(root, data.articles, Article.class);
+    }
+    
+    private void appendBooks(Element root) {
+        appendAny(root, data.books, Book.class);
+    }
+
+
     
     class AcademicLibraryData {
         public boolean isOfflineMode;

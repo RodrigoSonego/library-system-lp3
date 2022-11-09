@@ -2,6 +2,7 @@ package br.com.acme.gui;
 
 import br.com.acme.connection.BookDatabaseConnector;
 import br.com.acme.model.Book;
+import br.edu.unijui.xml.XMLCache;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -28,6 +29,9 @@ public class ListBooksForm extends javax.swing.JDialog {
         initComponents();
 
         populateTable(books);
+        
+        XMLCache.instance.setBooks(books);
+        XMLCache.instance.serialize();
     }
 
     private void populateTable(List<Book> books) {
