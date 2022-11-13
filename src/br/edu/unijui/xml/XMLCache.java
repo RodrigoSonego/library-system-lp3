@@ -1,5 +1,6 @@
 package br.edu.unijui.xml;
 
+import br.com.acme.model.AcademicLibraryData;
 import br.com.acme.model.Article;
 import br.com.acme.model.Book;
 import br.com.acme.model.User;
@@ -217,24 +218,5 @@ public class XMLCache {
         boolean isOfflineModeOn = Boolean.parseBoolean(offlineModeNode.getTextContent());
         
         return isOfflineModeOn;
-    }
-
-    class AcademicLibraryData implements Cloneable {
-
-        public boolean isOfflineMode;
-        public ArrayList<Article> articles;
-        public ArrayList<Book> books;
-        public ArrayList<User> users;
-
-        public AcademicLibraryData copy() {
-            try {
-                return (AcademicLibraryData)this.clone();
-                
-            } catch (CloneNotSupportedException ex) {
-                Logger.getLogger(XMLCache.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            return null;
-        }
     }
 }
