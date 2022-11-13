@@ -3,13 +3,13 @@ X - list books / articles mostra vazio
 X - tirar os lixo la de cima, menos o log ( deixa log on default )
 	- modo offline
 	        X - toggle
-		- ler XML quando loga
+		X ler XML quando loga
 		X - fazer serializador generico
 	X - se tentar adicionar uma pub / book no modo off, nao deixa
 X - log com o rodrigo
 	X - falta desativar o log quando marca off log
 	X - loga a desativação do l
 
-- quando loga le o cache e ve se ta no modo offline pra atualizar na checkbox la
+X quando loga le o cache e ve se ta no modo offline pra atualizar na checkbox la
 	- pega do cache e popula tabela
-- chamar o setOfflineMode do cache
+X chamar o setOfflineMode do cache

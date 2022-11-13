@@ -8,6 +8,7 @@ package br.com.acme.gui;
 import javax.swing.JOptionPane;
 
 import br.com.acme.model.logic.LogController;
+import br.edu.unijui.xml.XMLCache;
 
 /**
  *
@@ -16,22 +17,27 @@ import br.com.acme.model.logic.LogController;
 public class MainWindow extends javax.swing.JFrame {
 
     public boolean isOfflineMode = false;
-    
+
     private AddBookForm addBook;
     private AddArticleForm addArticle;
     private CreateAccountForm createAccount;
     private ListAccountsForm listAccounts;
     private ListArticlesForm listArticles;
-    private ListBooksForm listBooks;     
-    
+    private ListBooksForm listBooks;
+
     private LoginForm previousWindow;
-    
+
     public MainWindow(String username, LoginForm previousWindow) {
         this.previousWindow = previousWindow;
         initComponents();
-        
+
         jlUsername.setText(username);
-        isOfflineMode = jmcbOfflineOn.isSelected();
+
+        XMLCache.instance.deserialize();
+
+        isOfflineMode = XMLCache.instance.getCachedData().isOfflineMode;
+        jmcbOfflineOn.setSelected(isOfflineMode);
+        updateOfflineModeLabel();
     }
 
     /**
@@ -214,108 +220,116 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmiAddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAddBookActionPerformed
-        
+
         System.out.println("tamo no modo ofF?" + isOfflineMode);
-        
+
         if (isOfflineMode) {
             JOptionPane.showMessageDialog(this, "Erro, não se pode adicionar livro no modo offline!", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        addBook = new AddBookForm();             
-        
+
+        addBook = new AddBookForm();
+
         addBook.setVisible(true);
-        
+
     }//GEN-LAST:event_jmiAddBookActionPerformed
 
     private void jmiAddArticleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAddArticleActionPerformed
-        
+
         System.out.println("tamo no modo ofF?" + isOfflineMode);
         if (isOfflineMode) {
             JOptionPane.showMessageDialog(this, "Erro, não se pode adicionar publicação no modo offline!", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         addArticle = new AddArticleForm();
-        
+
         addArticle.setVisible(true);
-        
+
     }//GEN-LAST:event_jmiAddArticleActionPerformed
 
     private void jmiListBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListBookActionPerformed
 
         listBooks = new ListBooksForm();
-        if (listBooks.hasError) listBooks.dispose();
-        else listBooks.setVisible(true);
-        
+        if (listBooks.hasError) {
+            listBooks.dispose();
+        } else {
+            listBooks.setVisible(true);
+        }
+
     }//GEN-LAST:event_jmiListBookActionPerformed
 
     private void jmiListArticlesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListArticlesActionPerformed
 
         listArticles = new ListArticlesForm();
-        if (listArticles.hasError) listArticles.dispose();
-        else listArticles.setVisible(true);
-        
+        if (listArticles.hasError) {
+            listArticles.dispose();
+        } else {
+            listArticles.setVisible(true);
+        }
+
     }//GEN-LAST:event_jmiListArticlesActionPerformed
 
     private void jmiCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCreateActionPerformed
-        
+
         if (isOfflineMode) {
             JOptionPane.showMessageDialog(this, "Erro, não se pode criar conta no modo offline!", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         createAccount = new CreateAccountForm();
-        
+
         createAccount.setVisible(true);
-        
+
     }//GEN-LAST:event_jmiCreateActionPerformed
 
     private void jmiListAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListAccountsActionPerformed
-       listAccounts = new ListAccountsForm(this, true);
-       listAccounts.setVisible(true);
+        if (isOfflineMode) {
+            JOptionPane.showMessageDialog(this, "Erro, não se pode ver usuários no modo offline!", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        listAccounts = new ListAccountsForm(this, true);
+        listAccounts.setVisible(true);
     }//GEN-LAST:event_jmiListAccountsActionPerformed
 
     private void jmcbOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmcbOnActionPerformed
         jmcbOff.setSelected(false);
         jmcbOn.setSelected(true);
-        
+
         LogController.setLogStatus(true);
     }//GEN-LAST:event_jmcbOnActionPerformed
 
     private void jmcbOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmcbOffActionPerformed
         jmcbOn.setSelected(false);
         jmcbOff.setSelected(true);
-        
+
         LogController.setLogStatus(false);
         LogController.writeLog("Log has been toggled off.");
     }//GEN-LAST:event_jmcbOffActionPerformed
 
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
-        
+
         previousWindow.restart();
-        
-        
+
+
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
     private void jmcbOfflineOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmcbOfflineOnActionPerformed
-
         isOfflineMode = !isOfflineMode;
+        updateOfflineModeLabel();
+        
+        XMLCache.instance.setOfflineMode(isOfflineMode);
+        XMLCache.instance.serialize();
+    }//GEN-LAST:event_jmcbOfflineOnActionPerformed
+
+    private void updateOfflineModeLabel() {
         if (isOfflineMode) {
             jmOffline.setText("Offline Mode");
         } else {
             jmOffline.setText("Online Mode");
         }
-        
-    }//GEN-LAST:event_jmcbOfflineOnActionPerformed
-
-    /*
-    private void restrictFileChooser(){
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Academic Library files", "al");
-        jfcFileChooser.setFileFilter(filter);
     }
-    */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLogout;
