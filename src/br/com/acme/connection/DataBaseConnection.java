@@ -5,25 +5,37 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.ArrayList;
 
 public class DataBaseConnection {
     
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/library_system";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "root";
 
-    public static Connection getConnection(){
+     private static final ArrayList<String> passwords = new ArrayList() {{
+        add("");
+        add("root");
+        add("admin");
+        add("sa");
+    }};
+    
+    public static Connection getConnection() {
+        return getConnection(0);
+    }
+    
+    private static Connection getConnection(int tryIndex) {
+        if (tryIndex > passwords.size() - 1) return null;
+
         try {
-            //estabelece a conexão com o banco de dados
-            Connection connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
+            String passwordToTry = passwords.get(tryIndex);
+            Connection connection = DriverManager.getConnection(DATABASE_URL, USERNAME, passwordToTry);
             return connection;
-            
+
         } catch (SQLException ex) {
-            System.out.println("Erro ao conectar o Banco de Dados. " + ex.getMessage());
+            System.out.println("Trying connection index " + tryIndex + " failed, trying next");
+            
+            return getConnection(tryIndex + 1);
         }
-        
-        return null;
     }
 
     public static void closeConnection(Connection conection) {
