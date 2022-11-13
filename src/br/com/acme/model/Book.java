@@ -31,6 +31,8 @@ public class Book extends Publication implements Serializable{
         this.isbn = isbn;
         this.pages = pages;
     } 
+    
+    public Book() {}
 
     public int getIdBook() {
         return idBook;

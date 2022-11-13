@@ -12,6 +12,8 @@ public abstract class Publication implements Serializable{
         this.title = title;
         this.year = year;
     }
+    
+    public Publication () {}
 
     public String getTitle() {
         return title;
