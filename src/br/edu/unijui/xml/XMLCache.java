@@ -49,17 +49,21 @@ public class XMLCache {
         }
     }
 
-    public AcademicLibraryData deserialize() {
+    public void deserialize() {
 
         Document doc = loadXMLCache();
 
         ArrayList<Book> books = loadListFromCache(doc, Book.class);
         ArrayList<Article> articles = loadListFromCache(doc, Article.class);
+        boolean isOfflineModeOn = loadOfflineModeFromCache(doc);
         
-        
-
-        return null;
-
+        data.books = books;
+        data.articles = articles;
+        data.isOfflineMode = isOfflineModeOn;
+    }
+    
+    public AcademicLibraryData getCachedData() {
+        return data.copy();
     }
 
     public void setOfflineMode(boolean isOfflineMode) {
@@ -204,8 +208,18 @@ public class XMLCache {
 
         return input;
     }
+    
+    private boolean loadOfflineModeFromCache(Document doc) {
+        NodeList elementsByTagName = doc.getElementsByTagName("OfflineMode");
+        
+        Node offlineModeNode = elementsByTagName.item(0);
+        
+        boolean isOfflineModeOn = Boolean.parseBoolean(offlineModeNode.getTextContent());
+        
+        return isOfflineModeOn;
+    }
 
-    class AcademicLibraryData {
+    class AcademicLibraryData implements Cloneable {
 
         public boolean isOfflineMode;
         public ArrayList<Article> articles;
@@ -213,9 +227,14 @@ public class XMLCache {
         public ArrayList<User> users;
 
         public AcademicLibraryData copy() {
-
+            try {
+                return (AcademicLibraryData)this.clone();
+                
+            } catch (CloneNotSupportedException ex) {
+                Logger.getLogger(XMLCache.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             return null;
-
         }
     }
 }

@@ -35,6 +35,7 @@ public class Article extends Publication {
         setAuthor(author);
     }
 
+    public Article() {}
   
 
     public int getIdArticle() {
