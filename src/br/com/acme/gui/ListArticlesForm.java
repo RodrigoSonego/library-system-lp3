@@ -11,32 +11,40 @@ import javax.swing.table.TableModel;
 public class ListArticlesForm extends javax.swing.JDialog {
 
     public boolean hasError = false;
-    
-    public ListArticlesForm() {
-        
-        ArrayList<Article> articles = ArticleDatabaseConnector.getAllArticlesFromUser();
 
-        if(articles == null) {
+    public ListArticlesForm() {
+
+        ArrayList<Article> articles;
+
+        boolean isOnOfflineMode = XMLCache.instance.getCachedData().isOfflineMode;
+
+        if (isOnOfflineMode) {
+            articles = XMLCache.instance.getCachedData().articles;
+        } else {
+            articles = ArticleDatabaseConnector.getAllArticlesFromUser();
+        }
+
+        if (articles == null) {
             JOptionPane.showMessageDialog(this, "Erro ao conectar ao banco de dados", "Erro", JOptionPane.ERROR_MESSAGE);
             hasError = true;
             return;
         }
-        if(articles.size() == 0) {
+        if (articles.size() == 0) {
             JOptionPane.showMessageDialog(this, "Você não possui artigos registrados", "Erro", JOptionPane.INFORMATION_MESSAGE);
             hasError = true;
             return;
         }
-        
+
         initComponents();
 
         populateTable(articles);
-        
+
         XMLCache.instance.setArticles(articles);
         XMLCache.instance.serialize();
     }
 
     private void populateTable(List<Article> articles) {
-        
+
         jlTotal.setText(String.valueOf(articles.size()));
 
         TableModel model = jtArticleList.getModel();

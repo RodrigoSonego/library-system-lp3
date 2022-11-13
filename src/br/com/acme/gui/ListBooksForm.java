@@ -12,30 +12,39 @@ import javax.swing.table.TableModel;
 public class ListBooksForm extends javax.swing.JDialog {
 
     public boolean hasError = false;
-    
+
     public ListBooksForm() {
-        ArrayList<Book> books = BookDatabaseConnector.getAllBooksFromUser();
-        if(books == null) {
+        ArrayList<Book> books;
+
+        boolean isOnOfflineMode = XMLCache.instance.getCachedData().isOfflineMode;
+
+        if (isOnOfflineMode) {
+            books = XMLCache.instance.getCachedData().books;
+        } else {
+            books = BookDatabaseConnector.getAllBooksFromUser();
+        }
+
+        if (books == null) {
             JOptionPane.showMessageDialog(this, "Erro ao conectar ao banco de dados", "Erro", JOptionPane.ERROR_MESSAGE);
             hasError = true;
             return;
         }
-        if(books.size() == 0) {
+        if (books.size() == 0) {
             JOptionPane.showMessageDialog(this, "Você não possui livros registrados", "Erro", JOptionPane.INFORMATION_MESSAGE);
             hasError = true;
             return;
         }
-        
+
         initComponents();
 
         populateTable(books);
-        
+
         XMLCache.instance.setBooks(books);
         XMLCache.instance.serialize();
     }
 
     private void populateTable(List<Book> books) {
-                
+
         jlTotal.setText(Integer.toString(books.size()));
 
         TableModel model = jtBookList.getModel();
