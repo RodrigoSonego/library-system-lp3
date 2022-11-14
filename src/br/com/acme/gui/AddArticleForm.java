@@ -223,7 +223,7 @@ public class AddArticleForm extends javax.swing.JDialog {
     private boolean hasEmptyField() {
         for (Component c : getRootPane().getContentPane().getComponents()) {
             if (c instanceof JTextField) {
-                if (((JTextField) c).getText().equals("")) {
+                if (((JTextField) c).getText().trim().equals("")) {
                     return true;
                 }
             }

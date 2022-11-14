@@ -174,6 +174,11 @@ public class AddBookForm extends javax.swing.JDialog {
 
     private void jbOKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbOKMouseClicked
         
+        if (hasEmptyField()) {
+            JOptionPane.showMessageDialog(this, "One or more empty fields", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }        
+        
         try {
             Book tempBook = new Book(jtfTitle.getText(), Short.parseShort(jtfYear.getText()),
                     jtfLanguage.getText(), jtfIsbn.getText(), Short.parseShort(jtfPages.getText()), jtfAuthor.getText());
@@ -228,6 +233,17 @@ public class AddBookForm extends javax.swing.JDialog {
                 ((JTextField) c).setText("");
             }
         }
+    }
+    
+    private boolean hasEmptyField() {
+        for (Component c : getRootPane().getContentPane().getComponents()) {
+            if (c instanceof JTextField) {
+                if (((JTextField) c).getText().trim().equals("")) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 
