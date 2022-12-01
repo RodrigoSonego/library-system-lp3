@@ -13,3 +13,5 @@ X - log com o rodrigo
 X - quando loga le o cache e ve se ta no modo offline pra atualizar na checkbox la
 	X - pega do cache e popula tabela
 X - chamar o setOfflineMode do cache
+X - O arquivo cache.xml não ta sendo criado
+
