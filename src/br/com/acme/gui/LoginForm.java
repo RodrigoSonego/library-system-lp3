@@ -9,8 +9,10 @@ import br.com.acme.connection.UserDataBaseConnector;
 import br.com.acme.model.Session;
 import br.com.acme.model.User;
 import br.com.acme.model.logic.LogController;
+import java.awt.Component;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -29,6 +31,9 @@ public class LoginForm extends javax.swing.JDialog {
     public void restart() {
         mainWindow.dispose();
         this.setVisible(true);
+        for (Component component : getRootPane().getContentPane().getComponents())
+            if (component instanceof JTextField)
+                ((JTextField) component).setText("");
     }
 
     /**
