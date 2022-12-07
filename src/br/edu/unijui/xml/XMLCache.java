@@ -5,6 +5,7 @@ import br.com.acme.model.Article;
 import br.com.acme.model.Book;
 import br.com.acme.model.User;
 import br.com.acme.model.logic.LogController;
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -29,6 +30,8 @@ public class XMLCache {
 
     private AcademicLibraryData data;
     private Document doc;
+    
+    static final String CACHE_FILE_PATH = "./cache.xml";
 
     private XMLCache() {
         data = new AcademicLibraryData();
@@ -52,7 +55,8 @@ public class XMLCache {
 
     public void deserialize() {
 
-        Document doc = loadXMLCache();
+        Document doc = loadXMLCacheOrNull();
+        if (doc == null) return;
 
         ArrayList<Book> books = loadListFromCache(doc, Book.class);
         ArrayList<Article> articles = loadListFromCache(doc, Article.class);
@@ -134,14 +138,16 @@ public class XMLCache {
         appendAny(root, data.books, Book.class);
     }
 
-    private Document loadXMLCache() {
+    private Document loadXMLCacheOrNull() {
         try {
 
             DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
             domFactory.setNamespaceAware(true);
             DocumentBuilder builder = domFactory.newDocumentBuilder();
-            return builder.parse("./cache.xml");
-
+            
+            File cacheFile = new File(CACHE_FILE_PATH);
+            return builder.parse(cacheFile);
+            
         } catch (IOException | SAXException | ParserConfigurationException ex) {
             System.out.println(ex);
             return null;
