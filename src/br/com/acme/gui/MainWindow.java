@@ -62,6 +62,7 @@ public class MainWindow extends javax.swing.JFrame {
         jmList = new javax.swing.JMenu();
         jmiListBook = new javax.swing.JMenuItem();
         jmiListArticles = new javax.swing.JMenuItem();
+        jmiListMagazines = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jmiCreate = new javax.swing.JMenuItem();
         jmiListAccounts = new javax.swing.JMenuItem();
@@ -140,6 +141,14 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         jmList.add(jmiListArticles);
+
+        jmiListMagazines.setText("Magazines");
+        jmiListMagazines.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiListMagazinesActionPerformed(evt);
+            }
+        });
+        jmList.add(jmiListMagazines);
 
         jMenu2.add(jmList);
 
@@ -339,6 +348,12 @@ public class MainWindow extends javax.swing.JFrame {
         addMagazine.setVisible(true);
     }//GEN-LAST:event_jmiMagazineActionPerformed
 
+    private void jmiListMagazinesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListMagazinesActionPerformed
+        ListMagazinesForm listMagazines = new ListMagazinesForm();
+        
+        listMagazines.setVisible(true);
+    }//GEN-LAST:event_jmiListMagazinesActionPerformed
+
     private void updateOfflineModeLabel() {
         if (isOfflineMode) {
             jmOffline.setText("Offline Mode");
@@ -368,6 +383,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiListAccounts;
     private javax.swing.JMenuItem jmiListArticles;
     private javax.swing.JMenuItem jmiListBook;
+    private javax.swing.JMenuItem jmiListMagazines;
     private javax.swing.JMenuItem jmiMagazine;
     // End of variables declaration//GEN-END:variables
 }
