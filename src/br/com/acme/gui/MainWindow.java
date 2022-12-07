@@ -58,6 +58,7 @@ public class MainWindow extends javax.swing.JFrame {
         jmAdd = new javax.swing.JMenu();
         jmiAddBook = new javax.swing.JMenuItem();
         jmiAddArticle = new javax.swing.JMenuItem();
+        jmiMagazine = new javax.swing.JMenuItem();
         jmList = new javax.swing.JMenu();
         jmiListBook = new javax.swing.JMenuItem();
         jmiListArticles = new javax.swing.JMenuItem();
@@ -109,6 +110,15 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         jmAdd.add(jmiAddArticle);
+
+        jmiMagazine.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jmiMagazine.setText("Magazine");
+        jmiMagazine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiMagazineActionPerformed(evt);
+            }
+        });
+        jmAdd.add(jmiMagazine);
 
         jMenu2.add(jmAdd);
 
@@ -323,6 +333,12 @@ public class MainWindow extends javax.swing.JFrame {
         XMLCache.instance.serialize();
     }//GEN-LAST:event_jmcbOfflineOnActionPerformed
 
+    private void jmiMagazineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiMagazineActionPerformed
+        AddMagazineForm addMagazine = new AddMagazineForm();
+        
+        addMagazine.setVisible(true);
+    }//GEN-LAST:event_jmiMagazineActionPerformed
+
     private void updateOfflineModeLabel() {
         if (isOfflineMode) {
             jmOffline.setText("Offline Mode");
@@ -352,5 +368,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiListAccounts;
     private javax.swing.JMenuItem jmiListArticles;
     private javax.swing.JMenuItem jmiListBook;
+    private javax.swing.JMenuItem jmiMagazine;
     // End of variables declaration//GEN-END:variables
 }

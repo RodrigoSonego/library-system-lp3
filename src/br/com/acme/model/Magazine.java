@@ -10,6 +10,7 @@ package br.com.acme.model;
  */
 public class Magazine extends Publication {
     private String issue;
+    private int userId;
 
     public Magazine(String title, short year, String author, String issue) {
         super(title, year);
@@ -23,6 +24,14 @@ public class Magazine extends Publication {
 
     public void setIssue(String issue) {
         this.issue = issue;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
     
 }
