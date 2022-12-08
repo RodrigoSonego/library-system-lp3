@@ -161,7 +161,7 @@ public class AddMagazineForm extends javax.swing.JDialog {
         
         try {
             Magazine tempMagazine = new Magazine(jtfTitle.getText(), Short.parseShort(jtfYear.getText()),
-                    jtfIssue.getText(), jtfIssue.getText());
+                    jtfAuthor.getText(), jtfIssue.getText());
 
             int userId = Session.getInstance().getLoggedUser().getIdUser();
             tempMagazine.setUserId(userId);
