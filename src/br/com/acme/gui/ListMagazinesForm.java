@@ -1,6 +1,7 @@
 package br.com.acme.gui;
 
 import br.com.acme.connection.ArticleDatabaseConnector;
+import br.com.acme.connection.MagazineDatabaseConnector;
 import br.com.acme.model.Article;
 import br.com.acme.model.Magazine;
 import br.edu.unijui.xml.XMLCache;
@@ -19,11 +20,11 @@ public class ListMagazinesForm extends javax.swing.JDialog {
 
         boolean isOnOfflineMode = XMLCache.instance.getCachedData().isOfflineMode;
 
-        //if (isOnOfflineMode) {
-        //   magazines = XMLCache.instance.getCachedData().articles;
-        //} else {
-        //    magazines = ArticleDatabaseConnector.getAllArticlesFromUser();
-        //}
+        if (isOnOfflineMode) {
+           //magazines = XMLCache.instance.getCachedData().articles;
+        } else {
+            magazines = MagazineDatabaseConnector.getAllMagazinesFromUser();
+        }
 
         if (magazines == null) {
             JOptionPane.showMessageDialog(this, "Erro ao conectar ao banco de dados", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -52,10 +53,9 @@ public class ListMagazinesForm extends javax.swing.JDialog {
 
         int line = 0;
         for (Magazine m : magazines) {
-            model.setValueAt(m.getTitle(), line, 0);
-
             String author = m.getAuthor();
-
+            
+            model.setValueAt(m.getTitle(), line, 0);
             model.setValueAt(author, line, 1);
             model.setValueAt(m.getYear(), line, 2);
             model.setValueAt(m.getIssue(), line, 3);

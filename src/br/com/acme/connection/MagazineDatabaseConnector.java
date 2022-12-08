@@ -60,7 +60,7 @@ public class MagazineDatabaseConnector {
         return false;
     }
 
-    public static ArrayList<Magazine> getAllArticlesFromUser(){
+    public static ArrayList<Magazine> getAllMagazinesFromUser(){
         ArrayList<Magazine> magazines = new ArrayList<>();
         Connection con = DataBaseConnection.getConnection();
         PreparedStatement stm = null;
