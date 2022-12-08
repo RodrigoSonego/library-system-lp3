@@ -5,9 +5,8 @@
  */
 package br.com.acme.gui;
 
-import br.com.acme.connection.BookDatabaseConnector;
+import br.com.acme.connection.MagazineDatabaseConnector;
 import java.awt.Component;
-import br.com.acme.model.Book;
 import br.com.acme.model.Magazine;
 import br.com.acme.model.Session;
 import br.com.acme.model.logic.LogController;
@@ -167,15 +166,15 @@ public class AddMagazineForm extends javax.swing.JDialog {
             int userId = Session.getInstance().getLoggedUser().getIdUser();
             tempMagazine.setUserId(userId);
             
-            //boolean successful = BookDatabaseConnector.InsertBook(tempMagazine);
+           boolean successful = MagazineDatabaseConnector.insertMagazine(tempMagazine);
             
-            //if(successful == false ) {
-            //    JOptionPane.showMessageDialog(this, "Error on book insertion", "Error", JOptionPane.ERROR_MESSAGE);
-            //    return;
-            //}
+            if(successful == false ) {
+                JOptionPane.showMessageDialog(this, "Error on magazine insertion", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             
             if (LogController.getLogStatus()) {
-                LogController.writeLog("Book added: " + tempMagazine.getTitle());
+                LogController.writeLog("Magazine added: " + tempMagazine.getTitle());
             }
 
             JOptionPane.showMessageDialog(this, "Your magazine was successfully added!", "Succes!", JOptionPane.INFORMATION_MESSAGE);           
@@ -241,4 +240,8 @@ public class AddMagazineForm extends javax.swing.JDialog {
     private javax.swing.JTextField jtfTitle;
     private javax.swing.JTextField jtfYear;
     // End of variables declaration//GEN-END:variables
+
+    private boolean MagazineDatabaseConnector(Magazine tempMagazine) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
