@@ -20,6 +20,8 @@ public class ArticleDatabaseConnector {
         
         int userId = Session.getInstance().getLoggedUser().getIdUser();
         
+        System.out.println(userId);
+        
         String updateCountSql = "UPDATE user SET publication_limit = publication_limit - 1 WHERE idUser =  ?";
         
         try {
@@ -27,7 +29,7 @@ public class ArticleDatabaseConnector {
             
             ptstm = con.prepareStatement(insertArticleSql);
 
-            ptstm.setInt(1, article.getFK_idUser());
+            ptstm.setInt(1, userId);
             ptstm.setString(2, article.getTitle());
             ptstm.setInt(3, article.getYear());
             ptstm.setString(4, article.getAuthor());
