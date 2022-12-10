@@ -243,7 +243,7 @@ public class MainWindow extends javax.swing.JFrame {
         System.out.println("tamo no modo ofF?" + isOfflineMode);
 
         if (isOfflineMode) {
-            JOptionPane.showMessageDialog(this, "Erro, não se pode adicionar livro no modo offline!", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Erro, book adding is disabled while in offline mode!", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -257,7 +257,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         System.out.println("tamo no modo ofF?" + isOfflineMode);
         if (isOfflineMode) {
-            JOptionPane.showMessageDialog(this, "Erro, não se pode adicionar publicação no modo offline!", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Erro, article adding is disabled while in offline mode!", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -292,7 +292,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void jmiCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCreateActionPerformed
 
         if (isOfflineMode) {
-            JOptionPane.showMessageDialog(this, "Erro, não se pode criar conta no modo offline!", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error, account creation disabled while in offline mode!", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -304,7 +304,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jmiListAccountsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListAccountsActionPerformed
         if (isOfflineMode) {
-            JOptionPane.showMessageDialog(this, "Erro, não se pode ver usuários no modo offline!", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error, user listing disabled while in offline mode!", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -343,6 +343,11 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jmcbOfflineOnActionPerformed
 
     private void jmiMagazineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiMagazineActionPerformed
+         if (isOfflineMode) {
+            JOptionPane.showMessageDialog(this, "Erro, magazine adding is disabled while in offline mode!", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         AddMagazineForm addMagazine = new AddMagazineForm();
         
         addMagazine.setVisible(true);
