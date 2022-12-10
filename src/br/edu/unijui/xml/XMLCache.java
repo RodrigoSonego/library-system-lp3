@@ -46,6 +46,7 @@ public class XMLCache {
             appendOfflineMode(root);
             appendArticles(root);
             appendBooks(root);
+            appendMagazines(root);
 
             ManipuladorXML.writeXmlFile(doc, "./cache.xml");
         } catch (Exception ex) {
