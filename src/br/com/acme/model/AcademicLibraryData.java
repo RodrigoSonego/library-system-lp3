@@ -19,7 +19,8 @@ public class AcademicLibraryData implements Cloneable {
     public ArrayList<Article> articles;
     public ArrayList<Book> books;
     public ArrayList<User> users;
-
+    public ArrayList<Magazine> magazines;
+    
     public AcademicLibraryData copy() {
         try {
             return (AcademicLibraryData) this.clone();

@@ -3,13 +3,13 @@ package br.edu.unijui.xml;
 import br.com.acme.model.AcademicLibraryData;
 import br.com.acme.model.Article;
 import br.com.acme.model.Book;
+import br.com.acme.model.Magazine;
 import br.com.acme.model.User;
 import br.com.acme.model.logic.LogController;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -60,10 +60,12 @@ public class XMLCache {
 
         ArrayList<Book> books = loadListFromCache(doc, Book.class);
         ArrayList<Article> articles = loadListFromCache(doc, Article.class);
+        ArrayList<Magazine> magazines = loadListFromCache(doc, Magazine.class);
         boolean isOfflineModeOn = loadOfflineModeFromCache(doc);
         
         data.books = books;
         data.articles = articles;
+        data.magazines = magazines;
         data.isOfflineMode = isOfflineModeOn;
     }
     
@@ -85,6 +87,10 @@ public class XMLCache {
 
     public void setUsers(ArrayList<User> users) {
         data.users = users;
+    }
+    
+    public void setMagazines(ArrayList<Magazine> magazines){
+        data.magazines = magazines;
     }
 
     private XMLCache appendOfflineMode(Element root) {
@@ -136,6 +142,10 @@ public class XMLCache {
 
     private void appendBooks(Element root) {
         appendAny(root, data.books, Book.class);
+    }
+    
+    private void appendMagazines(Element root){
+        appendAny(root, data.books, Magazine.class);
     }
 
     private Document loadXMLCacheOrNull() {

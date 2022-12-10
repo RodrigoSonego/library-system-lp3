@@ -21,7 +21,7 @@ public class ListMagazinesForm extends javax.swing.JDialog {
         boolean isOnOfflineMode = XMLCache.instance.getCachedData().isOfflineMode;
 
         if (isOnOfflineMode) {
-           //magazines = XMLCache.instance.getCachedData().articles;
+           magazines = XMLCache.instance.getCachedData().magazines;
         } else {
             magazines = MagazineDatabaseConnector.getAllMagazinesFromUser();
         }
@@ -41,8 +41,8 @@ public class ListMagazinesForm extends javax.swing.JDialog {
 
         populateTable(magazines);
 
-        //XMLCache.instance.setArticles(magazines);
-        //XMLCache.instance.serialize();
+        XMLCache.instance.setMagazines(magazines);
+        XMLCache.instance.serialize();
     }
 
     private void populateTable(List<Magazine> magazines) {
