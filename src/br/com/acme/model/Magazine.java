@@ -18,6 +18,8 @@ public class Magazine extends Publication {
         this.issue = issue;
     }
     
+    public Magazine() {}
+    
     public String getIssue() {
         return issue;
     }
