@@ -27,7 +27,7 @@ public class ListMagazinesForm extends javax.swing.JDialog {
         }
 
         if (magazines == null) {
-            JOptionPane.showMessageDialog(this, "Erro ao conectar ao banco de dados", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Erro: nenhuma revista", "Erro", JOptionPane.ERROR_MESSAGE);
             hasError = true;
             return;
         }

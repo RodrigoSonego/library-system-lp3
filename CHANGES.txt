@@ -5,5 +5,5 @@
 - adicionado mensagens na tela de entrada que explicam como funciona a aplicação
 - o log imprime no console quando está desativado e em um arquivo quando está ativado
 
-
+lembrando que arquivos de log e cache estão ignorados pelo gitignore.
 

@@ -285,8 +285,10 @@ public class MainWindow extends javax.swing.JFrame {
 
         listBooks = new ListBooksForm();
         if (listBooks.hasError) {
+            LogController.writeLog("Error showing books");
             listBooks.dispose();
         } else {
+            LogController.writeLog("Showing books");
             listBooks.setVisible(true);
         }
 
@@ -296,8 +298,10 @@ public class MainWindow extends javax.swing.JFrame {
 
         listArticles = new ListArticlesForm();
         if (listArticles.hasError) {
+            LogController.writeLog("Error showing articles");
             listArticles.dispose();
         } else {
+            LogController.writeLog("Showing articles");
             listArticles.setVisible(true);
         }
 
@@ -371,12 +375,12 @@ public class MainWindow extends javax.swing.JFrame {
         ListMagazinesForm listMagazines = new ListMagazinesForm();
         
         if (listMagazines.hasError) {
+            LogController.writeLog("Error showing magazines");
             listMagazines.dispose();
         } else {
+            LogController.writeLog("Showing magazines");
             listMagazines.setVisible(true);
         }
-        
-        listMagazines.setVisible(true);
     }//GEN-LAST:event_jmiListMagazinesActionPerformed
 
     private void updateOfflineModeLabel() {

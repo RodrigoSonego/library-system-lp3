@@ -32,7 +32,6 @@ public class DataBaseConnection {
             return connection;
 
         } catch (SQLException ex) {
-            System.out.println("Trying connection index " + tryIndex + " failed, trying next");
             
             return getConnection(tryIndex + 1);
         }

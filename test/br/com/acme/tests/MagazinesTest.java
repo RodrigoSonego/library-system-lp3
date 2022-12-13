@@ -7,6 +7,7 @@ package br.com.acme.tests;
 import br.com.acme.connection.ArticleDatabaseConnector;
 import br.com.acme.connection.UserDataBaseConnector;
 import br.com.acme.model.Article;
+import br.com.acme.model.Magazine;
 import br.com.acme.model.Session;
 import br.com.acme.model.User;
 import java.util.ArrayList;
@@ -18,12 +19,11 @@ import static org.junit.Assert.*;
  *
  * @author USER
  */
-public class ConnectionTest {
-    Article testArticle;
+public class MagazinesTest {
     
     @Before
     public void setup(){
-        testArticle = null;
+        
     }
     
     @Test
@@ -36,10 +36,6 @@ public class ConnectionTest {
     
     @Test
     public void insertArticle() {
-        System.out.println("insert Article");
-        
-        testArticle = new Article("ArtigoTeste", (short)1234, "AutorTeste", "123-45.6", "JournalTeste");
-        boolean result = ArticleDatabaseConnector.InsertArticle(testArticle);
         
         assertTrue("insert article test", result);
     }

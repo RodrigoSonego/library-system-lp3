@@ -8,6 +8,7 @@ package br.com.acme.gui;
 import br.com.acme.connection.MagazineDatabaseConnector;
 import java.awt.Component;
 import br.com.acme.model.Magazine;
+import br.com.acme.model.DoiException;
 import br.com.acme.model.MagazineTopic;
 import br.com.acme.model.Session;
 import br.com.acme.model.logic.LogController;
@@ -203,7 +204,12 @@ public class AddMagazineForm extends javax.swing.JDialog {
 
             JOptionPane.showMessageDialog(this, "Your magazine was successfully added!", "Succes!", JOptionPane.INFORMATION_MESSAGE);           
             clearFields();
-        } catch (NumberFormatException ex) {
+        }
+        catch (DoiException ex) {
+            showDoiErrorMessage();
+            return;
+        }
+        catch (NumberFormatException ex) {
             showNumberErrorMessage();
             return;
         }
@@ -228,7 +234,11 @@ public class AddMagazineForm extends javax.swing.JDialog {
     private void showNumberErrorMessage() {
         JOptionPane.showMessageDialog(this, "The following fields must be NUMBERS between: \n"
                 + "Year: 0 and " + Short.MAX_VALUE + "\n"
-);
+        );
+    }
+    
+    private void showDoiErrorMessage() {
+        JOptionPane.showMessageDialog(this, "Doi number cannot contain spaces!\n");
     }
     
     private void clearFields() {

@@ -21,6 +21,7 @@ public class Magazine extends Publication {
         this.setTopic(topic);
     }
     
+    
     public Magazine() {}
 
     public static String topicToString(MagazineTopic topic) {
@@ -45,6 +46,8 @@ public class Magazine extends Publication {
     }
 
     private void setDoi(String doi) {
+        if (doi.contains(" ")) throw new DoiException("Doi não pode conter espaços");
+        
         this.doi = doi;
     }
 
