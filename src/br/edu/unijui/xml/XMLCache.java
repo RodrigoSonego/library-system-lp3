@@ -146,7 +146,7 @@ public class XMLCache {
     }
     
     private void appendMagazines(Element root){
-        appendAny(root, data.books, Magazine.class);
+        appendAny(root, data.magazines, Magazine.class);
     }
 
     private Document loadXMLCacheOrNull() {
