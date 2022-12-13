@@ -1,6 +1,7 @@
 package br.com.acme.connection;
 
 import br.com.acme.model.Magazine;
+import br.com.acme.model.MagazineTopic;
 import br.com.acme.model.Session;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,8 +16,8 @@ public class MagazineDatabaseConnector {
     public static boolean insertMagazine(Magazine magazine) {
         Connection con = DataBaseConnection.getConnection();
         PreparedStatement ptstm = null;
-        String insertArticleSql = "INSERT INTO magazine(FK_idUser, title, year, author, issue) "
-                + " VALUES(?, ?, ?, ?, ?)";
+        String insertArticleSql = "INSERT INTO magazine(FK_idUser, title, year, author, doi, topic) "
+                + " VALUES(?, ?, ?, ?, ?, ?)";
         
         int userId = Session.getInstance().getLoggedUser().getIdUser();
         
@@ -31,7 +32,8 @@ public class MagazineDatabaseConnector {
             ptstm.setString(2, magazine.getTitle());
             ptstm.setInt(3, magazine.getYear());
             ptstm.setString(4, magazine.getAuthor());
-            ptstm.setString(5, magazine.getIssue());
+            ptstm.setString(5, magazine.getDoi());
+            ptstm.setString(6, magazine.getTopic().toString());
 
             ptstm.executeUpdate();
             
@@ -79,9 +81,13 @@ public class MagazineDatabaseConnector {
                 String title = rst.getString(3);
                 short year = rst.getShort(4);
                 String author = rst.getString(5);
-                String issue = rst.getString(6);
+                String doi = rst.getString(6);
+                String topicStr = rst.getString(7);
+                System.out.println("got " + topicStr);
                 
-                Magazine magazine = new Magazine(title, year, author, issue);
+                MagazineTopic topic = MagazineTopic.valueOf(topicStr);
+                
+                Magazine magazine = new Magazine(title, year, author, doi, topic);
                 magazines.add(magazine);
             }
             
