@@ -22,7 +22,7 @@ public class LogController {
         return isLogOn;
     }
     
-    public static void writeLog(String message){
+    public static boolean writeLog(String message){
         File log = new File("library.log");
         StringBuilder finalMessage = new StringBuilder();
         finalMessage.append("[").append(new Date().toString()).append("] ").append(message).append("\n");
@@ -32,8 +32,10 @@ public class LogController {
             fileWriter.flush();
             fileWriter.close();
         }catch(IOException ex){
-            System.out.println("ajuda aqui");
+            return false;
         }
+        
+        return true;
     }
     
 }

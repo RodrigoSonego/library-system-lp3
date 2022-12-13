@@ -10,7 +10,6 @@ import br.com.acme.model.Article;
 import br.com.acme.model.Session;
 import br.com.acme.model.User;
 import java.util.ArrayList;
-import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -19,12 +18,7 @@ import static org.junit.Assert.*;
  * @author USER
  */
 public class ConnectionTest {
-    Article testArticle;
-    
-    @Before
-    public void setup(){
-        testArticle = null;
-    }
+    Article testArticle = new Article("ArtigoTeste", (short)1234, "AutorTeste", "123-45.6", "JournalTeste");
     
     @Test
     public void loginTest(){
@@ -38,7 +32,6 @@ public class ConnectionTest {
     public void insertArticle() {
         System.out.println("insert Article");
         
-        testArticle = new Article("ArtigoTeste", (short)1234, "AutorTeste", "123-45.6", "JournalTeste");
         boolean result = ArticleDatabaseConnector.InsertArticle(testArticle);
         
         assertTrue("insert article test", result);
@@ -49,8 +42,10 @@ public class ConnectionTest {
         ArrayList<Article> articles = ArticleDatabaseConnector.getAllArticlesFromUser();
         
         boolean hasFoundArticle = false;
+        System.out.println(testArticle.getTitle());
         for(Article art : articles) {
-            if (art.getTitle().equals(testArticle.getTitle())) {
+            System.out.println(art.getTitle());
+            if (art.getTitle().equals(testArticle.getTitle())) {;
                 hasFoundArticle = true;
                 break;
             }
