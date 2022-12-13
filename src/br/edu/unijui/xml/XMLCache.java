@@ -103,9 +103,7 @@ public class XMLCache {
     }
 
     private void appendAny(Element root, List toAppend, Class classOfObjectToAppend) {
-        if (toAppend == null) {
-            return;
-        }
+        if (toAppend == null) return;
 
         Field[] fields = classOfObjectToAppend.getDeclaredFields();
         Field[] baseFields = classOfObjectToAppend.getSuperclass().getDeclaredFields();
@@ -146,7 +144,7 @@ public class XMLCache {
     }
     
     private void appendMagazines(Element root){
-        appendAny(root, data.books, Magazine.class);
+        appendAny(root, data.magazines, Magazine.class);
     }
 
     private Document loadXMLCacheOrNull() {
@@ -167,8 +165,6 @@ public class XMLCache {
 
     private ArrayList loadListFromCache(Document doc, Class typeOfList) {
         ArrayList elements = new ArrayList();
-
-        System.out.println("nome da classe -> " + typeOfList.getSimpleName());
 
         Field[] fields = typeOfList.getDeclaredFields();
         Field[] baseFields = typeOfList.getSuperclass().getDeclaredFields();

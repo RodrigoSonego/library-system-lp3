@@ -58,7 +58,8 @@ public class ListMagazinesForm extends javax.swing.JDialog {
             model.setValueAt(m.getTitle(), line, 0);
             model.setValueAt(author, line, 1);
             model.setValueAt(m.getYear(), line, 2);
-            model.setValueAt(m.getIssue(), line, 3);
+            model.setValueAt(m.getDoi(), line, 3);
+            model.setValueAt(Magazine.topicToString(m.getTopic()), line, 4);
             line++;
         }
 
@@ -85,30 +86,30 @@ public class ListMagazinesForm extends javax.swing.JDialog {
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Articles in your library");
+        jLabel1.setText("Magazines in your library");
 
         jtArticleList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title", "Author", "Year", "Issue"
+                "Title", "Author", "Year", "DOI", "Topic"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Short.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.Short.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -141,7 +142,7 @@ public class ListMagazinesForm extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jspArticleList, javax.swing.GroupLayout.DEFAULT_SIZE, 879, Short.MAX_VALUE))
+                        .addComponent(jspArticleList, javax.swing.GroupLayout.DEFAULT_SIZE, 783, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -174,7 +175,7 @@ public class ListMagazinesForm extends javax.swing.JDialog {
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(915, 374));
+        setSize(new java.awt.Dimension(811, 374));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

@@ -53,6 +53,8 @@ public class MainWindow extends javax.swing.JFrame {
         jButtonLogout = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jlUsername = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jmAdd = new javax.swing.JMenu();
@@ -88,6 +90,12 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel1.setText("Logado como:");
 
         jlUsername.setText("userzao");
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("COMO FUNCIONA:\n\nModo offline: no modo offline, você não pode inserir publicações\ne as consultas serão lidas somente do cache, arquivo cache.xml.\n\na aplicação lembra pelo cache.xml se você estava no modo\noffline quando saiu\n\nLog: quando ativo, irá fazer logging de diversas ações em um\narquivo library.log\nquando inativo, irá fazer log na saída padrão (stdout do console).\n");
+        jScrollPane1.setViewportView(jTextArea1);
 
         jMenu2.setText("Publications");
 
@@ -222,6 +230,10 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(jlUsername)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 434, Short.MAX_VALUE)
                 .addComponent(jButtonLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,7 +243,9 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
                         .addComponent(jlUsername)))
-                .addGap(0, 315, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -356,6 +370,12 @@ public class MainWindow extends javax.swing.JFrame {
     private void jmiListMagazinesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListMagazinesActionPerformed
         ListMagazinesForm listMagazines = new ListMagazinesForm();
         
+        if (listMagazines.hasError) {
+            listMagazines.dispose();
+        } else {
+            listMagazines.setVisible(true);
+        }
+        
         listMagazines.setVisible(true);
     }//GEN-LAST:event_jmiListMagazinesActionPerformed
 
@@ -373,6 +393,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JFileChooser jfcFileChooser;
     private javax.swing.JLabel jlUsername;
     private javax.swing.JMenu jmAdd;

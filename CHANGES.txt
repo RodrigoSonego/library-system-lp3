@@ -1,0 +1,9 @@
+- adicionado magazines, contém um campo com um enum para o tópico da magazine e um campo doi (digital object identifier)
+
+- funcionalidade de reflection para serializar automaticamente instâncias de qualquer classe
+
+- adicionado mensagens na tela de entrada que explicam como funciona a aplicação
+- o log imprime no console quando está desativado e em um arquivo quando está ativado
+
+
+

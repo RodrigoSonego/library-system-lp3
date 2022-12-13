@@ -83,7 +83,6 @@ public class MagazineDatabaseConnector {
                 String author = rst.getString(5);
                 String doi = rst.getString(6);
                 String topicStr = rst.getString(7);
-                System.out.println("got " + topicStr);
                 
                 MagazineTopic topic = MagazineTopic.valueOf(topicStr);
                 

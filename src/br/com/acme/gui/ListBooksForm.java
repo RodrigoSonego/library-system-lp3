@@ -25,7 +25,7 @@ public class ListBooksForm extends javax.swing.JDialog {
         }
 
         if (books == null) {
-            JOptionPane.showMessageDialog(this, "Erro ao conectar ao banco de dados", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Erro: nenhuma entrada encontrada", "Erro", JOptionPane.ERROR_MESSAGE);
             hasError = true;
             return;
         }

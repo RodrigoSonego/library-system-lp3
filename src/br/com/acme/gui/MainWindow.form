@@ -186,13 +186,18 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jlUsername" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="434" max="32767" attributes="0"/>
               <Component id="jButtonLogout" min="-2" pref="96" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="367" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -206,7 +211,9 @@
                       <Component id="jlUsername" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="0" pref="315" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" pref="297" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -232,5 +239,22 @@
         <Property name="text" type="java.lang.String" value="userzao"/>
       </Properties>
     </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="jTextArea1">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+            <Property name="text" type="java.lang.String" value="COMO FUNCIONA:&#xa;&#xa;Modo offline: no modo offline, voc&#xea; n&#xe3;o pode inserir publica&#xe7;&#xf5;es&#xa;e as consultas ser&#xe3;o lidas somente do cache, arquivo cache.xml.&#xa;&#xa;a aplica&#xe7;&#xe3;o lembra pelo cache.xml se voc&#xea; estava no modo&#xa;offline quando saiu&#xa;&#xa;Log: quando ativo, ir&#xe1; fazer logging de diversas a&#xe7;&#xf5;es em um&#xa;arquivo library.log&#xa;quando inativo, ir&#xe1; fazer log na sa&#xed;da padr&#xe3;o (stdout do console).&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>

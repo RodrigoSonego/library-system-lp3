@@ -22,13 +22,23 @@ public class LogController {
         return isLogOn;
     }
     
-    public static void writeLog(String message){
-        File log = new File("library.log");
+    public static void writeLog(String message){       
+        
         StringBuilder finalMessage = new StringBuilder();
         finalMessage.append("[").append(new Date().toString()).append("] ").append(message).append("\n");
+        
+        String logMessage = finalMessage.toString();
+        if (!isLogOn) {
+            
+            System.out.println("LOG: " + logMessage);
+            return;
+        }
+        
+        File logFile = new File("library.log");
+        
         try{
-            FileWriter fileWriter = new FileWriter(log, true);
-            fileWriter.write(finalMessage.toString());
+            FileWriter fileWriter = new FileWriter(logFile, true);
+            fileWriter.write(logMessage);
             fileWriter.flush();
             fileWriter.close();
         }catch(IOException ex){
