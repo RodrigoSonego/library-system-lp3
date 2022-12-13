@@ -6,5 +6,5 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
-*.log
-cache.xml
+# *.log
+# cache.xml

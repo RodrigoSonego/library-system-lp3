@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AcademicLibrary>
+    <OfflineMode>false</OfflineMode>
+    <List type="Article">
+        <Article FK_idUser="0" author="dsfadsa" doi="sagffdsg" idArticle="0" journal="asdfasdfas" title="dsfasdfasd" year="1231"/>
+    </List>
+    <List type="Book">
+        <Book FK_idUser="0" author="bbb" idBook="0" isbn="1231241" language="asdfasd" pages="12" title="aaa" year="1234"/>
+    </List>
+    <List type="Magazine">
+        <Magazine author="1" doi="1" title="1" topic="Computer_Graphics" userId="0" year="1"/>
+        <Magazine author="mag" doi="123" title="mag" topic="Computer_Graphics" userId="0" year="2022"/>
+        <Magazine author="12312" doi="123123" title="123123" topic="Uncategorized" userId="0" year="3"/>
+        <Magazine author="123" doi="asdsd" title="123" topic="Uncategorized" userId="0" year="123"/>
+    </List>
+</AcademicLibrary>

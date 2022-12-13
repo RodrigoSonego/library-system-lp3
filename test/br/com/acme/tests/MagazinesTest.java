@@ -7,7 +7,9 @@ package br.com.acme.tests;
 import br.com.acme.connection.ArticleDatabaseConnector;
 import br.com.acme.connection.UserDataBaseConnector;
 import br.com.acme.model.Article;
+import br.com.acme.model.DoiException;
 import br.com.acme.model.Magazine;
+import br.com.acme.model.MagazineTopic;
 import br.com.acme.model.Session;
 import br.com.acme.model.User;
 import java.util.ArrayList;
@@ -21,37 +23,15 @@ import static org.junit.Assert.*;
  */
 public class MagazinesTest {
     
-    @Before
-    public void setup(){
-        
+    @Test
+    public void test() {
+        // TODO;
     }
     
-    @Test
-    public void loginTest(){
-        User loggedUser = UserDataBaseConnector.login("adm", "123");
-        assertNotNull(loggedUser);
-        
-        Session.startSession(loggedUser);
+    @Test(expected = DoiException.class)
+    public void magazineDoiTest(){
+        Magazine magazine = new Magazine("teste", (short)1999, "autor", "doi inválido pq contem espaço", MagazineTopic.Uncategorized);
+        magazine.getDoi();
     }
     
-    @Test
-    public void insertArticle() {
-        
-        assertTrue("insert article test", result);
-    }
-    
-    @Test
-    public void getArticleFromDatabase() {
-        ArrayList<Article> articles = ArticleDatabaseConnector.getAllArticlesFromUser();
-        
-        boolean hasFoundArticle = false;
-        for(Article art : articles) {
-            if (art.getTitle().equals(testArticle.getTitle())) {
-                hasFoundArticle = true;
-                break;
-            }
-        }
-        
-        assertTrue("Get Article Test", hasFoundArticle);
-    }
 }

@@ -10,9 +10,8 @@ package br.com.acme.model;
  */
 public class Magazine extends Publication {
     private int userId;
-    private String issue;
     private String doi;
-    private MagazineTopic topic;
+    private String topic;
 
     public Magazine(String title, short year, String author, String doi, MagazineTopic topic) {
         super(title, year);
@@ -42,7 +41,7 @@ public class Magazine extends Publication {
     }
     
     public MagazineTopic getTopic() {
-        return topic;
+        return MagazineTopic.valueOf(topic);
     }
 
     private void setDoi(String doi) {
@@ -52,7 +51,7 @@ public class Magazine extends Publication {
     }
 
     private void setTopic(MagazineTopic topic) {
-        this.topic = topic;
+        this.topic = topic.toString();
     }
     
 }
