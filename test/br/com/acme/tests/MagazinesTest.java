@@ -12,7 +12,10 @@ import br.com.acme.model.Magazine;
 import br.com.acme.model.MagazineTopic;
 import br.com.acme.model.Session;
 import br.com.acme.model.User;
+import br.com.acme.model.logic.LogController;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.logging.LogManager;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -24,8 +27,18 @@ import static org.junit.Assert.*;
 public class MagazinesTest {
     
     @Test
-    public void test() {
-        // TODO;
+    public void logEnabledTest() {
+        boolean isLogEnabled = LogController.getLogStatus();
+        if (isLogEnabled) {
+            
+            String lugarParaSalvarLog = "testLog.log";
+            
+            LogController.logPath = lugarParaSalvarLog;
+            LogController.writeLog("testando se o log cria o arquivo corretamente!");
+            
+            File file = new File(lugarParaSalvarLog);
+            assertTrue("nao conseguiu criar o arquivo de log", file.exists());
+        }
     }
     
     @Test(expected = DoiException.class)

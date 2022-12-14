@@ -12,6 +12,9 @@ import java.util.Date;
 
 public class LogController {
     
+    private static final String DEFAULT_LOG_PATH = "library.log";
+    public static String logPath = DEFAULT_LOG_PATH;
+    
     private static boolean isLogOn = true;
     
     public static void setLogStatus(boolean status){
@@ -34,7 +37,7 @@ public class LogController {
             return;
         }
         
-        File logFile = new File("library.log");
+        File logFile = new File(logPath);
         
         try{
             FileWriter fileWriter = new FileWriter(logFile, true);
