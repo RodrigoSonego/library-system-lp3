@@ -157,8 +157,10 @@ public class CreateAccountForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Login já utilizado", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
+        
+        
         LogController.writeLog("Account created -> login: " + tempUser.getLogin() + " email: "+ tempUser.getEmail());
+        
         
         JOptionPane.showMessageDialog(this, "Your account was successfully created!", "Succes!", JOptionPane.INFORMATION_MESSAGE);
         clearFields();

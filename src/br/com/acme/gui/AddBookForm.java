@@ -195,6 +195,7 @@ public class AddBookForm extends javax.swing.JDialog {
             
             if (LogController.getLogStatus()) {
                 LogController.writeLog("Book added: " + tempBook.getTitle());
+                
             }
 
             JOptionPane.showMessageDialog(this, "Your book was successfully added!", "Succes!", JOptionPane.INFORMATION_MESSAGE);           

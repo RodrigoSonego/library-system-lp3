@@ -128,6 +128,7 @@ public class XMLCache {
                     articleElement.setAttribute(field.getName(), String.valueOf(obj));
                 } catch (Exception any) {
                     LogController.writeLog(String.format("Exception in {0}", (Object) any.getStackTrace()));
+                    
                 }
             }
 

@@ -163,6 +163,7 @@ public class LoginForm extends javax.swing.JDialog {
 
         LogController.writeLog("Logged into the system: " + jtfLogin.getText());
         
+        
         mainWindow = new MainWindow(jtfLogin.getText(), this);
 
         mainWindow.setVisible(true);

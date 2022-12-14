@@ -211,6 +211,7 @@ public class AddArticleForm extends javax.swing.JDialog {
 
         if (LogController.getLogStatus()) {
             LogController.writeLog("Article added: " + article.getTitle());
+            
         }
 
         JOptionPane.showMessageDialog(this, "Article added successfully!", "Success!", JOptionPane.INFORMATION_MESSAGE);

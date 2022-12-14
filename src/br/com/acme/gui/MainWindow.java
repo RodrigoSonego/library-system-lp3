@@ -325,6 +325,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         LogController.setLogStatus(false);
         LogController.writeLog("Log has been toggled off.");
+        
     }//GEN-LAST:event_jmcbOffActionPerformed
 
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
