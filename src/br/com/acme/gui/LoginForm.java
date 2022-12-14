@@ -154,7 +154,7 @@ public class LoginForm extends javax.swing.JDialog {
         User loggedUser = UserDataBaseConnector.login(login, insertedPwd);
 
         if (loggedUser == null) {
-            JOptionPane.showMessageDialog(this, "Login ou senha inválidos", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Invalid login ou password", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 

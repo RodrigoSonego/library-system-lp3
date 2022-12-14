@@ -243,7 +243,7 @@ public class MainWindow extends javax.swing.JFrame {
         System.out.println("tamo no modo ofF?" + isOfflineMode);
 
         if (isOfflineMode) {
-            JOptionPane.showMessageDialog(this, "Erro, book adding is disabled while in offline mode!", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error, book adding is disabled while in offline mode!", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -257,7 +257,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         System.out.println("tamo no modo ofF?" + isOfflineMode);
         if (isOfflineMode) {
-            JOptionPane.showMessageDialog(this, "Erro, article adding is disabled while in offline mode!", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error, article adding is disabled while in offline mode!", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
 

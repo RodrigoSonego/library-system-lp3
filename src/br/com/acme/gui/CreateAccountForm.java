@@ -154,7 +154,7 @@ public class CreateAccountForm extends javax.swing.JDialog {
         boolean successful = UserDataBaseConnector.insertUser(tempUser);
         
         if(successful == false) {
-            JOptionPane.showMessageDialog(this, "Login já utilizado", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Login already in use", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
@@ -162,7 +162,7 @@ public class CreateAccountForm extends javax.swing.JDialog {
         LogController.writeLog("Account created -> login: " + tempUser.getLogin() + " email: "+ tempUser.getEmail());
         
         
-        JOptionPane.showMessageDialog(this, "Your account was successfully created!", "Succes!", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Your account was successfully created!", "Success!", JOptionPane.INFORMATION_MESSAGE);
         clearFields();
     }//GEN-LAST:event_jbCreateMouseClicked
 

@@ -19,7 +19,7 @@ public class ListAccountsForm extends javax.swing.JDialog {
         Collection<User> users = UserDataBaseConnector.getAllUsers();
 
         if(users == null || users.size() == 0) {
-            JOptionPane.showMessageDialog(this, "Erro ao comunicar com o banco de dados", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error when comunicating with the server", "Error", JOptionPane.ERROR_MESSAGE);
             dispose();
             return;
         }
